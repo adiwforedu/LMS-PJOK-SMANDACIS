@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS PJOK - SMAN 2 Ciamis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col md:flex-row">
+
+    <!-- ==========================================
+      1. SIDEBAR KIRI (Navigasi Utama - SMAN 2 Ciamis)
+    ========================================== -->
+    <aside class="hidden md:flex flex-col w-64 text-slate-400 fixed h-screen z-40 border-r border-slate-900 p-4 justify-between" style="background-color: #0b1329;">
+        <div class="space-y-6">
+            <!-- Header Logo LMS PJOK -->
+            <div class="flex items-center gap-3 px-2 py-3">
+                <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md">P</div>
+                <div>
+                    <h2 class="font-bold text-sm text-white leading-tight tracking-wide">LMS PJOK</h2>
+                    <p class="text-[10px] text-slate-500">Fase E • SMAN 2 Ciamis</p>
+                </div>
+            </div>
+
+            <!-- List Menu Utama Navigasi Kiri -->
+            <nav class="space-y-2" id="desktop-nav">
+                <button onclick="navigateTo('akun')" id="nav-desk-akun" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                    <span class="text-purple-400 text-sm">👤</span> Akun
+                </button>
+                <button onclick="navigateTo('dashboard')" id="nav-desk-dashboard" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                    <span class="text-sm">📊</span> Dashboard
+                </button>
+                <button onclick="navigateTo('modul')" id="nav-desk-modul" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                    <span class="text-teal-400 text-sm">📚</span> Modul PJOK
+                </button>
+                <button onclick="navigateTo('kalender')" id="nav-desk-kalender" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                    <span class="text-blue-400 text-sm">📅</span> Kalender Akademik
+                </button>
+                <a href="https://wa.me/6281234567890?text=Halo%20Guru%20PJOK%20SMAN%202%20Ciamis,%20saya%20ingin%20bertanya..." target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors justify-between w-full">
+                    <span class="flex items-center gap-3"><span class="text-pink-400 text-sm">📥</span> Inbox</span>
+                    <span class="bg-blue-600 text-white font-bold text-[9px] px-2 py-0.5 rounded-full">3 Baru</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Bagian Bawah Sidebar Kiri -->
+        <div class="pt-4 border-t border-slate-900">
+            <button onclick="navigateTo('bantuan')" id="nav-desk-bantuan" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                <span class="text-red-400 text-sm">❓</span> Pusat Bantuan
+            </button>
+        </div>
+    </aside>
+
+    <!-- ==========================================
+      2. WADAH UTAMA KONTEN HIERARKI KANAN
+    ========================================== -->
+    <div class="flex-grow md:pl-64 flex flex-col min-h-screen pb-20 md:pb-0">
+        
+        <!-- Top Sticky Header Bar -->
+        <nav class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-30 px-6 py-4 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-3 md:hidden">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-base">P</div>
+                <h1 class="font-bold text-base text-slate-900 dark:text-white tracking-tight" id="mobile-page-title">Dashboard</h1>
+            </div>
+            
+            <div class="hidden md:block">
+                <span class="text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-lg">Fase E (Kelas X) • SMAN 2 Ciamis</span>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <div id="time-tracker" class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 px-2.5 py-1 rounded-lg">
+                    <span class="text-xs font-bold text-amber-800 dark:text-amber-300 font-mono">⏱️ <span id="spend-time-clock">00:00</span></span>
+                </div>
+                <button id="theme-toggle" class="p-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg transition-colors">
+                    <svg id="theme-toggle-light-icon" class="hidden w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 14.05a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm-.707-8.485a1 1 0 010-1.414l.707-.707a1 1 0 111.414 1.414l-.707.707a1 1 0 01-1.414 0zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z"></path></svg>
+                    <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- ==========================================
+          HALAMAN-HALAMAN KONTEN INTERAKTIF (SPA)
+        ========================================== -->
+        
+        <!-- A. HALAMAN AKUN -->
+        <section id="page-akun" class="hidden max-w-7xl w-full mx-auto px-4 py-6">
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 max-w-2xl mx-auto">
+                <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-700">
+                    <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg">👤</div>
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Ahmad Fauzi</h3>
+                        <p class="text-xs text-slate-400">NISN: 0076543210 • Siswa Aktif</p>
+                        <span class="inline-block mt-2 bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Kelas X - Fase E</span>
+                    </div>
+                </div>
+                <div class="mt-6 space-y-4 text-xs">
+                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Instansi Sekolah</span><span class="col-span-2 font-semibold text-slate-700 dark:text-slate-300">SMAN 2 Ciamis</span></div>
+                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Email Utama</span><span class="col-span-2 font-medium text-slate-700 dark:text-slate-300">ahmad.fauzi@sman2ciamis.sch.id</span></div>
+                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Status Pembelajaran</span><span class="col-span-2 font-medium text-green-500">Tuntas Semester 1 (100%)</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- B. HALAMAN DASHBOARD -->
+        <section id="page-dashboard" class="max-w-7xl w-full mx-auto px-4 py-6 space-y-4">
+            <h2 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2">Daftar Kelas & Fase PJOK • SMAN 2 Ciamis</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Kelas X - Fase E -->
+                <div onclick="navigateTo('modul')" class="cursor-pointer bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden group hover:border-blue-500 hover:shadow-md transition-all duration-300">
+                    <div class="h-36 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 relative p-4 flex flex-col justify-between">
+                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        <span class="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Aktif</span>
+                        <h3 class="text-white font-bold text-base leading-tight">Kelas X<br><span class="text-sm font-normal text-blue-100">Fase E PJOK</span></h3>
+                    </div>
+                    <div class="p-4 flex justify-between items-center text-xs">
+                        <span class="text-slate-400">Total 10 Modul Pembelajaran</span>
+                        <span class="text-blue-500 font-bold group-hover:translate-x-1 transition-transform">Masuk ➔</span>
+                    </div>
+                </div>
+
+                <!-- Kelas XI - Fase F -->
+                <div class="opacity-75 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden relative">
+                    <div class="h-36 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 relative p-4 flex flex-col justify-between">
+                        <span class="bg-black/30 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Terkunci</span>
+                        <h3 class="text-white font-bold text-base leading-tight">Kelas XI<br><span class="text-sm font-normal text-emerald-100">Fase F PJOK</span></h3>
+                    </div>
+                    <div class="p-4 flex justify-between items-center text-xs text-slate-400">
+                        <span>Akses di Tahun Ajaran Depan</span>
+                        <span>🔒</span>
+                    </div>
+                </div>
+
+                <!-- Kelas XII - Fase F -->
+                <div class="opacity-75 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden relative">
+                    <div class="h-36 bg-gradient-to-br from-orange-500 via-amber-600 to-red-600 relative p-4 flex flex-col justify-between">
+                        <span class="bg-black/30 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Terkunci</span>
+                        <h3 class="text-white font-bold text-base leading-tight">Kelas XII<br><span class="text-sm font-normal text-orange-100">Fase F PJOK</span></h3>
+                    </div>
+                    <div class="p-4 flex justify-between items-center text-xs text-slate-400">
+                        <span>Akses di Tahun Ajaran Depan</span>
+                        <span>🔒</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- C. HALAMAN MODUL PJOK -->
+        <section id="page-modul" class="hidden max-w-7xl w-full mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="lg:col-span-1 space-y-3">
+                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-row lg:flex-col gap-2 overflow-x-auto">
+                    <button id="btn-sem1" class="whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-blue-600 text-white">
+                        <span>📅 Semester 1</span>
+                    </button>
+                    <button id="btn-sem2" class="whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                        <span>📅 Semester 2</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="scroll_target" class="lg:col-span-3 space-y-4 scroll-mt-24">
+                <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2">
+                    <h2 id="current-semester-title" class="text-lg font-bold text-slate-900 dark:text-white">Materi Semester 1</h2>
+                    <span id="materi-count-badge" class="bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-bold text-xs px-2.5 py-1 rounded-full">6 Materi</span>
+                </div>
+                <div id="modules-container" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+            </div>
+        </section>
+
+        <!-- D. HALAMAN KALENDER (EMBEDDED IFRAME INTERNAL) -->
+        <section id="page-kalender" class="hidden max-w-7xl w-full mx-auto px-4 py-6">
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col h-[70vh]">
+                <div class="bg-slate-100 dark:bg-slate-700/50 px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                        <span class="text-blue-500 font-bold text-sm">📅</span>
+                        <h3 class="text-xs font-bold text-slate-800 dark:text-white">Agenda & Jadwal Kegiatan Pembelajaran</h3>
+                    </div>
+                    <span class="text-[10px] bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-medium px-2 py-0.5 rounded border border-blue-200 dark:border-blue-900">Real-time Sinkronisasi</span>
+                </div>
+                <!-- Embed Iframe Google Calendar Publik / Kalender Pendidikan -->
+                <div class="flex-grow w-full h-full bg-slate-50 dark:bg-slate-900">
+                    <iframe src="https://calendar.google.com/calendar/embed?src=id.indonesian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FJakarta&wkst=2" 
+                            style="border: 0" class="w-full h-full opacity-90 dark:invert dark:hue-rotate-180 transition-all" frameborder="0" scrolling="no"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- E. HALAMAN PUSAT BANTUAN (Nama Sekolah Dihapus Pada Judul Utama) -->
+        <section id="page-bantuan" class="hidden max-w-7xl w-full mx-auto px-4 py-6 max-w-3xl">
+            <div class="text-center space-y-2 mb-8">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white">Pusat Bantuan Layanan LMS</h2>
+                <p class="text-xs text-slate-400">Punya pertanyaan seputar penggunaan aplikasi? Temukan jawabannya di bawah ini.</p>
+            </div>
+
+            <div class="space-y-3">
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                    <button onclick="toggleFAQ(1)" class="w-full flex justify-between items-center p-4 text-left font-semibold text-xs text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                        <span>❓ Bagaimana cara mengunduh modul materi yang ada di LMS ini?</span>
+                        <span id="faq-icon-1" class="text-slate-400 transition-transform duration-200">➕</span>
+                    </button>
+                    <div id="faq-ans-1" class="hidden px-4 pb-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-700/50 pt-3">
+                        Untuk mengunduh modul materi, Anda cukup menekan tombol <strong class="text-blue-500">"Buka Modul"</strong> pada materi pilihan Anda, kemudian di dalam modul tersebut akan tersedia tombol unduh berkas berekstensi PDF yang dapat diakses secara offline kapan saja.
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                    <button onclick="toggleFAQ(2)" class="w-full flex justify-between items-center p-4 text-left font-semibold text-xs text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                        <span>❓ Mengapa materi kelas XI dan XII tertulis status "Terkunci"?</span>
+                        <span id="faq-icon-2" class="text-slate-400 transition-transform duration-200">➕</span>
+                    </button>
+                    <div id="faq-ans-2" class="hidden px-4 pb-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-700/50 pt-3">
+                        Status terkunci disesuaikan dengan kurikulum Fase belajar Anda saat ini di SMAN 2 Ciamis. Karena Anda terdaftar pada sistem Kelas X (Fase E), maka modul Fase F sengaja dinonaktifkan sementara dan baru akan terbuka otomatis saat naik tingkat kelas berikutnya.
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                    <button onclick="toggleFAQ(3)" class="w-full flex justify-between items-center p-4 text-left font-semibold text-xs text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                        <span>❓ Apakah pelacakan waktu belajar (Time Tracker) memengaruhi nilai akhir?</span>
+                        <span id="faq-icon-3" class="text-slate-400 transition-transform duration-200">➕</span>
+                    </button>
+                    <div id="faq-ans-3" class="hidden px-4 pb-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-700/50 pt-3">
+                        Fitur <strong class="text-amber-500">Time Tracker</strong> di bagian kanan atas berguna untuk melatih manajemen kesehatan digital (*screen time*) siswa agar mata tidak terlalu lelah menatap layar ponsel, bukan parameter penilaian utama guru.
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                    <button onclick="toggleFAQ(4)" class="w-full flex justify-between items-center p-4 text-left font-semibold text-xs text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                        <span>❓ Bagaimana cara menghubungi guru jika ada eror pada materi tugas?</span>
+                        <span id="faq-icon-4" class="text-slate-400 transition-transform duration-200">➕</span>
+                    </button>
+                    <div id="faq-ans-4" class="hidden px-4 pb-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-700/50 pt-3">
+                        Anda dapat memanfaatkan navigasi menu atau tombol <strong class="text-pink-500">"Inbox"</strong> di aplikasi ini. Tombol tersebut secara instan akan menghubungkan akun Anda langsung ke WhatsApp resmi guru pengampu mata pelajaran PJOK SMAN 2 Ciamis.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 text-center py-4 text-[10px] text-slate-400 dark:text-slate-500 mt-auto">
+            &copy; 2026 Proyek LMS PJOK Mandiri - SMAN 2 Ciamis
+        </footer>
+    </div>
+
+    <!-- ==========================================
+      3. BOTTOM NAVIGATION BAR (Khusus Smartphone Smartphone)
+    ========================================== -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-2 py-2 flex justify-around items-center z-50 shadow-lg">
+        <button onclick="navigateTo('akun')" class="flex flex-col items-center gap-0.5 text-slate-400">
+            <span class="text-base">👤</span><span class="text-[9px] font-medium">Akun</span>
+        </button>
+        <button onclick="navigateTo('dashboard')" class="flex flex-col items-center gap-0.5 text-slate-400">
+            <span class="text-base">📊</span><span class="text-[9px] font-medium">Dashboard</span>
+        </button>
+        <button onclick="navigateTo('modul')" class="flex flex-col items-center gap-0.5 text-slate-400">
+            <span class="text-base">📚</span><span class="text-[9px] font-medium">Modul</span>
+        </button>
+        <button onclick="navigateTo('kalender')" class="flex flex-col items-center gap-0.5 text-slate-400">
+            <span class="text-base">📅</span><span class="text-[9px] font-medium">Jadwal</span>
+        </button>
+        <a href="https://wa.me/6282317611998?text=Halo%20Guru%20PJOK%20SMAN%202%20Ciamis,%20saya%20ingin%20bertanya..." target="_blank" class="flex flex-col items-center gap-0.5 text-slate-400 relative">
+            <span class="text-base">📥</span><span class="text-[9px] font-medium">Inbox</span>
+            <span class="absolute top-0 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+        </a>
+        <button onclick="navigateTo('bantuan')" class="flex flex-col items-center gap-0.5 text-slate-400">
+            <span class="text-base">❓</span><span class="text-[9px] font-medium">Bantuan</span>
+        </button>
+    </div>
+
+    <!-- ENGINE CODE CORE ROUTER SPA -->
+    <script type="module">
+        const templateMateri = [
+            { judul: "Permainan Bola Basket", semester: 1, kategori: "Bola Besar", durasi: 45, deskripsi: "Mempelajari teknik passing, dribbling, dan shooting dasar pada fase E.", image_url: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400" },
+            { judul: "Taktik Bulutangkis", semester: 1, kategori: "Bola Kecil", durasi: 40, deskripsi: "Analisis penempatan bola dan teknik footwork permainan tunggal.", image_url: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400" },
+            { judul: "Lari Jarak Pendek", semester: 1, kategori: "Atletik", durasi: 30, deskripsi: "Teknik start jongkok dan biomekanika akselerasi lari sprint.", image_url: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400" },
+            { judul: "Pencak Silat Dasar", semester: 1, kategori: "Bela Diri", durasi: 50, deskripsi: "Latihan kuda-kuda, pola langkah, dan teknik tangkisan praktis.", image_url: "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400" },
+            { judul: "Kebugaran Jasmani", semester: 1, kategori: "Latihan Fisik", durasi: 45, deskripsi: "Mengukur daya tahan jantung, kekuatan otot, dan kelenturan tubuh.", image_url: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400" },
+            { judul: "Gizi & Pola Makan Sehat", semester: 1, kategori: "Kesehatan", durasi: 35, deskripsi: "Menghitung kebutuhan kalori harian dan memilih asupan gizi seimbang.", image_url: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400" },
+            { judul: "Senam Lantai (Floor Exercise)", semester: 2, kategori: "Senam", durasi: 45, deskripsi: "Gerakan roll depan, roll belakang, dan menjaga keseimbangan dinamis.", image_url: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=400" },
+            { judul: "Aktivitas Gerak Berirama", semester: 2, kategori: "Senam Ritmik", durasi: 40, deskripsi: "Koreografi langkah kaki dan ayunan lengan mengikuti irama musik.", image_url: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400" },
+            { judul: "Renang Gaya Dada", semester: 2, kategori: "Aktivitas Air", durasi: 60, deskripsi: "Teknik meluncur, kayuhan kaki, pengambilan napas, dan keselamatan air.", image_url: "https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=400" },
+            { judul: "Pencegahan Pergaulan Bebas", semester: 2, kategori: "Kesehatan", durasi: 45, deskripsi: "Edukasi kesehatan reproduksi remaja dan benteng psikologis diri.", image_url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400" }
+        ];
+
+        let currentSelectedSemester = 1;
+
+        window.navigateTo = function(pageName) {
+            document.getElementById('page-akun').classList.add('hidden');
+            document.getElementById('page-dashboard').classList.add('hidden');
+            document.getElementById('page-modul').classList.add('hidden');
+            document.getElementById('page-kalender').classList.add('hidden');
+            document.getElementById('page-bantuan').classList.add('hidden');
+
+            document.getElementById(`page-${pageName}`).classList.remove('hidden');
+
+            const mobileTitle = document.getElementById('mobile-page-title');
+            if(pageName === 'bantuan') {
+                mobileTitle.innerText = 'Pusat Bantuan';
+            } else if(pageName === 'kalender') {
+                mobileTitle.innerText = 'Kalender';
+            } else {
+                mobileTitle.innerText = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+            }
+
+            updateSidebarStyles(pageName);
+
+            if(pageName === 'modul') {
+                renderFilteredModules();
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        function updateSidebarStyles(activePage) {
+            const pages = ['akun', 'dashboard', 'modul', 'kalender', 'bantuan'];
+            pages.forEach(p => {
+                const btn = document.getElementById(`nav-desk-${p}`);
+                if(!btn) return;
+                if (p === activePage) {
+                    btn.className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow-md transition-all";
+                } else {
+                    btn.className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors";
+                }
+            });
+        }
+
+        window.toggleFAQ = function(id) {
+            const answer = document.getElementById(`faq-ans-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if(answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.innerText = "➖";
+                icon.classList.add('text-blue-500');
+            } else {
+                answer.classList.add('hidden');
+                icon.innerText = "➕";
+                icon.classList.remove('text-blue-500');
+            }
+        };
+
+        function renderFilteredModules() {
+            const container = document.getElementById("modules-container");
+            container.innerHTML = "";
+            const filtered = templateMateri.filter(m => m.semester === currentSelectedSemester);
+            
+            document.getElementById("current-semester-title").innerText = `Materi Semester ${currentSelectedSemester}`;
+            document.getElementById("materi-count-badge").innerText = `${filtered.length} Materi`;
+
+            filtered.forEach((item) => {
+                container.innerHTML += `
+                    <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col justify-between group hover:border-blue-500 transition-all duration-300">
+                        <div class="h-32 w-full overflow-hidden relative bg-slate-100">
+                            <img src="${item.image_url}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute bottom-2 right-2 bg-black/60 backdrop-blur-md text-white text-[9px] font-bold px-2 py-0.5 rounded">⏱️ ${item.durasi} Min</span>
+                        </div>
+                        <div class="p-4 flex-grow">
+                            <span class="text-[9px] font-bold text-blue-500 uppercase tracking-wide block mb-0.5">${item.kategori}</span>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-xs line-clamp-1">${item.judul}</h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">${item.deskripsi}</p>
+                        </div>
+                        <div class="px-4 pb-4 pt-2 border-t border-slate-50 dark:border-slate-700/60 flex justify-between items-center text-[10px]">
+                            <span class="text-slate-400">📖 Fase E</span>
+                            <button class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-semibold px-3 py-1 rounded-lg hover:bg-blue-600 hover:text-white transition-colors">Buka Modul</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        document.getElementById("btn-sem1").addEventListener("click", () => { currentSelectedSemester = 1; renderFilteredModules(); document.getElementById("btn-sem1").className = "whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-blue-600 text-white"; document.getElementById("btn-sem2").className = "whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300"; });
+        document.getElementById("btn-sem2").addEventListener("click", () => { currentSelectedSemester = 2; renderFilteredModules(); document.getElementById("btn-sem2").className = "whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-blue-600 text-white"; document.getElementById("btn-sem1").className = "whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300"; });
+
+        // Dark Mode Controller
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); lightIcon.classList.remove('hidden'); } else { document.documentElement.classList.remove('dark'); darkIcon.classList.remove('hidden'); }
+        themeToggleBtn.addEventListener('click', function() { lightIcon.classList.toggle('hidden'); darkIcon.classList.toggle('hidden'); if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); } else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); } });
+
+        // Health Time Tracker Clock
+        let sec = 0; setInterval(() => { sec++; let m = Math.floor(sec/60), s = sec%60; document.getElementById('spend-time-clock').innerText = `${m<10?'0'+m:m}:${s<10?'0'+s:s}`; }, 1000);
+
+        // Halaman Default Awal
+        navigateTo('dashboard');
+    </script>
+</body>
+</html>
