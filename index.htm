@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +11,31 @@
             darkMode: 'class',
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .apa-reference { padding-left: 2rem; text-indent: -2rem; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .apa-reference {
+            padding-left: 2rem;
+            text-indent: -2rem;
+        }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col md:flex-row">
 
-    <aside class="hidden md:flex flex-col w-64 text-slate-400 fixed h-screen z-40 border-r border-slate-900 p-4 justify-between" style="background-color: #0b1329;">
+<body
+    class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col md:flex-row">
+
+    <aside
+        class="hidden md:flex flex-col w-64 text-slate-400 fixed h-screen z-40 border-r border-slate-900 p-4 justify-between"
+        style="background-color: #0b1329;">
         <div class="space-y-6">
             <div class="flex items-center gap-3 px-2 py-3">
-                <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md">P</div>
+                <div
+                    class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md">
+                    P</div>
                 <div>
                     <h2 class="font-bold text-sm text-white leading-tight tracking-wide">LMS PJOK</h2>
                     <p class="text-[10px] text-slate-500">SMAN 2 Ciamis</p>
@@ -29,22 +43,28 @@
             </div>
 
             <nav class="space-y-2" id="desktop-nav">
-                <button onclick="navigateTo('akun')" id="nav-desk-akun" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                <button onclick="navigateTo('akun')" id="nav-desk-akun"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
                     <span class="text-purple-400 text-sm">👤</span> Akun
                 </button>
-                <button onclick="navigateTo('dashboard')" id="nav-desk-dashboard" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                <button onclick="navigateTo('dashboard')" id="nav-desk-dashboard"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
                     <span class="text-sm">📊</span> Dashboard
                 </button>
-                <button onclick="navigateTo('modul')" id="nav-desk-modul" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                <button onclick="navigateTo('modul')" id="nav-desk-modul"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
                     <span class="text-teal-400 text-sm">📚</span> Modul PJOK
                 </button>
-                <button onclick="navigateTo('kalender')" id="nav-desk-kalender" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                <button onclick="navigateTo('kalender')" id="nav-desk-kalender"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
                     <span class="text-blue-400 text-sm">📅</span> Kalender Akademik
                 </button>
-                <button onclick="navigateTo('referensi')" id="nav-desk-referensi" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                <button onclick="navigateTo('referensi')" id="nav-desk-referensi"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
                     <span class="text-amber-400 text-sm">🔖</span> Referensi
                 </button>
-                <a href="https://wa.me/6282317611998?text=Halo%20Guru%20PJOK%20SMAN%202%20Ciamis..." target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors justify-between w-full">
+                <a href="https://wa.me/6281234567890?text=Halo%20Guru%20PJOK%20SMAN%202%20Ciamis..." target="_blank"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors justify-between w-full">
                     <span class="flex items-center gap-3"><span class="text-pink-400 text-sm">📥</span> Inbox</span>
                     <span class="bg-blue-600 text-white font-bold text-[9px] px-2 py-0.5 rounded-full">3 Baru</span>
                 </a>
@@ -52,102 +72,157 @@
         </div>
 
         <div class="pt-4 border-t border-slate-900">
-            <button onclick="navigateTo('bantuan')" id="nav-desk-bantuan" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+            <button onclick="navigateTo('bantuan')" id="nav-desk-bantuan"
+                class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
                 <span class="text-red-400 text-sm">❓</span> Pusat Bantuan
             </button>
         </div>
     </aside>
 
     <div class="flex-grow md:pl-64 flex flex-col min-h-screen pb-20 md:pb-0">
-        
-        <nav class="bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 px-6 py-4 flex justify-between items-center shadow-sm">
+
+        <nav
+            class="bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 px-6 py-4 flex justify-between items-center shadow-sm">
             <div class="flex items-center gap-3 md:hidden">
-                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-base">P</div>
-                <h1 class="font-bold text-base text-slate-900 dark:text-white tracking-tight" id="mobile-page-title">Dashboard</h1>
+                <div
+                    class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-base">
+                    P</div>
+                <h1 class="font-bold text-base text-slate-900 dark:text-white tracking-tight" id="mobile-page-title">
+                    Dashboard</h1>
             </div>
-            
+
             <div class="hidden md:block">
-                <span id="header-page-title" class="text-xs font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1 rounded-lg tracking-wide shadow-sm border border-slate-200 dark:border-slate-700">Dashboard</span>
+                <span id="header-page-title"
+                    class="text-xs font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1 rounded-lg tracking-wide shadow-sm border border-slate-200 dark:border-slate-700">Dashboard</span>
             </div>
-            
+
             <div class="flex items-center gap-3">
-                <div id="time-tracker" class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 px-2.5 py-1 rounded-lg">
-                    <span class="text-xs font-bold text-amber-800 dark:text-amber-300 font-mono">⏱️ <span id="spend-time-clock">00:00</span></span>
+                <div id="time-tracker"
+                    class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 px-2.5 py-1 rounded-lg">
+                    <span class="text-xs font-bold text-amber-800 dark:text-amber-300 font-mono">⏱️ <span
+                            id="spend-time-clock">00:00</span></span>
                 </div>
-                <button id="theme-toggle" class="p-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg transition-colors shadow-sm">
-                    <svg id="theme-toggle-light-icon" class="hidden w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 14.05a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm-.707-8.485a1 1 0 010-1.414l.707-.707a1 1 0 111.414 1.414l-.707.707a1 1 0 01-1.414 0zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z"></path></svg>
-                    <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                <button id="theme-toggle"
+                    class="p-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg transition-colors shadow-sm">
+                    <svg id="theme-toggle-light-icon" class="hidden w-4 h-4 text-amber-500" fill="currentColor"
+                        viewBox="0 0 20 20">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 14.05a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm-.707-8.485a1 1 0 010-1.414l.707-.707a1 1 0 111.414 1.414l-.707.707a1 1 0 01-1.414 0zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z">
+                        </path>
+                    </svg>
+                    <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4 text-slate-500" fill="currentColor"
+                        viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
                 </button>
             </div>
         </nav>
 
         <section id="page-akun" class="hidden max-w-7xl w-full mx-auto px-4 py-6">
-            <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 max-w-2xl mx-auto">
-                <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-700">
-                    <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg">👤</div>
+            <div
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 max-w-2xl mx-auto">
+                <div
+                    class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-700">
+                    <div
+                        class="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+                        👤</div>
                     <div class="text-center sm:text-left">
                         <h3 class="text-lg font-bold text-slate-900 dark:text-white">Ahmad Fauzi</h3>
                         <p class="text-xs text-slate-400">NISN: 0076543210 • Siswa Aktif</p>
-                        <span class="inline-block mt-2 bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Kelas X - Fase E</span>
+                        <span
+                            class="inline-block mt-2 bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Kelas
+                            X - Fase E</span>
                     </div>
                 </div>
                 <div class="mt-6 space-y-4 text-xs">
-                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Instansi Sekolah</span><span class="col-span-2 font-semibold text-slate-700 dark:text-slate-300">SMAN 2 Ciamis</span></div>
-                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Email Utama</span><span class="col-span-2 font-medium text-slate-700 dark:text-slate-300">ahmad.fauzi@sman2ciamis.sch.id</span></div>
-                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Status Pembelajaran</span><span class="col-span-2 font-medium text-green-500">Terhubung Pusat</span></div>
+                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Instansi Sekolah</span><span
+                            class="col-span-2 font-semibold text-slate-700 dark:text-slate-300">SMAN 2 Ciamis</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Email Utama</span><span
+                            class="col-span-2 font-medium text-slate-700 dark:text-slate-300">ahmad.fauzi@sman2ciamis.sch.id</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-400">Status Pembelajaran</span><span
+                            class="col-span-2 font-medium text-green-500">Terhubung Pusat</span></div>
                 </div>
             </div>
         </section>
 
         <section id="page-dashboard" class="max-w-7xl w-full mx-auto px-4 py-6 space-y-4">
-            <h2 class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2">Daftar Kelas & Fase PJOK • Pusat Materi</h2>
+            <h2
+                class="text-lg font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2">
+                Daftar Kelas & Fase PJOK • Pusat Materi</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <div onclick="selectClassAndNavigate('Kelas X Fase E')" class="cursor-pointer bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden group hover:border-blue-500 hover:shadow-md transition-all duration-300">
-                    <div class="h-36 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 relative p-4 flex flex-col justify-between">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                        <span class="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Aktif</span>
-                        <h3 class="text-white font-bold text-base leading-tight">Kelas X<br><span class="text-sm font-normal text-blue-100">Fase E PJOK</span></h3>
+
+                <div onclick="selectClassAndNavigate('Kelas X Fase E')"
+                    class="cursor-pointer bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden group hover:border-blue-500 hover:shadow-md transition-all duration-300">
+                    <div
+                        class="h-36 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 relative p-4 flex flex-col justify-between">
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]">
+                        </div>
+                        <span
+                            class="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Aktif</span>
+                        <h3 class="text-white font-bold text-base leading-tight">Kelas X<br><span
+                                class="text-sm font-normal text-blue-100">Fase E PJOK</span></h3>
                     </div>
                     <div class="p-4 flex justify-between items-center text-xs">
                         <span class="text-slate-400">12 Modul Pembelajaran</span>
-                        <span class="text-blue-500 font-bold group-hover:translate-x-1 transition-transform">Lihat Pusat Materi ➔</span>
+                        <span class="text-blue-500 font-bold group-hover:translate-x-1 transition-transform">Lihat Pusat
+                            Materi ➔</span>
                     </div>
                 </div>
 
-                <div onclick="selectClassAndNavigate('Kelas XI Fase F')" class="cursor-pointer bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden group hover:border-emerald-500 hover:shadow-md transition-all duration-300">
-                    <div class="h-36 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 relative p-4 flex flex-col justify-between">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                        <span class="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Aktif</span>
-                        <h3 class="text-white font-bold text-base leading-tight">Kelas XI<br><span class="text-sm font-normal text-emerald-100">Fase F PJOK</span></h3>
+                <div onclick="selectClassAndNavigate('Kelas XI Fase F')"
+                    class="cursor-pointer bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden group hover:border-emerald-500 hover:shadow-md transition-all duration-300">
+                    <div
+                        class="h-36 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 relative p-4 flex flex-col justify-between">
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]">
+                        </div>
+                        <span
+                            class="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Aktif</span>
+                        <h3 class="text-white font-bold text-base leading-tight">Kelas XI<br><span
+                                class="text-sm font-normal text-emerald-100">Fase F PJOK</span></h3>
                     </div>
                     <div class="p-4 flex justify-between items-center text-xs">
                         <span class="text-slate-400">12 Modul Fase Lanjutan</span>
-                        <span class="text-emerald-500 font-bold group-hover:translate-x-1 transition-transform">Lihat Pusat Materi ➔</span>
+                        <span class="text-emerald-500 font-bold group-hover:translate-x-1 transition-transform">Lihat
+                            Pusat Materi ➔</span>
                     </div>
                 </div>
 
-                <div onclick="selectClassAndNavigate('Kelas XII Fase F')" class="cursor-pointer bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden group hover:border-orange-500 hover:shadow-md transition-all duration-300">
-                    <div class="h-36 bg-gradient-to-br from-orange-500 via-amber-600 to-red-600 relative p-4 flex flex-col justify-between">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                        <span class="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Aktif</span>
-                        <h3 class="text-white font-bold text-base leading-tight">Kelas XII<br><span class="text-sm font-normal text-orange-100">Fase F PJOK</span></h3>
+                <div onclick="selectClassAndNavigate('Kelas XII Fase F')"
+                    class="cursor-pointer bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden group hover:border-orange-500 hover:shadow-md transition-all duration-300">
+                    <div
+                        class="h-36 bg-gradient-to-br from-orange-500 via-amber-600 to-red-600 relative p-4 flex flex-col justify-between">
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]">
+                        </div>
+                        <span
+                            class="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-md self-start">Aktif</span>
+                        <h3 class="text-white font-bold text-base leading-tight">Kelas XII<br><span
+                                class="text-sm font-normal text-orange-100">Fase F PJOK</span></h3>
                     </div>
                     <div class="p-4 flex justify-between items-center text-xs">
                         <span class="text-slate-400">12 Modul Fase Akhir</span>
-                        <span class="text-orange-500 font-bold group-hover:translate-x-1 transition-transform">Lihat Pusat Materi ➔</span>
+                        <span class="text-orange-500 font-bold group-hover:translate-x-1 transition-transform">Lihat
+                            Pusat Materi ➔</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="page-modul" class="hidden max-w-7xl w-full mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <section id="page-modul"
+            class="hidden max-w-7xl w-full mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div class="lg:col-span-1 space-y-3">
-                <div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-row lg:flex-col gap-2 overflow-x-auto">
-                    <button id="btn-sem1" class="whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-blue-600 text-white">
+                <div
+                    class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-row lg:flex-col gap-2 overflow-x-auto">
+                    <button id="btn-sem1"
+                        class="whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-blue-600 text-white">
                         <span>📅 Semester 1</span>
                     </button>
-                    <button id="btn-sem2" class="whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                    <button id="btn-sem2"
+                        class="whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
                         <span>📅 Semester 2</span>
                     </button>
                 </div>
@@ -155,24 +230,33 @@
 
             <div id="scroll_target" class="lg:col-span-3 space-y-4 scroll-mt-24">
                 <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2">
-                    <h2 id="current-semester-title" class="text-lg font-bold text-slate-900 dark:text-white">Materi Semester 1</h2>
-                    <span id="materi-count-badge" class="bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-bold text-xs px-2.5 py-1 rounded-full">7 Materi</span>
+                    <h2 id="current-semester-title" class="text-lg font-bold text-slate-900 dark:text-white">Materi
+                        Semester 1</h2>
+                    <span id="materi-count-badge"
+                        class="bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-bold text-xs px-2.5 py-1 rounded-full">7
+                        Materi</span>
                 </div>
                 <div id="modules-container" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
             </div>
         </section>
 
         <section id="page-kalender" class="hidden max-w-7xl w-full mx-auto px-4 py-6">
-            <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col h-[70vh]">
-                <div class="bg-slate-100 dark:bg-slate-700/50 px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
+            <div
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col h-[70vh]">
+                <div
+                    class="bg-slate-100 dark:bg-slate-700/50 px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
                     <div class="flex items-center gap-2">
                         <span class="text-blue-500 font-bold text-sm">📅</span>
-                        <h3 class="text-xs font-bold text-slate-800 dark:text-white">Agenda & Jadwal Kegiatan Pembelajaran</h3>
+                        <h3 class="text-xs font-bold text-slate-800 dark:text-white">Agenda & Jadwal Kegiatan
+                            Pembelajaran</h3>
                     </div>
                 </div>
                 <div class="flex-grow w-full h-full bg-slate-50 dark:bg-slate-900">
-                    <iframe src="https://calendar.google.com/calendar/embed?src=id.indonesian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FJakarta&wkst=2" 
-                            style="border: 0" class="w-full h-full opacity-90 dark:invert dark:hue-rotate-180 transition-all" frameborder="0" scrolling="no"></iframe>
+                    <iframe
+                        src="https://calendar.google.com/calendar/embed?src=id.indonesian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FJakarta&wkst=2"
+                        style="border: 0"
+                        class="w-full h-full opacity-90 dark:invert dark:hue-rotate-180 transition-all" frameborder="0"
+                        scrolling="no"></iframe>
                 </div>
             </div>
         </section>
@@ -180,39 +264,59 @@
         <section id="page-referensi" class="hidden max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
             <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl p-6 text-white shadow-sm">
                 <h2 class="text-xl font-bold">Referensi Standar Pembelajaran</h2>
-                <p class="text-xs text-orange-100 mt-1">Acuan kajian kurikulum kurasi keilmuan Pendidikan Jasmani, Olahraga, dan Kesehatan jenjang Pendidikan Menengah (SMA).</p>
+                <p class="text-xs text-orange-100 mt-1">Acuan kajian kurikulum kurasi keilmuan Pendidikan Jasmani,
+                    Olahraga, dan Kesehatan jenjang Pendidikan Menengah (SMA).</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                <div
+                    class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
                     <div class="flex items-center gap-2 border-b border-slate-100 dark:border-slate-700 pb-2">
                         <span class="text-base">📝</span>
-                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Sitasi Konsep Kurikulum Nasional</h3>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Sitasi Konsep Kurikulum Nasional
+                        </h3>
                     </div>
                     <div class="text-xs text-slate-600 dark:text-slate-400 space-y-3 leading-relaxed">
                         <p>
-                            Pelaksanaan kurikulum matapelajaran Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK) di tingkat Sekolah Menengah Atas menitikberatkan pada perolehan keterampilan gerak dasar terpadu serta penguatan sistem efikasi kebugaran jasmani yang berkelanjutan. Menurut panduan resmi dari Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi (2022), reorientasi kurikulum Merdeka dirancang untuk memberikan ruang fleksibilitas yang lebih lebar bagi peserta didik dalam mengeksplorasi kemampuan taktis olahraga kelompok maupun mandiri.
+                            Pelaksanaan kurikulum matapelajaran Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK) di
+                            tingkat Sekolah Menengah Atas menitikberatkan pada perolehan keterampilan gerak dasar
+                            terpadu serta penguatan sistem efikasi kebugaran jasmani yang berkelanjutan. Menurut panduan
+                            resmi dari Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi (2022), reorientasi
+                            kurikulum Merdeka dirancang untuk memberikan ruang fleksibilitas yang lebih lebar bagi
+                            peserta didik dalam mengeksplorasi kemampuan taktis olahraga kelompok maupun mandiri.
                         </p>
                         <p>
-                            Di samping aspek ketangkasan fisik, implementasi proses pembelajaran olahraga juga berkontribusi linear terhadap pembentukan regulasi emosi, sportivitas, serta karakter kerja sama tim (Lutan, 2020). Sinkronisasi ini sejalan dengan kerangka kerja global yang diamanatkan oleh World Health Organization (2020) mengenai pentingnya pemenuhan durasi minimal aktivitas fisik harian demi menekan prevalensi *sedentary behaviour* pada kelompok usia remaja.
+                            Di samping aspek ketangkasan fisik, implementasi proses pembelajaran olahraga juga
+                            berkontribusi linear terhadap pembentukan regulasi emosi, sportivitas, serta karakter kerja
+                            sama tim (Lutan, 2020). Sinkronisasi ini sejalan dengan kerangka kerja global yang
+                            diamanatkan oleh World Health Organization (2020) mengenai pentingnya pemenuhan durasi
+                            minimal aktivitas fisik harian demi menekan prevalensi *sedentary behaviour* pada kelompok
+                            usia remaja.
                         </p>
                     </div>
                 </div>
 
-                <div class="lg:col-span-1 bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                <div
+                    class="lg:col-span-1 bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
                     <div class="flex items-center gap-2 border-b border-slate-100 dark:border-slate-700 pb-2">
                         <span class="text-base">📚</span>
-                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Daftar Pustaka (APA 7th Edition)</h3>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Daftar Pustaka (APA 7th Edition)
+                        </h3>
                     </div>
-                    <div class="space-y-4 text-[11px] text-slate-600 dark:text-slate-400 font-mono tracking-tight leading-relaxed">
+                    <div
+                        class="space-y-4 text-[11px] text-slate-600 dark:text-slate-400 font-mono tracking-tight leading-relaxed">
                         <div class="apa-reference">
-                            Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. (2022). <em>Panduan pembelajaran dan asesmen pendidikan anak usia dini, pendidikan dasar, dan pendidikan menengah</em>. Badan Standar, Kurikulum, dan Asesmen Pendidikan.
+                            Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. (2022). <em>Panduan pembelajaran
+                                dan asesmen pendidikan anak usia dini, pendidikan dasar, dan pendidikan menengah</em>.
+                            Badan Standar, Kurikulum, dan Asesmen Pendidikan.
                         </div>
                         <div class="apa-reference">
-                            Lutan, R. (2020). <em>Pendidikan jasmani dan kesehatan: Perspektif teoretis dan praktis</em>. Penerbit Universitas Pendidikan Indonesia.
+                            Lutan, R. (2020). <em>Pendidikan jasmani dan kesehatan: Perspektif teoretis dan
+                                praktis</em>. Penerbit Universitas Pendidikan Indonesia.
                         </div>
                         <div class="apa-reference">
-                            World Health Organization. (2020). <em>Guidelines on physical activity and sedentary behaviour</em>. WHO Press.
+                            World Health Organization. (2020). <em>Guidelines on physical activity and sedentary
+                                behaviour</em>. WHO Press.
                         </div>
                     </div>
                 </div>
@@ -222,27 +326,36 @@
         <section id="page-bantuan" class="hidden max-w-7xl w-full mx-auto px-4 py-6 max-w-3xl">
             <div class="text-center space-y-2 mb-8">
                 <h2 class="text-xl font-bold text-slate-900 dark:text-white">Pusat Bantuan Layanan LMS</h2>
-                <p class="text-xs text-slate-400">Punya pertanyaan seputar penggunaan aplikasi? Temukan jawabannya di bawah ini.</p>
+                <p class="text-xs text-slate-400">Punya pertanyaan seputar penggunaan aplikasi? Temukan jawabannya di
+                    bawah ini.</p>
             </div>
             <div class="space-y-3">
-                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
-                    <button onclick="toggleFAQ(1)" class="w-full flex justify-between items-center p-4 text-left font-semibold text-xs text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                    <button onclick="toggleFAQ(1)"
+                        class="w-full flex justify-between items-center p-4 text-left font-semibold text-xs text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
                         <span>❓ Bagaimana cara mengakses modul materi lengkap?</span>
                         <span id="faq-icon-1" class="text-slate-400 transition-transform duration-200">➕</span>
                     </button>
-                    <div id="faq-ans-1" class="hidden px-4 pb-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-700/50 pt-3">
-                        Halaman ini merupakan **LMS PJOK** utama. Saat Anda klik <strong class="text-blue-500">"Buka Modul"</strong>, Anda akan diarahkan otomatis ke situs eksternal terpisah tempat isi materi diletakkan. Di situs isi materi tersebut, Anda dapat mengunduh atau membaca dokumen secara menyeluruh.
+                    <div id="faq-ans-1"
+                        class="hidden px-4 pb-4 text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-700/50 pt-3">
+                        Halaman ini merupakan **LMS PJOK** utama. Saat Anda klik <strong class="text-blue-500">"Buka
+                            Modul"</strong>, Anda akan diarahkan otomatis ke situs eksternal terpisah tempat isi materi
+                        diletakkan. Di situs isi materi tersebut, Anda dapat mengunduh atau membaca dokumen secara
+                        menyeluruh.
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer class="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-850 text-center py-4 text-[10px] text-slate-400 dark:text-slate-500 mt-auto">
+        <footer
+            class="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-850 text-center py-4 text-[10px] text-slate-400 dark:text-slate-500 mt-auto">
             &copy; 2026 Proyek Portal Hub LMS PJOK - SMAN 2 Ciamis
         </footer>
     </div>
 
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-2 py-2 flex justify-around items-center z-50 shadow-lg">
+    <div
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-2 py-2 flex justify-around items-center z-50 shadow-lg">
         <button onclick="navigateTo('akun')" class="flex flex-col items-center gap-0.5 text-slate-400">
             <span class="text-base">👤</span><span class="text-[9px] font-medium">Akun</span>
         </button>
@@ -258,100 +371,133 @@
         <button onclick="navigateTo('referensi')" class="flex flex-col items-center gap-0.5 text-slate-400">
             <span class="text-base">🔖</span><span class="text-[9px] font-medium">Referensi</span>
         </button>
-        <a href="https://wa.me/6282317611998?text=Halo%20Guru%20PJOK%20SMAN%202%20Ciamis..." target="_blank" class="flex flex-col items-center gap-0.5 text-slate-400 relative">
+        <a href="https://wa.me/6281234567890?text=Halo%20Guru%20PJOK%20SMAN%202%20Ciamis..." target="_blank"
+            class="flex flex-col items-center gap-0.5 text-slate-400 relative">
             <span class="text-base">📥</span><span class="text-[9px] font-medium">Inbox</span>
             <span class="absolute top-0 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
         </a>
     </div>
 
+    <!-- In-App Module Viewer -->
+    <section id="page-viewer"
+        class="hidden fixed inset-0 z-[60] bg-white dark:bg-slate-900 flex flex-col transition-opacity duration-300 opacity-0">
+        <div
+            class="bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex justify-between items-center shadow-sm">
+            <div class="flex items-center gap-3">
+                <button onclick="closeModuleViewer()"
+                    class="p-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors text-slate-700 dark:text-slate-300 shadow-sm flex items-center gap-2 text-xs font-bold">
+                    <span>⬅️</span> Kembali ke LMS
+                </button>
+                <h2 id="viewer-title"
+                    class="font-bold text-sm text-slate-900 dark:text-white truncate max-w-[150px] md:max-w-md">Modul
+                </h2>
+            </div>
+            <div>
+                <a id="viewer-external-link" href="#" target="_blank"
+                    class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 px-3 py-1.5 rounded-lg border border-blue-100 dark:border-blue-800">
+                    Buka di Tab Baru <span>↗️</span>
+                </a>
+            </div>
+        </div>
+        <div class="flex-grow w-full bg-slate-50 dark:bg-slate-900 relative">
+            <div id="viewer-loading"
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-slate-50 dark:bg-slate-900 z-10">
+                <div class="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Memuat modul...</p>
+            </div>
+            <iframe id="module-iframe" src="" class="w-full h-full border-0 relative z-20" allowfullscreen
+                onload="document.getElementById('viewer-loading').classList.add('hidden')"></iframe>
+        </div>
+    </section>
+
     <script type="module">
         const templateMateri = [
             // === SEMESTER 1 ===
-            { 
-                judul: "Bola Basket", semester: 1, kategori: "Permainan Invasi", durasi: 45, 
-                deskripsi: "Menganalisis keterampilan gerak operan, menggiring, dan menembak ke ring berdasarkan taktik penyerangan.", 
+            {
+                judul: "Bola Basket", semester: 1, kategori: "Permainan Invasi", durasi: 45,
+                deskripsi: "Menganalisis keterampilan gerak operan, menggiring, dan menembak ke ring berdasarkan taktik penyerangan.",
                 image_url: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400",
-                url_materi: "https://tautan-web-materi-basket-anda.com" 
+                url_materi: "https://adiwforedu.github.io/MPIBasketFaseE/"
             },
-            { 
-                judul: "Bola Voli", semester: 1, kategori: "Permainan Net", durasi: 40, 
-                deskripsi: "Mengevaluasi variasi pola pertahanan, servis bawah/atas, serta teknik passing bawah dan atas secara berkelompok.", 
+            {
+                judul: "Bola Voli", semester: 1, kategori: "Permainan Net", durasi: 40,
+                deskripsi: "Mengevaluasi variasi pola pertahanan, servis bawah/atas, serta teknik passing bawah dan atas secara berkelompok.",
                 image_url: "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=400",
-                url_materi: "https://tautan-web-materi-voli-anda.com" 
+                url_materi: "https://tautan-web-materi-voli-anda.com"
             },
-            { 
-                judul: "Sepak Bola/Futsal", semester: 1, kategori: "Permainan Lapangan", durasi: 45, 
-                deskripsi: "Mempraktikkan keterampilan menendang, menahan, dan mengumpan bola dalam simulasi permainan taktis.", 
+            {
+                judul: "Sepak Bola/Futsal", semester: 1, kategori: "Permainan Lapangan", durasi: 45,
+                deskripsi: "Mempraktikkan keterampilan menendang, menahan, dan mengumpan bola dalam simulasi permainan taktis.",
                 image_url: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400",
                 url_materi: "https://link-materi-sepakbola.com"
             },
-            { 
-                judul: "Lari Jarak Pendek", semester: 1, kategori: "Olahraga Atletik", durasi: 30, 
-                deskripsi: "Memahami biomekanika start jongkok, fase akselerasi lintasan lurus, dan teknik melewati garis finis.", 
+            {
+                judul: "Lari Jarak Pendek", semester: 1, kategori: "Olahraga Atletik", durasi: 30,
+                deskripsi: "Memahami biomekanika start jongkok, fase akselerasi lintasan lurus, dan teknik melewati garis finis.",
                 image_url: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400",
                 url_materi: "https://link-materi-atletik.com"
             },
-            { 
-                judul: "Senam Irama", semester: 1, kategori: "Gerak Berirama", durasi: 40, 
-                deskripsi: "Menyusun rangkaian langkah kaki tunggal-ganda serta ayunan lengan berirama mengikuti ketukan musik.", 
+            {
+                judul: "Senam Irama", semester: 1, kategori: "Gerak Berirama", durasi: 40,
+                deskripsi: "Menyusun rangkaian langkah kaki tunggal-ganda serta ayunan lengan berirama mengikuti ketukan musik.",
                 image_url: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400",
                 url_materi: "https://link-materi-senamirama.com"
             },
-            { 
-                judul: "Daya Tahan Jantung dan Paru", semester: 1, kategori: "Kebugaran Jasmani", durasi: 45, 
-                deskripsi: "Menghitung kapasitas VO2 Max melalui latihan interval training dan sirkuit demi menunjang stabilitas fisik.", 
+            {
+                judul: "Daya Tahan Jantung dan Paru", semester: 1, kategori: "Kebugaran Jasmani", durasi: 45,
+                deskripsi: "Menghitung kapasitas VO2 Max melalui latihan interval training dan sirkuit demi menunjang stabilitas fisik.",
                 image_url: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400",
-                url_materi: "https://link-materi-kebugaran.com"
+                url_materi: "https://adiwforedu.github.io/gimedukasi_kebugaran_jasmani_faseE_SMA/"
             },
-            { 
-                judul: "Pola Hidup Sehat", semester: 1, kategori: "Kesehatan", durasi: 35, 
-                deskripsi: "Menerapkan prinsip gizi seimbang, manajemen istirahat, dan pencegahan penyakit menular/tidak menular remaja.", 
+            {
+                judul: "Pola Hidup Sehat", semester: 1, kategori: "Kesehatan", durasi: 35,
+                deskripsi: "Menerapkan prinsip gizi seimbang, manajemen istirahat, dan pencegahan penyakit menular/tidak menular remaja.",
                 image_url: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400",
-                url_materi: "https://link-materi-gizi.com"
+                url_materi: "https://adiwforedu.github.io/Pola-Hidup-Sehat-Fase-E/"
             },
 
             // === SEMESTER 2 ===
-            { 
-                judul: "Bulu tangkis dan Tenis Meja", semester: 2, kategori: "Permainan Net", durasi: 45, 
-                deskripsi: "Mengevaluasi teknik pegangan raket/bet, pukulan forehand-backhand, serta pola penempatan bola taktis.", 
+            {
+                judul: "Bulu tangkis dan Tenis Meja", semester: 2, kategori: "Permainan Net", durasi: 45,
+                deskripsi: "Mengevaluasi teknik pegangan raket/bet, pukulan forehand-backhand, serta pola penempatan bola taktis.",
                 image_url: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400",
                 url_materi: "https://link-materi-badminton.com"
             },
-            { 
-                judul: "Softball", semester: 2, kategori: "Permainan Lapangan", durasi: 45, 
-                deskripsi: "Mempelajari koordinasi mekanika melempar, menangkap bola glove, serta strategi memukul (batting) base.", 
+            {
+                judul: "Softball", semester: 2, kategori: "Permainan Lapangan", durasi: 45,
+                deskripsi: "Mempelajari koordinasi mekanika melempar, menangkap bola glove, serta strategi memukul (batting) base.",
                 image_url: "https://images.unsplash.com/photo-1544698310-74ea9d1c8258?w=400",
                 url_materi: "https://link-materi-softball.com"
             },
-            { 
-                judul: "Senam Lantai", semester: 2, kategori: "Aktivitas Senam", durasi: 45, 
-                deskripsi: "Menganalisis rangkaian gerak guling depan, guling belakang, dan sikap lilin dengan aspek keselamatan.", 
+            {
+                judul: "Senam Lantai", semester: 2, kategori: "Aktivitas Senam", durasi: 45,
+                deskripsi: "Menganalisis rangkaian gerak guling depan, guling belakang, dan sikap lilin dengan aspek keselamatan.",
                 image_url: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=400",
                 url_materi: "https://link-materi-senam.com"
             },
-            { 
-                judul: "Pencak Silat", semester: 2, kategori: "Aktivitas Bela Diri", durasi: 50, 
-                deskripsi: "Menguasai pembentukan kuda-kuda, pola langkah, teknik tangkisan, serta jurus dasar bela diri nasional.", 
+            {
+                judul: "Pencak Silat", semester: 2, kategori: "Aktivitas Bela Diri", durasi: 50,
+                deskripsi: "Menguasai pembentukan kuda-kuda, pola langkah, teknik tangkisan, serta jurus dasar bela diri nasional.",
                 image_url: "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400",
                 url_materi: "https://link-materi-silat.com"
             },
-            { 
-                judul: "Renang", semester: 2, kategori: "Aktivitas Air", durasi: 60, 
-                deskripsi: "Mempraktikkan teknik koordinasi gerakan kaki, kayuhan lengan, dan pernapasan ritmis gaya dada.", 
+            {
+                judul: "Renang", semester: 2, kategori: "Aktivitas Air", durasi: 60,
+                deskripsi: "Mempraktikkan teknik koordinasi gerakan kaki, kayuhan lengan, dan pernapasan ritmis gaya dada.",
                 image_url: "https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?w=400",
                 url_materi: "https://link-materi-renang.com"
             }
         ];
 
         let currentSelectedSemester = 1;
-        let selectedClassContext = ""; 
+        let selectedClassContext = "";
 
-        window.selectClassAndNavigate = function(className) {
+        window.selectClassAndNavigate = function (className) {
             selectedClassContext = className;
             navigateTo('modul');
         };
 
-        window.navigateTo = function(pageName) {
+        window.navigateTo = function (pageName) {
             document.getElementById('page-akun').classList.add('hidden');
             document.getElementById('page-dashboard').classList.add('hidden');
             document.getElementById('page-modul').classList.add('hidden');
@@ -363,7 +509,7 @@
 
             const desktopHeader = document.getElementById('header-page-title');
             const mobileTitle = document.getElementById('mobile-page-title');
-            
+
             let displayTitle = "";
             if (pageName === 'modul' && selectedClassContext !== "") {
                 displayTitle = `${selectedClassContext} LMS PJOK`;
@@ -386,14 +532,14 @@
 
             updateSidebarStyles(pageName);
 
-            if(pageName === 'modul') {
+            if (pageName === 'modul') {
                 renderFilteredModules();
             } else if (pageName === 'dashboard') {
                 selectedClassContext = "";
                 desktopHeader.innerText = "Dashboard";
                 mobileTitle.innerText = "Dashboard";
             }
-            
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
@@ -401,7 +547,7 @@
             const pages = ['akun', 'dashboard', 'modul', 'kalender', 'referensi', 'bantuan'];
             pages.forEach(p => {
                 const btn = document.getElementById(`nav-desk-${p}`);
-                if(!btn) return;
+                if (!btn) return;
                 if (p === activePage) {
                     btn.className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow-md transition-all";
                 } else {
@@ -410,10 +556,10 @@
             });
         }
 
-        window.toggleFAQ = function(id) {
+        window.toggleFAQ = function (id) {
             const answer = document.getElementById(`faq-ans-${id}`);
             const icon = document.getElementById(`faq-icon-${id}`);
-            if(answer.classList.contains('hidden')) {
+            if (answer.classList.contains('hidden')) {
                 answer.classList.remove('hidden');
                 icon.innerText = "➖";
                 icon.classList.add('text-blue-500');
@@ -428,7 +574,7 @@
             const container = document.getElementById("modules-container");
             container.innerHTML = "";
             const filtered = templateMateri.filter(m => m.semester === currentSelectedSemester);
-            
+
             document.getElementById("current-semester-title").innerText = `Materi Semester ${currentSelectedSemester}`;
             document.getElementById("materi-count-badge").innerText = `${filtered.length} Materi`;
 
@@ -439,6 +585,15 @@
             }
 
             filtered.forEach((item) => {
+                let finalUrl = item.url_materi;
+
+                // Batasi 3 link materi khusus untuk Kelas X Fase E saja
+                if (currentClassLabel !== "Kelas X Fase E") {
+                    if (item.judul === "Bola Basket") finalUrl = "https://tautan-web-materi-basket-anda.com";
+                    else if (item.judul === "Daya Tahan Jantung dan Paru") finalUrl = "https://link-materi-kebugaran.com";
+                    else if (item.judul === "Pola Hidup Sehat") finalUrl = "https://link-materi-gizi.com";
+                }
+
                 container.innerHTML += `
                     <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col justify-between group hover:border-blue-500 transition-all duration-300">
                         <div class="h-32 w-full overflow-hidden relative bg-slate-100">
@@ -452,11 +607,41 @@
                         </div>
                         <div class="px-4 pb-4 pt-2 border-t border-slate-50 dark:border-slate-700/60 flex justify-between items-center text-[10px]">
                             <span class="text-slate-400 font-medium">📖 ${currentClassLabel}</span>
-                            <a href="${item.url_materi}" target="_blank" class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-semibold px-3 py-1 rounded-lg hover:bg-blue-600 hover:text-white transition-colors text-center">Buka Modul</a>
+                            <button onclick="openModuleViewer('${finalUrl}', '${item.judul}')" class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-semibold px-3 py-1 rounded-lg hover:bg-blue-600 hover:text-white transition-colors text-center cursor-pointer">Buka Modul</button>
                         </div>
                     </div>`;
             });
         }
+
+        window.openModuleViewer = function (url, judul) {
+            const viewer = document.getElementById('page-viewer');
+            const iframe = document.getElementById('module-iframe');
+            const title = document.getElementById('viewer-title');
+            const extLink = document.getElementById('viewer-external-link');
+            const loading = document.getElementById('viewer-loading');
+
+            title.innerText = judul;
+            extLink.href = url;
+            loading.classList.remove('hidden');
+
+            viewer.classList.remove('hidden');
+            setTimeout(() => {
+                viewer.classList.remove('opacity-0');
+            }, 10);
+
+            iframe.src = url;
+        };
+
+        window.closeModuleViewer = function () {
+            const viewer = document.getElementById('page-viewer');
+            const iframe = document.getElementById('module-iframe');
+
+            viewer.classList.add('opacity-0');
+            setTimeout(() => {
+                viewer.classList.add('hidden');
+                iframe.src = "";
+            }, 300);
+        };
 
         document.getElementById("btn-sem1").addEventListener("click", () => { currentSelectedSemester = 1; renderFilteredModules(); document.getElementById("btn-sem1").className = "whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-blue-600 text-white"; document.getElementById("btn-sem2").className = "whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300"; });
         document.getElementById("btn-sem2").addEventListener("click", () => { currentSelectedSemester = 2; renderFilteredModules(); document.getElementById("btn-sem2").className = "whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-blue-600 text-white"; document.getElementById("btn-sem1").className = "whitespace-nowrap flex-grow text-center lg:text-left flex items-center justify-between px-4 py-2.5 rounded-lg font-semibold text-xs transition-all bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300"; });
@@ -465,11 +650,12 @@
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
         const lightIcon = document.getElementById('theme-toggle-light-icon');
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); lightIcon.classList.remove('hidden'); } else { document.documentElement.classList.remove('dark'); darkIcon.classList.remove('hidden'); }
-        themeToggleBtn.addEventListener('click', function() { lightIcon.classList.toggle('hidden'); darkIcon.classList.toggle('hidden'); if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); } else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); } });
+        themeToggleBtn.addEventListener('click', function () { lightIcon.classList.toggle('hidden'); darkIcon.classList.toggle('hidden'); if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); } else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); } });
 
-        let sec = 0; setInterval(() => { sec++; let m = Math.floor(sec/60), s = sec%60; document.getElementById('spend-time-clock').innerText = `${m<10?'0'+m:m}:${s<10?'0'+s:s}`; }, 1000);
+        let sec = 0; setInterval(() => { sec++; let m = Math.floor(sec / 60), s = sec % 60; document.getElementById('spend-time-clock').innerText = `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`; }, 1000);
 
         navigateTo('dashboard');
     </script>
 </body>
+
 </html>
