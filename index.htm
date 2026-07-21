@@ -22,10 +22,19 @@
             padding-left: 2rem;
             text-indent: -2rem;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .animate-fade-in {
             animation: fadeIn 0.5s ease-out forwards;
         }
@@ -36,42 +45,64 @@
     class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col md:flex-row">
 
     <!-- Login Overlay -->
-    <div id="login-overlay" class="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl relative border border-slate-200 dark:border-slate-700">
-            <div class="p-8 text-center bg-[#eef7fe] dark:bg-slate-900/50 border-b border-blue-50 dark:border-slate-700">
+    <div id="login-overlay"
+        class="fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-sm flex items-center justify-center p-4">
+        <div
+            class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl relative border border-slate-200 dark:border-slate-700">
+            <div
+                class="p-8 text-center bg-[#eef7fe] dark:bg-slate-900/50 border-b border-blue-50 dark:border-slate-700">
                 <div class="w-20 h-20 mx-auto flex items-center justify-center mb-4">
-                    <img src="https://lh3.googleusercontent.com/d/1s2m0En85KFyuNUi-KtxBUEeBLwYtdDcd" alt="Logo Sekolah" class="w-full h-full object-contain drop-shadow-md">
+                    <img src="https://lh3.googleusercontent.com/d/1s2m0En85KFyuNUi-KtxBUEeBLwYtdDcd" alt="Logo Sekolah"
+                        class="w-full h-full object-contain drop-shadow-md">
                 </div>
                 <h2 class="text-2xl font-bold text-slate-900 dark:text-white">LMS PJOK</h2>
                 <p class="text-slate-500 text-sm mt-1">SMAN 2 Ciamis</p>
             </div>
-            
+
             <div class="flex border-b border-slate-200 dark:border-slate-700">
-                <button id="tab-murid" onclick="switchLoginTab('murid')" class="flex-1 py-3 font-semibold text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 transition-colors">Masuk Murid</button>
-                <button id="tab-admin" onclick="switchLoginTab('admin')" class="flex-1 py-3 font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-b-2 border-transparent transition-colors">Guru / Admin</button>
+                <button id="tab-murid" onclick="switchLoginTab('murid')"
+                    class="flex-1 py-3 font-semibold text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 transition-colors">Masuk
+                    Murid</button>
+                <button id="tab-admin" onclick="switchLoginTab('admin')"
+                    class="flex-1 py-3 font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-b-2 border-transparent transition-colors">Guru
+                    / Admin</button>
             </div>
 
             <div class="p-8 space-y-4">
                 <div id="form-murid" class="space-y-4 animate-fade-in">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Nomor Induk Siswa Nasional (NISN)</label>
-                        <input type="text" id="login-nisn" placeholder="Contoh: 12345" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all" onkeypress="if(event.key === 'Enter') doLogin('murid')">
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Nomor Induk
+                            Siswa Nasional (NISN)</label>
+                        <input type="text" id="login-nisn" placeholder="Contoh: 12345"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                            onkeypress="if(event.key === 'Enter') doLogin('murid')">
                     </div>
-                    <button onclick="doLogin('murid')" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">Masuk ke LMS</button>
+                    <button onclick="doLogin('murid')"
+                        class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">Masuk
+                        ke LMS</button>
                 </div>
 
                 <div id="form-admin" class="space-y-4 hidden animate-fade-in">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Username Guru</label>
-                        <input type="text" id="login-username" placeholder="Masukkan 'guru'" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Username
+                            Guru</label>
+                        <input type="text" id="login-username" placeholder="Masukkan 'guru'"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Nomor Induk Pegawai (NIP)</label>
-                        <input type="password" id="login-password" placeholder="Masukkan 'NIP'" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all" onkeypress="if(event.key === 'Enter') doLogin('admin')">
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Nomor Induk
+                            Pegawai (NIP)</label>
+                        <input type="password" id="login-password" placeholder="Masukkan 'NIP'"
+                            class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all"
+                            onkeypress="if(event.key === 'Enter') doLogin('admin')">
                     </div>
-                    <button onclick="doLogin('admin')" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">Masuk sebagai Admin</button>
+                    <button onclick="doLogin('admin')"
+                        class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">Masuk
+                        sebagai Admin</button>
                 </div>
-                <p id="login-error" class="text-red-500 text-xs font-semibold text-center hidden p-2 bg-red-50 dark:bg-red-900/30 rounded-lg"></p>
+                <p id="login-error"
+                    class="text-red-500 text-xs font-semibold text-center hidden p-2 bg-red-50 dark:bg-red-900/30 rounded-lg">
+                </p>
             </div>
         </div>
     </div>
@@ -82,7 +113,8 @@
         <div class="space-y-6">
             <div class="flex items-center gap-3 px-2 py-3">
                 <div class="w-10 h-10 flex items-center justify-center shrink-0">
-                    <img src="https://lh3.googleusercontent.com/d/1s2m0En85KFyuNUi-KtxBUEeBLwYtdDcd" alt="Logo" class="w-full h-full object-contain drop-shadow-sm">
+                    <img src="https://lh3.googleusercontent.com/d/1s2m0En85KFyuNUi-KtxBUEeBLwYtdDcd" alt="Logo"
+                        class="w-full h-full object-contain drop-shadow-sm">
                 </div>
                 <div>
                     <h2 class="font-bold text-sm text-white leading-tight tracking-wide">LMS PJOK</h2>
@@ -132,7 +164,8 @@
             class="bg-slate-100 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30 px-6 py-4 flex justify-between items-center shadow-sm">
             <div class="flex items-center gap-3 md:hidden">
                 <div class="w-8 h-8 flex items-center justify-center shrink-0">
-                    <img src="https://lh3.googleusercontent.com/d/1s2m0En85KFyuNUi-KtxBUEeBLwYtdDcd" alt="Logo" class="w-full h-full object-contain drop-shadow-sm">
+                    <img src="https://lh3.googleusercontent.com/d/1s2m0En85KFyuNUi-KtxBUEeBLwYtdDcd" alt="Logo"
+                        class="w-full h-full object-contain drop-shadow-sm">
                 </div>
                 <h1 class="font-bold text-base text-slate-900 dark:text-white tracking-tight" id="mobile-page-title">
                     Dashboard</h1>
@@ -167,58 +200,99 @@
 
         <section id="page-welcome" class="hidden w-full mx-auto animate-fade-in">
             <!-- Header Area -->
-            <div class="bg-[#eef7fe] dark:bg-slate-900/60 pt-6 md:pt-12 pb-8 md:pb-16 px-4 text-center border-b border-blue-100 dark:border-slate-800">
-                <h1 class="text-xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-4 md:mb-8 tracking-tight">Selamat Datang di Kelas PJOK Fase E!</h1>
-                
-                <div class="max-w-4xl mx-auto bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl md:rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
-                    <p class="text-slate-600 dark:text-slate-300 italic mb-4 md:mb-10 font-medium text-xs md:text-base leading-relaxed">
-                        "Belajar bukan hanya tentang teori, tapi tentang bergerak, berkolaborasi, dan bertumbuh. Mari jadikan setiap langkah, ayunan, dan lompatanmu bermakna."
+            <div
+                class="bg-[#eef7fe] dark:bg-slate-900/60 pt-6 md:pt-12 pb-8 md:pb-16 px-4 text-center border-b border-blue-100 dark:border-slate-800">
+                <h1
+                    class="text-xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-4 md:mb-8 tracking-tight">
+                    Selamat Datang di Kelas PJOK Fase E!</h1>
+
+                <div
+                    class="max-w-4xl mx-auto bg-white dark:bg-slate-800 p-4 md:p-8 rounded-xl md:rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                    <p
+                        class="text-slate-600 dark:text-slate-300 italic mb-4 md:mb-10 font-medium text-xs md:text-base leading-relaxed">
+                        "Belajar bukan hanya tentang teori, tapi tentang bergerak, berkolaborasi, dan bertumbuh. Mari
+                        jadikan setiap langkah, ayunan, dan lompatanmu bermakna."
                     </p>
-                    
+
                     <div class="grid grid-cols-3 gap-2 md:gap-6">
-                        
-                        <div class="relative group rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 cursor-default bg-white dark:bg-slate-800 flex flex-col">
-                            <div class="h-16 md:h-28 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 p-2 md:p-4 flex flex-col items-center justify-center relative transition-transform duration-500 group-hover:scale-110">
-                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+                        <div
+                            class="relative group rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 cursor-default bg-white dark:bg-slate-800 flex flex-col">
+                            <div
+                                class="h-16 md:h-28 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 p-2 md:p-4 flex flex-col items-center justify-center relative transition-transform duration-500 group-hover:scale-110">
+                                <div
+                                    class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]">
+                                </div>
                                 <span class="text-2xl md:text-4xl relative z-10 drop-shadow-md">⭐</span>
                             </div>
-                            <div class="p-2 md:p-4 text-center bg-white dark:bg-slate-800 relative z-20 h-full flex flex-col items-center justify-center min-h-[48px] md:min-h-[60px]">
-                                <h4 class="font-bold text-slate-900 dark:text-white text-[10px] md:text-base leading-tight">Berkesadaran</h4>
+                            <div
+                                class="p-2 md:p-4 text-center bg-white dark:bg-slate-800 relative z-20 h-full flex flex-col items-center justify-center min-h-[48px] md:min-h-[60px]">
+                                <h4
+                                    class="font-bold text-slate-900 dark:text-white text-[10px] md:text-base leading-tight">
+                                    Berkesadaran</h4>
                             </div>
                             <!-- Hover state -->
-                            <div class="absolute inset-0 bg-blue-600/95 backdrop-blur-sm flex flex-col items-center justify-center p-2 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 overflow-y-auto">
-                                <span class="text-white font-bold mb-1 md:mb-2 text-[10px] md:text-sm text-center leading-tight">Mindful</span>
-                                <p class="text-blue-100 text-[8px] sm:text-[9px] md:text-xs text-center leading-tight md:leading-relaxed font-medium">Belajar dengan kesadaran penuh akan setiap gerakan dan dampaknya bagi tubuh kita.</p>
+                            <div
+                                class="absolute inset-0 bg-blue-600/95 backdrop-blur-sm flex flex-col items-center justify-center p-2 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 overflow-y-auto">
+                                <span
+                                    class="text-white font-bold mb-1 md:mb-2 text-[10px] md:text-sm text-center leading-tight">Mindful</span>
+                                <p
+                                    class="text-blue-100 text-[8px] sm:text-[9px] md:text-xs text-center leading-tight md:leading-relaxed font-medium">
+                                    Belajar dengan kesadaran penuh akan setiap gerakan dan dampaknya bagi tubuh kita.
+                                </p>
                             </div>
                         </div>
 
-                        <div class="relative group rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 cursor-default bg-white dark:bg-slate-800 flex flex-col">
-                            <div class="h-16 md:h-28 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 p-2 md:p-4 flex flex-col items-center justify-center relative transition-transform duration-500 group-hover:scale-110">
-                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        <div
+                            class="relative group rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 cursor-default bg-white dark:bg-slate-800 flex flex-col">
+                            <div
+                                class="h-16 md:h-28 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 p-2 md:p-4 flex flex-col items-center justify-center relative transition-transform duration-500 group-hover:scale-110">
+                                <div
+                                    class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]">
+                                </div>
                                 <span class="text-2xl md:text-4xl relative z-10 drop-shadow-md">💡</span>
                             </div>
-                            <div class="p-2 md:p-4 text-center bg-white dark:bg-slate-800 relative z-20 h-full flex flex-col items-center justify-center min-h-[48px] md:min-h-[60px]">
-                                <h4 class="font-bold text-slate-900 dark:text-white text-[10px] md:text-base leading-tight">Bermakna</h4>
+                            <div
+                                class="p-2 md:p-4 text-center bg-white dark:bg-slate-800 relative z-20 h-full flex flex-col items-center justify-center min-h-[48px] md:min-h-[60px]">
+                                <h4
+                                    class="font-bold text-slate-900 dark:text-white text-[10px] md:text-base leading-tight">
+                                    Bermakna</h4>
                             </div>
                             <!-- Hover state -->
-                            <div class="absolute inset-0 bg-emerald-600/95 backdrop-blur-sm flex flex-col items-center justify-center p-2 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 overflow-y-auto">
-                                <span class="text-white font-bold mb-1 md:mb-2 text-[10px] md:text-sm text-center leading-tight">Meaningful</span>
-                                <p class="text-emerald-100 text-[8px] sm:text-[9px] md:text-xs text-center leading-tight md:leading-relaxed font-medium">Setiap aktivitas yang dilakukan selalu punya makna dan relevansi dalam kehidupan nyata.</p>
+                            <div
+                                class="absolute inset-0 bg-emerald-600/95 backdrop-blur-sm flex flex-col items-center justify-center p-2 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 overflow-y-auto">
+                                <span
+                                    class="text-white font-bold mb-1 md:mb-2 text-[10px] md:text-sm text-center leading-tight">Meaningful</span>
+                                <p
+                                    class="text-emerald-100 text-[8px] sm:text-[9px] md:text-xs text-center leading-tight md:leading-relaxed font-medium">
+                                    Setiap aktivitas yang dilakukan selalu punya makna dan relevansi dalam kehidupan
+                                    nyata.</p>
                             </div>
                         </div>
 
-                        <div class="relative group rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 cursor-default bg-white dark:bg-slate-800 flex flex-col">
-                            <div class="h-16 md:h-28 bg-gradient-to-br from-orange-500 via-amber-600 to-red-600 p-2 md:p-4 flex flex-col items-center justify-center relative transition-transform duration-500 group-hover:scale-110">
-                                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        <div
+                            class="relative group rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 cursor-default bg-white dark:bg-slate-800 flex flex-col">
+                            <div
+                                class="h-16 md:h-28 bg-gradient-to-br from-orange-500 via-amber-600 to-red-600 p-2 md:p-4 flex flex-col items-center justify-center relative transition-transform duration-500 group-hover:scale-110">
+                                <div
+                                    class="absolute inset-0 opacity-20 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]">
+                                </div>
                                 <span class="text-2xl md:text-4xl relative z-10 drop-shadow-md">🥳</span>
                             </div>
-                            <div class="p-2 md:p-4 text-center bg-white dark:bg-slate-800 relative z-20 h-full flex flex-col items-center justify-center min-h-[48px] md:min-h-[60px]">
-                                <h4 class="font-bold text-slate-900 dark:text-white text-[10px] md:text-base leading-tight">Menggembirakan</h4>
+                            <div
+                                class="p-2 md:p-4 text-center bg-white dark:bg-slate-800 relative z-20 h-full flex flex-col items-center justify-center min-h-[48px] md:min-h-[60px]">
+                                <h4
+                                    class="font-bold text-slate-900 dark:text-white text-[10px] md:text-base leading-tight">
+                                    Menggembirakan</h4>
                             </div>
                             <!-- Hover state -->
-                            <div class="absolute inset-0 bg-orange-600/95 backdrop-blur-sm flex flex-col items-center justify-center p-2 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 overflow-y-auto">
-                                <span class="text-white font-bold mb-1 md:mb-2 text-[10px] md:text-sm text-center leading-tight">Joyful</span>
-                                <p class="text-orange-100 text-[8px] sm:text-[9px] md:text-xs text-center leading-tight md:leading-relaxed font-medium">Proses belajar yang dipenuhi kegembiraan, antusiasme, dan tanpa tekanan.</p>
+                            <div
+                                class="absolute inset-0 bg-orange-600/95 backdrop-blur-sm flex flex-col items-center justify-center p-2 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-30 overflow-y-auto">
+                                <span
+                                    class="text-white font-bold mb-1 md:mb-2 text-[10px] md:text-sm text-center leading-tight">Joyful</span>
+                                <p
+                                    class="text-orange-100 text-[8px] sm:text-[9px] md:text-xs text-center leading-tight md:leading-relaxed font-medium">
+                                    Proses belajar yang dipenuhi kegembiraan, antusiasme, dan tanpa tekanan.</p>
                             </div>
                         </div>
 
@@ -228,116 +302,169 @@
 
             <!-- Content Sections -->
             <div class="w-full text-sm md:text-base text-slate-700 dark:text-slate-300">
-                
+
                 <!-- Apa yang akan kamu pelajari -->
                 <div class="bg-[#f8fbff] dark:bg-slate-900 py-10 px-6">
                     <div class="max-w-4xl mx-auto">
-                        <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5 mb-5">
+                        <h2
+                            class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5 mb-5">
                             <span>💪</span> Apa yang Akan Kamu Pelajari?
                         </h2>
-                        <p class="mb-5 leading-relaxed">Di kelas PJOK Fase E ini, kamu tidak hanya akan berlari, bermain, atau berolahraga, tetapi juga akan <strong>memahami makna gerak</strong> dalam kehidupan sehari-hari.</p>
+                        <p class="mb-5 leading-relaxed">Di kelas PJOK Fase E ini, kamu tidak hanya akan berlari,
+                            bermain, atau berolahraga, tetapi juga akan <strong>memahami makna gerak</strong> dalam
+                            kehidupan sehari-hari.</p>
                         <p class="mb-3 leading-relaxed">Kita akan menjelajahi berbagai aktivitas seperti:</p>
                         <ul class="space-y-2 mb-5 ml-1">
-                            <li class="flex items-start gap-3"><span class="text-lg">🏀</span> <span>Permainan Invasi (sepak bola, basket)</span></li>
-                            <li class="flex items-start gap-3"><span class="text-lg">🏸</span> <span>Permainan net (bola voli, bulu tangkis, tenis meja)</span></li>
-                            <li class="flex items-start gap-3"><span class="text-lg">🤸</span> <span>Aktivitas kebugaran jasmani</span></li>
-                            <li class="flex items-start gap-3"><span class="text-lg">🏊</span> <span>Aktivitas akuatik (renang)</span></li>
-                            <li class="flex items-start gap-3"><span class="text-lg">🥋</span> <span>Aktivitas bela diri (pencak silat)</span></li>
-                            <li class="flex items-start gap-3"><span class="text-lg">🎵</span> <span>Aktivitas gerak berirama (senam)</span></li>
+                            <li class="flex items-start gap-3"><span class="text-lg">🏀</span> <span>Permainan Invasi
+                                    (sepak bola, basket)</span></li>
+                            <li class="flex items-start gap-3"><span class="text-lg">🏸</span> <span>Permainan net (bola
+                                    voli, bulu tangkis, tenis meja)</span></li>
+                            <li class="flex items-start gap-3"><span class="text-lg">🤸</span> <span>Aktivitas kebugaran
+                                    jasmani</span></li>
+                            <li class="flex items-start gap-3"><span class="text-lg">🏊</span> <span>Aktivitas akuatik
+                                    (renang)</span></li>
+                            <li class="flex items-start gap-3"><span class="text-lg">🥋</span> <span>Aktivitas bela diri
+                                    (pencak silat)</span></li>
+                            <li class="flex items-start gap-3"><span class="text-lg">🎵</span> <span>Aktivitas gerak
+                                    berirama (senam)</span></li>
                         </ul>
-                        <p class="leading-relaxed">Semua itu akan kamu jalani dengan cara yang <strong>mindful (sadar), meaningful (bermakna), dan joyful (menyenangkan)</strong>.</p>
+                        <p class="leading-relaxed">Semua itu akan kamu jalani dengan cara yang <strong>mindful (sadar),
+                                meaningful (bermakna), dan joyful (menyenangkan)</strong>.</p>
                     </div>
                 </div>
 
                 <!-- Mengapa PJOK itu penting -->
                 <div class="bg-[#f0f8ff] dark:bg-slate-800/50 py-10 px-6 border-y border-blue-50 dark:border-slate-800">
                     <div class="max-w-4xl mx-auto">
-                        <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5 mb-5">
+                        <h2
+                            class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5 mb-5">
                             <span>🌱</span> Mengapa PJOK Itu Penting?
                         </h2>
                         <p class="mb-5 leading-relaxed">PJOK bukan hanya tentang olahraga, tapi juga tentang:</p>
-                        <ul class="space-y-2.5 mb-5 ml-5 list-disc list-outside text-slate-600 dark:text-slate-400 marker:text-slate-400">
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">🌈 Menjaga kesehatan fisik dan mental</span></li>
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">🤝 Belajar bekerja sama dan menghargai orang lain</span></li>
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">🧠 Berpikir kritis dan kreatif dalam menghadapi tantangan</span></li>
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">❤️ Mengembangkan sikap sportif, tangguh, dan berkarakter</span></li>
+                        <ul
+                            class="space-y-2.5 mb-5 ml-5 list-disc list-outside text-slate-600 dark:text-slate-400 marker:text-slate-400">
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">🌈 Menjaga kesehatan fisik
+                                    dan mental</span></li>
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">🤝 Belajar bekerja sama
+                                    dan menghargai orang lain</span></li>
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">🧠 Berpikir kritis dan
+                                    kreatif dalam menghadapi tantangan</span></li>
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">❤️ Mengembangkan sikap
+                                    sportif, tangguh, dan berkarakter</span></li>
                         </ul>
-                        <p class="leading-relaxed">Dengan PJOK, kamu belajar menjadi pribadi yang <strong>sehat, kuat, dan bahagia</strong> — bukan hanya di lapangan, tapi juga dalam kehidupan sehari-hari.</p>
+                        <p class="leading-relaxed">Dengan PJOK, kamu belajar menjadi pribadi yang <strong>sehat, kuat,
+                                dan bahagia</strong> — bukan hanya di lapangan, tapi juga dalam kehidupan sehari-hari.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Bagaimana Kamu Akan Belajar -->
                 <div class="bg-[#f8fbff] dark:bg-slate-900 py-10 px-6">
                     <div class="max-w-4xl mx-auto">
-                        <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5 mb-5">
+                        <h2
+                            class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5 mb-5">
                             <span>🎯</span> Bagaimana Kamu Akan Belajar?
                         </h2>
-                        <p class="mb-5 leading-relaxed">Kelas ini akan kamu jalani melalui beragam aktivitas interaktif, baik di lapangan maupun secara daring.</p>
+                        <p class="mb-5 leading-relaxed">Kelas ini akan kamu jalani melalui beragam aktivitas interaktif,
+                            baik di lapangan maupun secara daring.</p>
                         <p class="mb-3 leading-relaxed">Kamu akan diajak untuk:</p>
-                        <ol class="space-y-2.5 mb-5 ml-5 list-decimal list-outside text-slate-600 dark:text-slate-400 font-medium marker:text-slate-500">
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300 font-normal">🧠 Memahami konsep gerak dan kesehatan,</span></li>
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300 font-normal">💪 Menerapkan dalam aktivitas nyata,</span></li>
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300 font-normal">🔎 Merefleksikan maknanya dalam kehidupan kamu sehari-hari.</span></li>
+                        <ol
+                            class="space-y-2.5 mb-5 ml-5 list-decimal list-outside text-slate-600 dark:text-slate-400 font-medium marker:text-slate-500">
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300 font-normal">🧠 Memahami
+                                    konsep gerak dan kesehatan,</span></li>
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300 font-normal">💪 Menerapkan
+                                    dalam aktivitas nyata,</span></li>
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300 font-normal">🔎
+                                    Merefleksikan maknanya dalam kehidupan kamu sehari-hari.</span></li>
                         </ol>
-                        <p class="leading-relaxed">Semua kegiatan dirancang agar kamu <strong>aktif, mandiri, dan kolaboratif</strong>, baik saat latihan individu maupun saat bekerja dalam tim.</p>
+                        <p class="leading-relaxed">Semua kegiatan dirancang agar kamu <strong>aktif, mandiri, dan
+                                kolaboratif</strong>, baik saat latihan individu maupun saat bekerja dalam tim.</p>
                     </div>
                 </div>
 
                 <!-- Siapkan dirimu -->
-                <div class="bg-[#eef7fe] dark:bg-slate-800/80 py-12 px-6 border-t border-blue-100 dark:border-slate-700">
+                <div
+                    class="bg-[#eef7fe] dark:bg-slate-800/80 py-12 px-6 border-t border-blue-100 dark:border-slate-700">
                     <div class="max-w-4xl mx-auto">
-                        <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5 mb-5">
+                        <h2
+                            class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5 mb-5">
                             <span>🚀</span> Siapkan Dirimu!
                         </h2>
                         <p class="mb-3 leading-relaxed">Yuk, siapkan:</p>
-                        <ul class="space-y-2.5 mb-5 ml-5 list-disc list-outside text-slate-600 dark:text-slate-400 marker:text-slate-400">
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">Pakaian olahraga yang nyaman 👕</span></li>
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">Air minum secukupnya 💧</span></li>
-                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">Semangat dan pikiran positif 🤩</span></li>
+                        <ul
+                            class="space-y-2.5 mb-5 ml-5 list-disc list-outside text-slate-600 dark:text-slate-400 marker:text-slate-400">
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">Pakaian olahraga yang
+                                    nyaman 👕</span></li>
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">Air minum secukupnya
+                                    💧</span></li>
+                            <li class="pl-1"><span class="text-slate-700 dark:text-slate-300">Semangat dan pikiran
+                                    positif 🤩</span></li>
                         </ul>
-                        <p class="leading-relaxed">Karena di PJOK, <strong>setiap gerakmu bermakna</strong>, dan setiap usaha kecilmu adalah <strong>langkah menuju kesehatan dan kebahagiaan.</strong></p>
-                        
+                        <p class="leading-relaxed">Karena di PJOK, <strong>setiap gerakmu bermakna</strong>, dan setiap
+                            usaha kecilmu adalah <strong>langkah menuju kesehatan dan kebahagiaan.</strong></p>
+
                         <div class="mt-10 flex justify-center pb-6">
-                            <button onclick="navigateTo('dashboard')" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white font-bold py-4 px-12 rounded-full shadow-[0_4px_14px_0_rgba(99,102,241,0.39)] transform transition-all hover:scale-105 hover:shadow-[0_6px_25px_rgba(99,102,241,0.5)] flex items-center gap-3 text-base md:text-lg">
+                            <button onclick="navigateTo('dashboard')"
+                                class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white font-bold py-4 px-12 rounded-full shadow-[0_4px_14px_0_rgba(99,102,241,0.39)] transform transition-all hover:scale-105 hover:shadow-[0_6px_25px_rgba(99,102,241,0.5)] flex items-center gap-3 text-base md:text-lg">
                                 <span class="text-xl">🎯</span> Mari Mulai Pembelajaran!
                             </button>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </section>
 
         <section id="page-akun" class="hidden max-w-7xl w-full mx-auto px-4 py-6">
-            <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 max-w-2xl mx-auto relative">
-                <button onclick="doLogout()" class="absolute top-6 right-6 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 font-bold text-xs px-4 py-2 rounded-lg border border-red-200 dark:border-red-800 transition-colors flex items-center gap-2 shadow-sm">Logout <span>🚪</span></button>
-                <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-700 mt-10 sm:mt-0">
-                    <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg">👤</div>
+            <div
+                class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 max-w-2xl mx-auto relative">
+                <button onclick="doLogout()"
+                    class="absolute top-6 right-6 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 font-bold text-xs px-4 py-2 rounded-lg border border-red-200 dark:border-red-800 transition-colors flex items-center gap-2 shadow-sm">Logout
+                    <span>🚪</span></button>
+                <div
+                    class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-100 dark:border-slate-700 mt-10 sm:mt-0">
+                    <div
+                        class="w-24 h-24 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+                        👤</div>
                     <div class="text-center sm:text-left">
                         <h3 id="akun-name" class="text-xl font-bold text-slate-900 dark:text-white">Siswa</h3>
                         <p id="akun-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-1">Siswa Aktif</p>
-                        <span id="akun-role-badge" class="inline-block mt-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-100 dark:border-blue-800">Siswa - Fase E</span>
+                        <span id="akun-role-badge"
+                            class="inline-block mt-2.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-100 dark:border-blue-800">Siswa
+                            - Fase E</span>
                     </div>
                 </div>
                 <div class="mt-6 space-y-4 text-xs">
-                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-500 dark:text-slate-400">Instansi Sekolah</span><span class="col-span-2 font-bold text-slate-700 dark:text-slate-300">SMAN 2 Ciamis</span></div>
-                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-500 dark:text-slate-400">Status Server</span><span class="col-span-2 font-bold text-green-500 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Terhubung Firebase Real-time</span></div>
+                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-500 dark:text-slate-400">Instansi
+                            Sekolah</span><span class="col-span-2 font-bold text-slate-700 dark:text-slate-300">SMAN 2
+                            Ciamis</span></div>
+                    <div class="grid grid-cols-3 gap-2"><span class="text-slate-500 dark:text-slate-400">Status
+                            Server</span><span
+                            class="col-span-2 font-bold text-green-500 flex items-center gap-1.5"><span
+                                class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Terhubung Firebase
+                            Real-time</span></div>
                 </div>
-                
+
                 <!-- Fitur Upload CSV untuk Admin -->
                 <div id="admin-csv-upload" class="hidden mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
-                    <h4 class="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2"><span>👥</span> Kelola Data NISN Murid</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Upload file CSV/Excel (format .csv) berisi daftar NISN (di kolom pertama ke bawah) agar murid bisa masuk (login).</p>
-                    
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2"><span>👥</span>
+                        Kelola Data NISN Murid</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Upload file CSV/Excel (format .csv)
+                        berisi daftar NISN (di kolom pertama ke bawah) agar murid bisa masuk (login).</p>
+
                     <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-                        <label class="cursor-pointer bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 hover:bg-blue-100 font-semibold py-2.5 px-4 rounded-xl border border-blue-200 dark:border-blue-800 transition-colors text-xs flex items-center justify-center gap-2 max-w-[200px]">
+                        <label
+                            class="cursor-pointer bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 hover:bg-blue-100 font-semibold py-2.5 px-4 rounded-xl border border-blue-200 dark:border-blue-800 transition-colors text-xs flex items-center justify-center gap-2 max-w-[200px]">
                             <span>📄</span> Upload File .CSV
-                            <input type="file" id="csv-file-input" accept=".csv" class="hidden" onchange="handleCSVUpload(event)">
+                            <input type="file" id="csv-file-input" accept=".csv" class="hidden"
+                                onchange="handleCSVUpload(event)">
                         </label>
-                        <span id="csv-upload-status" class="text-xs text-slate-500 font-medium">Belum ada file dipilih</span>
+                        <span id="csv-upload-status" class="text-xs text-slate-500 font-medium">Belum ada file
+                            dipilih</span>
                     </div>
                     <div class="mt-4">
-                        <p class="text-[10px] text-slate-400">Total NISN terdaftar di Server: <strong id="nisn-count" class="text-slate-700 dark:text-slate-300">0</strong></p>
+                        <p class="text-[10px] text-slate-400">Total NISN terdaftar di Server: <strong id="nisn-count"
+                                class="text-slate-700 dark:text-slate-300">0</strong></p>
                     </div>
                 </div>
 
@@ -428,10 +555,14 @@
             <div id="scroll_target" class="lg:col-span-3 space-y-4 scroll-mt-24">
                 <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2">
                     <div class="flex items-center gap-3">
-                        <h2 id="current-semester-title" class="text-lg font-bold text-slate-900 dark:text-white">Materi Semester 1</h2>
-                        <span id="materi-count-badge" class="bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-bold text-xs px-2.5 py-1 rounded-full">0 Materi</span>
+                        <h2 id="current-semester-title" class="text-lg font-bold text-slate-900 dark:text-white">Materi
+                            Semester 1</h2>
+                        <span id="materi-count-badge"
+                            class="bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-bold text-xs px-2.5 py-1 rounded-full">0
+                            Materi</span>
                     </div>
-                    <button onclick="openAddModal()" id="btn-add-module" class="hidden bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition-colors flex items-center gap-1">
+                    <button onclick="openAddModal()" id="btn-add-module"
+                        class="hidden bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition-colors flex items-center gap-1">
                         <span>➕</span> Tambah Modul
                     </button>
                 </div>
@@ -461,13 +592,15 @@
         </section>
 
         <section id="page-referensi" class="hidden max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
-            <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl p-6 text-white shadow-sm flex justify-between items-center flex-wrap gap-4">
+            <div
+                class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl p-6 text-white shadow-sm flex justify-between items-center flex-wrap gap-4">
                 <div>
                     <h2 class="text-xl font-bold">Referensi Standar Pembelajaran</h2>
                     <p class="text-xs text-orange-100 mt-1">Acuan kajian kurikulum kurasi keilmuan Pendidikan Jasmani,
                         Olahraga, dan Kesehatan jenjang Pendidikan Menengah (SMA).</p>
                 </div>
-                <button id="btn-edit-referensi" onclick="openReferensiModal()" class="hidden bg-white/20 hover:bg-white/30 text-white border border-white/40 font-bold text-xs px-4 py-2 rounded-lg transition-colors flex items-center gap-2 backdrop-blur-md">
+                <button id="btn-edit-referensi" onclick="openReferensiModal()"
+                    class="hidden bg-white/20 hover:bg-white/30 text-white border border-white/40 font-bold text-xs px-4 py-2 rounded-lg transition-colors flex items-center gap-2 backdrop-blur-md">
                     <span>✏️</span> Edit Teks
                 </button>
             </div>
@@ -560,22 +693,28 @@
 
     <div
         class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-2 py-2 flex justify-around items-center z-50 shadow-lg">
-        <button onclick="navigateTo('welcome')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-blue-500 transition-colors">
+        <button onclick="navigateTo('welcome')"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-blue-500 transition-colors">
             <span class="text-base">🏠</span><span class="text-[9px] font-medium">Beranda</span>
         </button>
-        <button onclick="navigateTo('dashboard')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-blue-500 transition-colors">
+        <button onclick="navigateTo('dashboard')"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-blue-500 transition-colors">
             <span class="text-base">📊</span><span class="text-[9px] font-medium">Dashboard</span>
         </button>
-        <button onclick="navigateTo('modul')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-teal-500 transition-colors">
+        <button onclick="navigateTo('modul')"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-teal-500 transition-colors">
             <span class="text-base">📚</span><span class="text-[9px] font-medium">Modul</span>
         </button>
-        <button onclick="navigateTo('kalender')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-blue-500 transition-colors">
+        <button onclick="navigateTo('kalender')"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-blue-500 transition-colors">
             <span class="text-base">📅</span><span class="text-[9px] font-medium">Jadwal</span>
         </button>
-        <button onclick="navigateTo('referensi')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-amber-500 transition-colors">
+        <button onclick="navigateTo('referensi')"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-amber-500 transition-colors">
             <span class="text-base">🔖</span><span class="text-[9px] font-medium">Referensi</span>
         </button>
-        <button onclick="navigateTo('akun')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-purple-500 transition-colors">
+        <button onclick="navigateTo('akun')"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-purple-500 transition-colors">
             <span class="text-base">👤</span><span class="text-[9px] font-medium">Akun</span>
         </button>
     </div>
@@ -613,67 +752,93 @@
     </section>
 
     <!-- Add Module Modal -->
-    <div id="modal-add-module" class="hidden fixed inset-0 z-[70] bg-slate-900/60 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="p-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
-                <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2"><span>➕</span> Tambah Modul Baru</h3>
-                <button onclick="closeAddModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">&times;</button>
+    <div id="modal-add-module"
+        class="hidden fixed inset-0 z-[70] bg-slate-900/60 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in">
+        <div
+            class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div
+                class="p-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
+                <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2"><span>➕</span> Tambah Modul
+                    Baru</h3>
+                <button onclick="closeAddModal()"
+                    class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">&times;</button>
             </div>
             <div class="p-6 overflow-y-auto flex-grow space-y-4 text-sm text-slate-700 dark:text-slate-300">
                 <div>
                     <label class="block font-semibold mb-1.5">Judul Materi</label>
-                    <input type="text" id="add-judul" placeholder="Cth: Bola Voli Lanjutan" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="text" id="add-judul" placeholder="Cth: Bola Voli Lanjutan"
+                        class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block font-semibold mb-1.5">Kategori</label>
-                        <input type="text" id="add-kategori" placeholder="Cth: Permainan Net" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="text" id="add-kategori" placeholder="Cth: Permainan Net"
+                            class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
                     <div>
                         <label class="block font-semibold mb-1.5">Durasi (Menit)</label>
-                        <input type="number" id="add-durasi" value="45" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="number" id="add-durasi" value="45"
+                            class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
                 </div>
                 <div>
                     <label class="block font-semibold mb-1.5">Semester</label>
-                    <select id="add-semester" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    <select id="add-semester"
+                        class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
                         <option value="1">Semester 1</option>
                         <option value="2">Semester 2</option>
                     </select>
                 </div>
                 <div>
                     <label class="block font-semibold mb-1.5">Deskripsi Singkat</label>
-                    <textarea id="add-deskripsi" rows="2" placeholder="Jelaskan isi materi..." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                    <textarea id="add-deskripsi" rows="2" placeholder="Jelaskan isi materi..."
+                        class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
                 </div>
                 <div>
                     <label class="block font-semibold mb-1.5">URL Gambar Cover</label>
-                    <input type="text" id="add-image" placeholder="https://..." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="text" id="add-image" placeholder="https://..."
+                        class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
                 </div>
                 <div>
                     <label class="block font-semibold mb-1.5">Tautan Materi (URL)</label>
-                    <input type="text" id="add-url" placeholder="https://..." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="text" id="add-url" placeholder="https://..."
+                        class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none">
                 </div>
             </div>
-            <div class="p-5 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3 bg-slate-50 dark:bg-slate-900/50">
-                <button onclick="closeAddModal()" class="px-5 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Batal</button>
-                <button onclick="saveNewModule()" class="px-5 py-2.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-md">Simpan Modul</button>
+            <div
+                class="p-5 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3 bg-slate-50 dark:bg-slate-900/50">
+                <button onclick="closeAddModal()"
+                    class="px-5 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Batal</button>
+                <button onclick="saveNewModule()"
+                    class="px-5 py-2.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-md">Simpan
+                    Modul</button>
             </div>
         </div>
     </div>
 
     <!-- Modal Referensi Edit -->
-    <div id="modal-edit-referensi" class="hidden fixed inset-0 z-[70] bg-slate-900/60 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="p-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
-                <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2"><span>✏️</span> Edit Teks Referensi (HTML)</h3>
-                <button onclick="closeReferensiModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">&times;</button>
+    <div id="modal-edit-referensi"
+        class="hidden fixed inset-0 z-[70] bg-slate-900/60 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in">
+        <div
+            class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div
+                class="p-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
+                <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2"><span>✏️</span> Edit Teks
+                    Referensi (HTML)</h3>
+                <button onclick="closeReferensiModal()"
+                    class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">&times;</button>
             </div>
             <div class="p-6 overflow-y-auto flex-grow">
-                <textarea id="edit-referensi-textarea" rows="12" class="w-full p-4 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none text-sm font-mono"></textarea>
+                <textarea id="edit-referensi-textarea" rows="12"
+                    class="w-full p-4 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500 outline-none text-sm font-mono"></textarea>
             </div>
-            <div class="p-5 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3 bg-slate-50 dark:bg-slate-900/50">
-                <button onclick="closeReferensiModal()" class="px-5 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Batal</button>
-                <button onclick="saveReferensi()" class="px-5 py-2.5 rounded-xl font-bold text-white bg-amber-600 hover:bg-amber-700 transition-colors shadow-md">Simpan Perubahan</button>
+            <div
+                class="p-5 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3 bg-slate-50 dark:bg-slate-900/50">
+                <button onclick="closeReferensiModal()"
+                    class="px-5 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Batal</button>
+                <button onclick="saveReferensi()"
+                    class="px-5 py-2.5 rounded-xl font-bold text-white bg-amber-600 hover:bg-amber-700 transition-colors shadow-md">Simpan
+                    Perubahan</button>
             </div>
         </div>
     </div>
@@ -681,21 +846,21 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, push, remove } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-        
+
         const firebaseConfig = {
-          apiKey: "AIzaSyAfJmqN9NbdE5aAu0VsvVcD9uy_wea2jIE",
-          authDomain: "lms-pjok-smandacis.firebaseapp.com",
-          databaseURL: "https://lms-pjok-smandacis-default-rtdb.asia-southeast1.firebasedatabase.app",
-          projectId: "lms-pjok-smandacis",
-          storageBucket: "lms-pjok-smandacis.firebasestorage.app",
-          messagingSenderId: "1013476278556",
-          appId: "1:1013476278556:web:d56ff865e52120284cfad9"
+            apiKey: "AIzaSyAfJmqN9NbdE5aAu0VsvVcD9uy_wea2jIE",
+            authDomain: "lms-pjok-smandacis.firebaseapp.com",
+            databaseURL: "https://lms-pjok-smandacis-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "lms-pjok-smandacis",
+            storageBucket: "lms-pjok-smandacis.firebasestorage.app",
+            messagingSenderId: "1013476278556",
+            appId: "1:1013476278556:web:d56ff865e52120284cfad9"
         };
-        
+
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         const modulesRef = ref(db, 'modules');
-        
+
         let allModules = [];
         let currentUser = null;
 
@@ -865,7 +1030,7 @@
         // Initialize Firebase DB with defaults if empty
         const metaRef = ref(db, 'meta');
         onValue(metaRef, (snap) => {
-            if(!snap.val()?.initialized) {
+            if (!snap.val()?.initialized) {
                 set(ref(db, 'meta'), { initialized: true });
                 templateMateri.forEach(mod => push(modulesRef, mod));
             }
@@ -879,7 +1044,7 @@
             } else {
                 allModules = [];
             }
-            if(currentUser) renderFilteredModules();
+            if (currentUser) renderFilteredModules();
         });
 
         // Listen for realtime updates (Referensi)
@@ -905,25 +1070,26 @@
                 allNISN = [];
             }
             const countEl = document.getElementById('nisn-count');
-            if(countEl) countEl.innerText = allNISN.length;
+            if (countEl) countEl.innerText = allNISN.length;
         });
 
         // --- AUTH & LOGIN LOGIC ---
         function checkLoginState() {
             const saved = localStorage.getItem('lmsUser');
-            if(saved) {
+            if (saved) {
                 currentUser = JSON.parse(saved);
                 document.getElementById('login-overlay').classList.add('hidden');
                 setupUIForRole();
+                navigateTo('welcome');
             } else {
                 document.getElementById('login-overlay').classList.remove('hidden');
             }
         }
 
-        window.switchLoginTab = function(tab) {
+        window.switchLoginTab = function (tab) {
             const err = document.getElementById('login-error');
             err.classList.add('hidden');
-            if(tab === 'murid') {
+            if (tab === 'murid') {
                 document.getElementById('form-murid').classList.remove('hidden');
                 document.getElementById('form-admin').classList.add('hidden');
                 document.getElementById('tab-murid').className = "flex-1 py-3 font-semibold text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 transition-colors";
@@ -936,24 +1102,24 @@
             }
         }
 
-        window.doLogin = function(role) {
+        window.doLogin = function (role) {
             const errorEl = document.getElementById('login-error');
-            if(role === 'murid') {
+            if (role === 'murid') {
                 const nisn = document.getElementById('login-nisn').value.trim();
-                if(!nisn) { errorEl.innerText = "Masukkan NISN Anda terlebih dahulu!"; errorEl.classList.remove('hidden'); return; }
-                
+                if (!nisn) { errorEl.innerText = "Masukkan NISN Anda terlebih dahulu!"; errorEl.classList.remove('hidden'); return; }
+
                 // Validate against Firebase NISN List (only if Admin has uploaded at least 1)
-                if(allNISN.length > 0 && !allNISN.includes(nisn)) {
+                if (allNISN.length > 0 && !allNISN.includes(nisn)) {
                     errorEl.innerText = "NISN tidak terdaftar di Server LMS! Hubungi Guru PJOK.";
                     errorEl.classList.remove('hidden');
                     return;
                 }
-                
+
                 currentUser = { role: 'murid', id: nisn };
             } else {
                 const user = document.getElementById('login-username').value.trim();
                 const pass = document.getElementById('login-password').value.trim();
-                if(user === 'guru' && pass === '198404042022211015') {
+                if (user === 'guru' && pass === '198404042022211015') {
                     currentUser = { role: 'admin', id: '198404042022211015' };
                 } else {
                     errorEl.innerText = "Username atau Password Admin salah!";
@@ -967,8 +1133,8 @@
             navigateTo('welcome');
         }
 
-        window.doLogout = function() {
-            if(!confirm("Anda yakin ingin keluar?")) return;
+        window.doLogout = function () {
+            if (!confirm("Anda yakin ingin keluar?")) return;
             localStorage.removeItem('lmsUser');
             currentUser = null;
             document.getElementById('login-overlay').classList.remove('hidden');
@@ -978,7 +1144,7 @@
         }
 
         function setupUIForRole() {
-            if(!currentUser) return;
+            if (!currentUser) return;
             const addBtn = document.getElementById('btn-add-module');
             const editRefBtn = document.getElementById('btn-edit-referensi');
             const adminCsvUI = document.getElementById('admin-csv-upload');
@@ -986,27 +1152,27 @@
             const accName = document.getElementById('akun-name');
             const accDesc = document.getElementById('akun-desc');
 
-            if(currentUser.role === 'admin') {
-                if(addBtn) addBtn.classList.remove('hidden');
-                if(editRefBtn) editRefBtn.classList.remove('hidden');
-                if(adminCsvUI) adminCsvUI.classList.remove('hidden');
-                if(accName) accName.innerText = "Guru Utama PJOK";
-                if(accDesc) accDesc.innerText = "Pengajar Aktif • " + currentUser.id;
-                if(roleBadge) roleBadge.innerHTML = "🌟 Administrator (Guru)";
+            if (currentUser.role === 'admin') {
+                if (addBtn) addBtn.classList.remove('hidden');
+                if (editRefBtn) editRefBtn.classList.remove('hidden');
+                if (adminCsvUI) adminCsvUI.classList.remove('hidden');
+                if (accName) accName.innerText = "Guru Utama PJOK";
+                if (accDesc) accDesc.innerText = "Pengajar Aktif • " + currentUser.id;
+                if (roleBadge) roleBadge.innerHTML = "🌟 Administrator (Guru)";
             } else {
-                if(addBtn) addBtn.classList.add('hidden');
-                if(editRefBtn) editRefBtn.classList.add('hidden');
-                if(adminCsvUI) adminCsvUI.classList.add('hidden');
-                if(accName) accName.innerText = "Siswa SMAN 2 Ciamis";
-                if(accDesc) accDesc.innerText = `NISN: ${currentUser.id} • Siswa Aktif`;
-                if(roleBadge) roleBadge.innerHTML = "🎓 Siswa - Fase E";
+                if (addBtn) addBtn.classList.add('hidden');
+                if (editRefBtn) editRefBtn.classList.add('hidden');
+                if (adminCsvUI) adminCsvUI.classList.add('hidden');
+                if (accName) accName.innerText = "Siswa SMAN 2 Ciamis";
+                if (accDesc) accDesc.innerText = `NISN: ${currentUser.id} • Siswa Aktif`;
+                if (roleBadge) roleBadge.innerHTML = "🎓 Siswa - Fase E";
             }
             renderFilteredModules();
         }
 
         // --- RENDER & CRUD LOGIC ---
         function renderFilteredModules() {
-            if(!currentUser) return;
+            if (!currentUser) return;
             const container = document.getElementById("modules-container");
             container.innerHTML = "";
             const filtered = allModules.filter(m => Number(m.semester) === currentSelectedSemester);
@@ -1027,7 +1193,7 @@
                 }
 
                 let adminControls = '';
-                if(currentUser.role === 'admin') {
+                if (currentUser.role === 'admin') {
                     adminControls = `<button onclick="deleteModule('${item.id}')" class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-lg px-2 py-1 text-xs font-bold shadow-lg transition-transform hover:scale-105 z-10 flex items-center gap-1"><span>🗑️</span> Hapus</button>`;
                 }
 
@@ -1051,13 +1217,13 @@
             });
         }
 
-        window.deleteModule = function(id) {
-            if(confirm('Yakin ingin menghapus materi ini dari Database?')) {
+        window.deleteModule = function (id) {
+            if (confirm('Yakin ingin menghapus materi ini dari Database?')) {
                 remove(ref(db, 'modules/' + id));
             }
         }
 
-        window.openAddModal = function() {
+        window.openAddModal = function () {
             document.getElementById('add-judul').value = '';
             document.getElementById('add-kategori').value = '';
             document.getElementById('add-durasi').value = '45';
@@ -1067,14 +1233,14 @@
             document.getElementById('modal-add-module').classList.remove('hidden');
         }
 
-        window.closeAddModal = function() {
+        window.closeAddModal = function () {
             document.getElementById('modal-add-module').classList.add('hidden');
         }
 
-        window.saveNewModule = function() {
+        window.saveNewModule = function () {
             const judul = document.getElementById('add-judul').value.trim();
-            if(!judul) return alert('Judul materi wajib diisi!');
-            
+            if (!judul) return alert('Judul materi wajib diisi!');
+
             const newMod = {
                 judul: judul,
                 kategori: document.getElementById('add-kategori').value.trim() || 'Umum',
@@ -1084,7 +1250,7 @@
                 image_url: document.getElementById('add-image').value.trim() || 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400',
                 url_materi: document.getElementById('add-url').value.trim() || '#'
             };
-            
+
             push(modulesRef, newMod).then(() => {
                 closeAddModal();
             }).catch((err) => {
@@ -1133,42 +1299,42 @@
         // INITIALIZE APP
         checkLoginState();
         // --- ADMIN REFERENSI & CSV CRUD LOGIC ---
-        window.openReferensiModal = function() {
+        window.openReferensiModal = function () {
             // Fill textarea with current content
             const container = document.getElementById('referensi-content-container');
             document.getElementById('edit-referensi-textarea').value = container.innerHTML;
             document.getElementById('modal-edit-referensi').classList.remove('hidden');
         }
 
-        window.closeReferensiModal = function() {
+        window.closeReferensiModal = function () {
             document.getElementById('modal-edit-referensi').classList.add('hidden');
         }
 
-        window.saveReferensi = function() {
+        window.saveReferensi = function () {
             const newContent = document.getElementById('edit-referensi-textarea').value;
             set(ref(db, 'referensi/content'), newContent).then(() => {
                 closeReferensiModal();
             }).catch(e => alert("Gagal menyimpan: " + e.message));
         }
 
-        window.handleCSVUpload = function(event) {
+        window.handleCSVUpload = function (event) {
             const file = event.target.files[0];
             if (!file) return;
             document.getElementById('csv-upload-status').innerText = "Memproses " + file.name + "...";
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const text = e.target.result;
                 const lines = text.split(/\r?\n/);
                 const nisns = [];
-                for(let line of lines) {
+                for (let line of lines) {
                     const parts = line.split(',');
-                    if(parts[0]) {
+                    if (parts[0]) {
                         const val = parts[0].replace(/['"]/g, '').trim();
-                        if(val && !isNaN(val)) nisns.push(val); 
+                        if (val && !isNaN(val)) nisns.push(val);
                     }
                 }
-                
-                if(nisns.length > 0) {
+
+                if (nisns.length > 0) {
                     set(ref(db, 'nisn_list'), nisns).then(() => {
                         document.getElementById('csv-upload-status').innerHTML = `<span class="text-green-500">✅ Berhasil mengimpor ${nisns.length} NISN ke Database!</span>`;
                     }).catch((error) => {
