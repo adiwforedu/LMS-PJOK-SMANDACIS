@@ -198,7 +198,10 @@
             </div>
         </nav>
 
-        <section id="page-welcome" class="hidden w-full mx-auto animate-fade-in">
+        <section id="page-welcome" class="hidden w-full mx-auto animate-fade-in relative">
+            <button id="btn-edit-beranda" onclick="openBerandaModal()" class="hidden absolute top-4 right-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-white font-bold text-xs px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors z-50 flex items-center gap-2 shadow-sm">
+                <span>✏️</span> Edit Beranda
+            </button>
             <!-- Header Area -->
             <div
                 class="bg-[#eef7fe] dark:bg-slate-900/60 pt-6 md:pt-12 pb-8 md:pb-16 px-4 text-center border-b border-blue-100 dark:border-slate-800">
@@ -301,7 +304,7 @@
             </div>
 
             <!-- Content Sections -->
-            <div class="w-full text-sm md:text-base text-slate-700 dark:text-slate-300">
+            <div id="beranda-content-container" class="w-full text-sm md:text-base text-slate-700 dark:text-slate-300">
 
                 <!-- Apa yang akan kamu pelajari -->
                 <div class="bg-[#f8fbff] dark:bg-slate-900 py-10 px-6">
@@ -843,6 +846,33 @@
         </div>
     </div>
 
+    <!-- Modal Beranda Edit -->
+    <div id="modal-edit-beranda"
+        class="hidden fixed inset-0 z-[70] bg-slate-900/60 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in">
+        <div
+            class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div
+                class="p-5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
+                <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2"><span>✏️</span> Edit Teks
+                    Beranda (HTML)</h3>
+                <button onclick="closeBerandaModal()"
+                    class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto flex-grow">
+                <textarea id="edit-beranda-textarea" rows="12"
+                    class="w-full p-4 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none text-sm font-mono"></textarea>
+            </div>
+            <div
+                class="p-5 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3 bg-slate-50 dark:bg-slate-900/50">
+                <button onclick="closeBerandaModal()"
+                    class="px-5 py-2.5 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Batal</button>
+                <button onclick="saveBeranda()"
+                    class="px-5 py-2.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-md">Simpan
+                    Perubahan</button>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, push, remove } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
@@ -1059,6 +1089,15 @@
             }
         });
 
+        // Listen for realtime updates (Beranda)
+        const berandaRef = ref(db, 'beranda/content');
+        onValue(berandaRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                document.getElementById('beranda-content-container').innerHTML = data;
+            }
+        });
+
         // Listen for NISN List (CSV upload)
         let allNISN = [];
         const nisnRef = ref(db, 'nisn_list');
@@ -1147,6 +1186,7 @@
             if (!currentUser) return;
             const addBtn = document.getElementById('btn-add-module');
             const editRefBtn = document.getElementById('btn-edit-referensi');
+            const editBerandaBtn = document.getElementById('btn-edit-beranda');
             const adminCsvUI = document.getElementById('admin-csv-upload');
             const roleBadge = document.getElementById('akun-role-badge');
             const accName = document.getElementById('akun-name');
@@ -1155,6 +1195,7 @@
             if (currentUser.role === 'admin') {
                 if (addBtn) addBtn.classList.remove('hidden');
                 if (editRefBtn) editRefBtn.classList.remove('hidden');
+                if (editBerandaBtn) editBerandaBtn.classList.remove('hidden');
                 if (adminCsvUI) adminCsvUI.classList.remove('hidden');
                 if (accName) accName.innerText = "Guru Utama PJOK";
                 if (accDesc) accDesc.innerText = "Pengajar Aktif • " + currentUser.id;
@@ -1162,6 +1203,7 @@
             } else {
                 if (addBtn) addBtn.classList.add('hidden');
                 if (editRefBtn) editRefBtn.classList.add('hidden');
+                if (editBerandaBtn) editBerandaBtn.classList.add('hidden');
                 if (adminCsvUI) adminCsvUI.classList.add('hidden');
                 if (accName) accName.innerText = "Siswa SMAN 2 Ciamis";
                 if (accDesc) accDesc.innerText = `NISN: ${currentUser.id} • Siswa Aktif`;
@@ -1315,6 +1357,26 @@
             set(ref(db, 'referensi/content'), newContent).then(() => {
                 closeReferensiModal();
             }).catch(e => alert("Gagal menyimpan: " + e.message));
+        }
+
+        // --- ADMIN BERANDA CRUD LOGIC ---
+        window.openBerandaModal = function () {
+            const container = document.getElementById('beranda-content-container');
+            document.getElementById('edit-beranda-textarea').value = container.innerHTML;
+            document.getElementById('modal-edit-beranda').classList.remove('hidden');
+        }
+
+        window.closeBerandaModal = function () {
+            document.getElementById('modal-edit-beranda').classList.add('hidden');
+        }
+
+        window.saveBeranda = function () {
+            const newContent = document.getElementById('edit-beranda-textarea').value;
+            set(ref(db, 'beranda/content'), newContent).then(() => {
+                closeBerandaModal();
+            }).catch((err) => {
+                alert('Gagal menyimpan beranda: ' + err.message);
+            });
         }
 
         window.handleCSVUpload = function (event) {
