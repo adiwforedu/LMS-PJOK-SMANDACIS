@@ -135,6 +135,10 @@
                     class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
                     <span class="text-teal-400 text-sm">📚</span> Modul PJOK
                 </button>
+                <button onclick="navigateTo('rekap')" id="nav-desk-rekap"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
+                    <span class="text-emerald-400 text-sm">📈</span> Rekap Asesmen
+                </button>
                 <button onclick="navigateTo('kalender')" id="nav-desk-kalender"
                     class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors">
                     <span class="text-blue-400 text-sm">📅</span> Kalender Akademik
@@ -199,7 +203,8 @@
         </nav>
 
         <section id="page-welcome" class="hidden w-full mx-auto animate-fade-in relative">
-            <button id="btn-edit-beranda" onclick="openBerandaModal()" class="hidden absolute top-4 right-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-white font-bold text-xs px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors z-50 flex items-center gap-2 shadow-sm">
+            <button id="btn-edit-beranda" onclick="openBerandaModal()"
+                class="hidden absolute top-4 right-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-white font-bold text-xs px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors z-50 flex items-center gap-2 shadow-sm">
                 <span>✏️</span> Edit Beranda
             </button>
             <!-- Header Area -->
@@ -452,14 +457,13 @@
                 <div id="admin-csv-upload" class="hidden mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
                     <h4 class="font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2"><span>👥</span>
                         Kelola Data NISN Murid</h4>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Upload file CSV/Excel (format .csv)
-                        berisi daftar NISN (di kolom pertama ke bawah) agar murid bisa masuk (login).</p>
-
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-                        <label
-                            class="cursor-pointer bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 hover:bg-blue-100 font-semibold py-2.5 px-4 rounded-xl border border-blue-200 dark:border-blue-800 transition-colors text-xs flex items-center justify-center gap-2 max-w-[200px]">
-                            <span>📄</span> Upload File .CSV
-                            <input type="file" id="csv-file-input" accept=".csv" class="hidden"
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Upload file Excel atau CSV (format .xlsx, .xls, atau .csv)
+                        berisi kolom NISN dan Nama untuk memperbarui database otomatis.</p>
+                    <div
+                        class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl p-4 text-center hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                        <label for="csv-file-input" class="cursor-pointer text-blue-600 dark:text-blue-400 font-bold text-xs flex flex-col items-center gap-2">
+                            <span>📄</span> Upload File .XLSX / .CSV
+                            <input type="file" id="csv-file-input" accept=".csv, .xlsx, .xls" class="hidden"
                                 onchange="handleCSVUpload(event)">
                         </label>
                         <span id="csv-upload-status" class="text-xs text-slate-500 font-medium">Belum ada file
@@ -688,6 +692,73 @@
             </div>
         </section>
 
+        <section id="page-rekap" class="hidden max-w-7xl w-full mx-auto px-4 py-6">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Rekapitulasi Asesmen</h2>
+                    <p class="text-xs text-slate-500 mt-1">Hasil perolehan KKTP berdasarkan capaian materi</p>
+                </div>
+                <div class="flex gap-2">
+                    <button id="btn-rekap-sem1" onclick="switchRekapSemester(1)" class="px-4 py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-sm transition-all">Semester 1</button>
+                    <button id="btn-rekap-sem2" onclick="switchRekapSemester(2)" class="px-4 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 transition-all">Semester 2</button>
+                </div>
+            </div>
+            
+            <!-- Admin Student Selector (Hidden by default) -->
+            <div id="admin-rekap-selector" class="hidden mb-6 bg-slate-100 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-200 dark:border-slate-700 flex-col md:flex-row items-center gap-4">
+                <label for="admin-select-siswa" class="font-bold text-sm text-slate-700 dark:text-slate-300 whitespace-nowrap">Pilih Siswa:</label>
+                <select id="admin-select-siswa" class="flex-grow p-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-sm focus:outline-none focus:border-blue-500" onchange="renderRekapAsesmen()">
+                    <option value="">-- Pilih Siswa --</option>
+                </select>
+                <button onclick="simpanNilaiAsesmen()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-lg text-sm transition-colors shadow-sm whitespace-nowrap">💾 Simpan Nilai</button>
+            </div>
+            <!-- Summary Card -->
+            <div id="rekap-summary-card" class="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl p-6 text-white shadow-sm mb-6 flex flex-col md:flex-row justify-between items-center gap-4 cursor-pointer hover:shadow-md transition-shadow" onclick="showKktpPopup()">
+                <div>
+                    <h3 class="font-bold text-lg">Status Ketercapaian (KKTP)</h3>
+                    <p class="text-xs text-emerald-100 mt-1">Klik untuk melihat detail capaian akhir rapor Anda</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-3xl font-extrabold" id="rekap-nilai-akhir">-</div>
+                    <div class="text-xs font-medium bg-white/20 px-2 py-1 rounded mt-1 inline-block" id="rekap-kategori">-</div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center text-sm text-slate-600 dark:text-slate-400">
+                        <thead class="bg-slate-50 dark:bg-slate-900/50 text-[10px] uppercase font-bold text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700">
+                            <tr id="rekap-th-row">
+                                <th class="px-3 py-3 text-left w-32 border-r border-slate-200 dark:border-slate-700">Komp. Nilai (V2)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rekap-table-body" class="divide-y divide-slate-100 dark:divide-slate-700">
+                            <!-- Rows rendered by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal KKTP Pop-up -->
+        <div id="modal-kktp-popup" class="hidden fixed inset-0 z-[80] bg-slate-900/70 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden flex flex-col relative text-center">
+                <div id="kktp-header-bg" class="h-24 bg-gradient-to-br from-emerald-500 to-teal-600 absolute top-0 left-0 right-0"></div>
+                <div class="relative z-10 pt-16 pb-6 px-6 flex flex-col items-center">
+                    <div id="kktp-icon" class="w-16 h-16 rounded-full bg-white dark:bg-slate-700 shadow-lg flex items-center justify-center text-3xl mb-4 border-4 border-emerald-50 dark:border-slate-800">
+                        🌟
+                    </div>
+                    <h3 class="font-bold text-xl text-slate-900 dark:text-white" id="kktp-title">Layak</h3>
+                    <p class="text-xs text-slate-500 mt-2 mb-4" id="kktp-desc">Anda sudah memenuhi kriteria ketuntasan minimal.</p>
+                    <div class="w-full bg-slate-50 dark:bg-slate-900/50 rounded-xl p-3 border border-slate-100 dark:border-slate-700 mb-4">
+                        <span class="block text-[10px] text-slate-400 uppercase font-bold mb-1">Rata-rata Semester</span>
+                        <span class="text-2xl font-extrabold text-slate-800 dark:text-slate-100" id="kktp-score">0</span>
+                    </div>
+                    <button onclick="document.getElementById('modal-kktp-popup').classList.add('hidden')" class="w-full py-2.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-md">Tutup</button>
+                </div>
+            </div>
+        </div>
+
         <footer
             class="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-850 text-center py-4 text-[10px] text-slate-400 dark:text-slate-500 mt-auto">
             PJOK_SMANDACIS @2025
@@ -707,6 +778,10 @@
         <button onclick="navigateTo('modul')"
             class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-teal-500 transition-colors">
             <span class="text-base">📚</span><span class="text-[9px] font-medium">Modul</span>
+        </button>
+        <button onclick="navigateTo('rekap')"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-emerald-500 transition-colors">
+            <span class="text-base">📈</span><span class="text-[9px] font-medium">Rekap</span>
         </button>
         <button onclick="navigateTo('kalender')"
             class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-blue-500 transition-colors">
@@ -875,7 +950,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set, push, remove } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+        import { getDatabase, ref, onValue, set, push, remove, update } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAfJmqN9NbdE5aAu0VsvVcD9uy_wea2jIE",
@@ -895,80 +970,100 @@
         let currentUser = null;
 
         const templateMateri = [
-            // === SEMESTER 1 ===
+            // === SEMESTER 1 (Kelas X) ===
             {
-                judul: "Bola Basket", semester: 1, kategori: "Permainan Invasi", durasi: 45,
+                judul: "Bola Basket", semester: 1, kelas: "Kelas X", kategori: "Permainan Invasi", durasi: 45,
                 deskripsi: "Menganalisis keterampilan gerak operan, menggiring, dan menembak ke ring berdasarkan taktik penyerangan.",
                 image_url: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400",
                 url_materi: "https://adiwforedu.github.io/MPIBasketFaseE/"
             },
             {
-                judul: "Bola Voli", semester: 1, kategori: "Permainan Net", durasi: 40,
+                judul: "Bola Voli", semester: 1, kelas: "Kelas X", kategori: "Permainan Net", durasi: 40,
                 deskripsi: "Mengevaluasi variasi pola pertahanan, servis bawah/atas, serta teknik passing bawah dan atas secara berkelompok.",
                 image_url: "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=400",
                 url_materi: "https://tautan-web-materi-voli-anda.com"
             },
             {
-                judul: "Sepak Bola/Futsal", semester: 1, kategori: "Permainan Lapangan", durasi: 45,
+                judul: "Sepak Bola/Futsal", semester: 1, kelas: "Kelas X", kategori: "Permainan Lapangan", durasi: 45,
                 deskripsi: "Mempraktikkan keterampilan menendang, menahan, dan mengumpan bola dalam simulasi permainan taktis.",
                 image_url: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400",
                 url_materi: "https://link-materi-sepakbola.com"
             },
             {
-                judul: "Lari Jarak Pendek", semester: 1, kategori: "Olahraga Atletik", durasi: 30,
+                judul: "Lari Jarak Pendek", semester: 1, kelas: "Kelas X", kategori: "Olahraga Atletik", durasi: 30,
                 deskripsi: "Memahami biomekanika start jongkok, fase akselerasi lintasan lurus, dan teknik melewati garis finis.",
                 image_url: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400",
                 url_materi: "https://link-materi-atletik.com"
             },
             {
-                judul: "Senam Irama", semester: 1, kategori: "Gerak Berirama", durasi: 40,
+                judul: "Senam Irama", semester: 1, kelas: "Kelas X", kategori: "Gerak Berirama", durasi: 40,
                 deskripsi: "Menyusun rangkaian langkah kaki tunggal-ganda serta ayunan lengan berirama mengikuti ketukan musik.",
                 image_url: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400",
                 url_materi: "https://link-materi-senamirama.com"
             },
             {
-                judul: "Daya Tahan Jantung dan Paru", semester: 1, kategori: "Kebugaran Jasmani", durasi: 45,
+                judul: "Daya Tahan Jantung dan Paru", semester: 1, kelas: "Kelas X", kategori: "Kebugaran Jasmani", durasi: 45,
                 deskripsi: "Menghitung kapasitas VO2 Max melalui latihan interval training dan sirkuit demi menunjang stabilitas fisik.",
                 image_url: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400",
                 url_materi: "https://adiwforedu.github.io/gimedukasi_kebugaran_jasmani_faseE_SMA/"
             },
             {
-                judul: "Pola Hidup Sehat", semester: 1, kategori: "Kesehatan", durasi: 35,
+                judul: "Pola Hidup Sehat", semester: 1, kelas: "Kelas X", kategori: "Kesehatan", durasi: 35,
                 deskripsi: "Menerapkan prinsip gizi seimbang, manajemen istirahat, dan pencegahan penyakit menular/tidak menular remaja.",
                 image_url: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400",
                 url_materi: "https://adiwforedu.github.io/Pola-Hidup-Sehat-Fase-E/"
             },
 
-            // === SEMESTER 2 ===
+            // === SEMESTER 2 (Kelas X) ===
             {
-                judul: "Bulu tangkis dan Tenis Meja", semester: 2, kategori: "Permainan Net", durasi: 45,
-                deskripsi: "Mengevaluasi teknik pegangan raket/bet, pukulan forehand-backhand, serta pola penempatan bola taktis.",
-                image_url: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400",
-                url_materi: "https://link-materi-badminton.com"
-            },
-            {
-                judul: "Softball", semester: 2, kategori: "Permainan Lapangan", durasi: 45,
+                judul: "Permainan Softball", semester: 2, kelas: "Kelas X", kategori: "Permainan Lapangan", durasi: 45,
                 deskripsi: "Mempelajari koordinasi mekanika melempar, menangkap bola glove, serta strategi memukul (batting) base.",
                 image_url: "https://images.unsplash.com/photo-1544698310-74ea9d1c8258?w=400",
                 url_materi: "https://link-materi-softball.com"
             },
             {
-                judul: "Senam Lantai", semester: 2, kategori: "Aktivitas Senam", durasi: 45,
-                deskripsi: "Menganalisis rangkaian gerak guling depan, guling belakang, dan sikap lilin dengan aspek keselamatan.",
-                image_url: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=400",
-                url_materi: "https://link-materi-senam.com"
+                judul: "Bulutangkis", semester: 2, kelas: "Kelas X", kategori: "Permainan Net", durasi: 45,
+                deskripsi: "Mengevaluasi teknik pegangan raket, pukulan forehand-backhand, serta pola penempatan bola taktis.",
+                image_url: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=400",
+                url_materi: "https://link-materi-badminton.com"
             },
             {
-                judul: "Pencak Silat", semester: 2, kategori: "Aktivitas Bela Diri", durasi: 50,
-                deskripsi: "Menguasai pembentukan kuda-kuda, pola langkah, teknik tangkisan, serta jurus dasar bela diri nasional.",
+                judul: "Tenis Meja", semester: 2, kelas: "Kelas X", kategori: "Permainan Net", durasi: 45,
+                deskripsi: "Mempelajari teknik pegangan bet (shakehand/penhold), servis, serta pukulan drive dan chop.",
+                image_url: "https://images.unsplash.com/photo-1534158914592-062992fbe900?w=400",
+                url_materi: "https://link-materi-tenismeja.com"
+            },
+            {
+                judul: "Senam Ritmik", semester: 2, kelas: "Kelas X", kategori: "Aktivitas Senam", durasi: 45,
+                deskripsi: "Menganalisis rangkaian gerak senam ritmik menggunakan alat bantu maupun tanpa alat secara berkelompok.",
+                image_url: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400",
+                url_materi: "https://link-materi-senamritmik.com"
+            },
+            {
+                judul: "Silat", semester: 2, kelas: "Kelas X", kategori: "Aktivitas Beladiri", durasi: 50,
+                deskripsi: "Menguasai pembentukan kuda-kuda, pola langkah, teknik tangkisan, serta jurus dasar pencak silat.",
                 image_url: "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400",
                 url_materi: "https://link-materi-silat.com"
             },
             {
-                judul: "Renang", semester: 2, kategori: "Aktivitas Air", durasi: 60,
-                deskripsi: "Mempraktikkan teknik koordinasi gerakan kaki, kayuhan lengan, dan pernapasan ritmis gaya dada.",
+                judul: "Renang dan Keselamatan Air", semester: 2, kelas: "Kelas X", kategori: "Aktivitas Air", durasi: 60,
+                deskripsi: "Mempraktikkan teknik dasar renang dan pemahaman mendalam tentang standar keselamatan saat di air.",
                 image_url: "https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?w=400",
                 url_materi: "https://link-materi-renang.com"
+            },
+            
+            // === MOCK KELAS XI & XII ===
+            {
+                judul: "Pola Penyerangan Basket", semester: 1, kelas: "Kelas XI", kategori: "Permainan Invasi", durasi: 45,
+                deskripsi: "Menganalisis dan merancang taktik pola penyerangan dalam permainan bola basket.",
+                image_url: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400",
+                url_materi: "#"
+            },
+            {
+                judul: "Strategi Permainan Voli", semester: 1, kelas: "Kelas XII", kategori: "Permainan Net", durasi: 45,
+                deskripsi: "Merancang strategi dan pola pertahanan serta penyerangan bola voli level mahir.",
+                image_url: "https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=400",
+                url_materi: "#"
             }
         ];
 
@@ -1030,7 +1125,7 @@
         };
 
         function updateSidebarStyles(activePage) {
-            const pages = ['welcome', 'akun', 'dashboard', 'modul', 'kalender', 'referensi', 'bantuan'];
+            const pages = ['welcome', 'akun', 'dashboard', 'modul', 'kalender', 'referensi', 'bantuan', 'rekap'];
             pages.forEach(p => {
                 const btn = document.getElementById(`nav-desk-${p}`);
                 if (!btn) return;
@@ -1099,17 +1194,61 @@
         });
 
         // Listen for NISN List (CSV upload)
-        let allNISN = [];
+        let allNISN = {};
         const nisnRef = ref(db, 'nisn_list');
         onValue(nisnRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                allNISN = Object.values(data);
+                allNISN = {};
+                if (Array.isArray(data)) {
+                    data.forEach(val => {
+                        if (val) allNISN[val] = "Siswa SMAN 2 Ciamis";
+                    });
+                } else if (typeof data === 'object') {
+                    // Check if it's a mixed old/new schema (numeric keys containing NISN strings)
+                    Object.keys(data).forEach(key => {
+                        const val = data[key];
+                        if (!isNaN(key) && key.length < 5 && typeof val === 'string' && !isNaN(val)) {
+                            // Old schema element (key is "0", "1", val is NISN)
+                            allNISN[val] = { name: "Siswa SMAN 2 Ciamis", kelas: "" };
+                        } else {
+                            // New schema element (key is NISN, val is Name string OR Object)
+                            if (typeof val === 'string') {
+                                allNISN[key] = { name: val, kelas: "" };
+                            } else {
+                                allNISN[key] = val; // Already an object {name: ..., kelas: ...}
+                            }
+                        }
+                    });
+                }
             } else {
-                allNISN = [];
+                allNISN = {};
             }
             const countEl = document.getElementById('nisn-count');
-            if (countEl) countEl.innerText = allNISN.length;
+            if (countEl) countEl.innerText = Object.keys(allNISN).length;
+            
+            // Populate Admin Selector
+            const selector = document.getElementById('admin-select-siswa');
+            if (selector) {
+                let options = '<option value="">-- Pilih Siswa --</option>';
+                Object.keys(allNISN).forEach(n => {
+                    options += `<option value="${n}">${n} - ${allNISN[n]}</option>`;
+                });
+                const prevVal = selector.value;
+                selector.innerHTML = options;
+                if (prevVal) selector.value = prevVal;
+            }
+        });
+
+        // Listen for Asesmen Data
+        let allAsesmenData = {};
+        const asesmenRef = ref(db, 'asesmen_data');
+        onValue(asesmenRef, (snapshot) => {
+            const data = snapshot.val();
+            allAsesmenData = data || {};
+            if (currentUser && !document.getElementById('page-rekap').classList.contains('hidden')) {
+                renderRekapAsesmen();
+            }
         });
 
         // --- AUTH & LOGIN LOGIC ---
@@ -1148,13 +1287,26 @@
                 if (!nisn) { errorEl.innerText = "Masukkan NISN Anda terlebih dahulu!"; errorEl.classList.remove('hidden'); return; }
 
                 // Validate against Firebase NISN List (only if Admin has uploaded at least 1)
-                if (allNISN.length > 0 && !allNISN.includes(nisn)) {
+                if (Object.keys(allNISN).length > 0 && !allNISN[nisn]) {
                     errorEl.innerText = "NISN tidak terdaftar di Server LMS! Hubungi Guru PJOK.";
                     errorEl.classList.remove('hidden');
                     return;
                 }
 
-                currentUser = { role: 'murid', id: nisn };
+                let studentData = allNISN[nisn];
+                let studentName = "Siswa SMAN 2 Ciamis";
+                let studentClass = "";
+                
+                if (studentData) {
+                    if (typeof studentData === 'string') {
+                        studentName = studentData;
+                    } else {
+                        studentName = studentData.name || "Siswa SMAN 2 Ciamis";
+                        studentClass = studentData.kelas || "";
+                    }
+                }
+                
+                currentUser = { role: 'murid', id: nisn, name: studentName, kelas: studentClass };
             } else {
                 const user = document.getElementById('login-username').value.trim();
                 const pass = document.getElementById('login-password').value.trim();
@@ -1205,9 +1357,14 @@
                 if (editRefBtn) editRefBtn.classList.add('hidden');
                 if (editBerandaBtn) editBerandaBtn.classList.add('hidden');
                 if (adminCsvUI) adminCsvUI.classList.add('hidden');
-                if (accName) accName.innerText = "Siswa SMAN 2 Ciamis";
+                if (accName) accName.innerText = currentUser.name || "Siswa SMAN 2 Ciamis";
                 if (accDesc) accDesc.innerText = `NISN: ${currentUser.id} • Siswa Aktif`;
-                if (roleBadge) roleBadge.innerHTML = "🎓 Siswa - Fase E";
+                
+                let displayRole = "🎓 Siswa - Fase E";
+                if (currentUser.kelas && currentUser.kelas.trim() !== '') {
+                    displayRole = `🎓 Siswa ${currentUser.kelas}`;
+                }
+                if (roleBadge) roleBadge.innerHTML = displayRole;
             }
             renderFilteredModules();
         }
@@ -1217,13 +1374,18 @@
             if (!currentUser) return;
             const container = document.getElementById("modules-container");
             container.innerHTML = "";
-            const filtered = allModules.filter(m => Number(m.semester) === currentSelectedSemester);
+            
+            let currentClassLabel = "Kelas X Fase E";
+            if (selectedClassContext !== "") currentClassLabel = selectedClassContext;
+            
+            // Ekstrak nama kelas (misal: "Kelas X")
+            let classParts = currentClassLabel.split(' ');
+            let classFilter = classParts[0] + ' ' + classParts[1];
+
+            const filtered = allModules.filter(m => Number(m.semester) === currentSelectedSemester && (m.kelas === classFilter || !m.kelas));
 
             document.getElementById("current-semester-title").innerText = `Materi Semester ${currentSelectedSemester}`;
             document.getElementById("materi-count-badge").innerText = `${filtered.length} Materi`;
-
-            let currentClassLabel = "Kelas X Fase E";
-            if (selectedClassContext !== "") currentClassLabel = selectedClassContext;
 
             filtered.forEach((item) => {
                 let finalUrl = item.url_materi;
@@ -1379,34 +1541,268 @@
             });
         }
 
+        // Load SheetJS dynamically
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+        document.head.appendChild(script);
+
         window.handleCSVUpload = function (event) {
             const file = event.target.files[0];
             if (!file) return;
             document.getElementById('csv-upload-status').innerText = "Memproses " + file.name + "...";
             const reader = new FileReader();
+            
             reader.onload = function (e) {
-                const text = e.target.result;
-                const lines = text.split(/\r?\n/);
-                const nisns = [];
-                for (let line of lines) {
-                    const parts = line.split(',');
-                    if (parts[0]) {
-                        const val = parts[0].replace(/['"]/g, '').trim();
-                        if (val && !isNaN(val)) nisns.push(val);
+                try {
+                    let nisnData = {};
+                    
+                    if (file.name.toLowerCase().endsWith('.xlsx') || file.name.toLowerCase().endsWith('.xls')) {
+                        if (typeof XLSX === 'undefined') {
+                            alert('Pustaka Excel sedang dimuat, silakan coba lagi dalam beberapa detik.');
+                            return;
+                        }
+                        const data = new Uint8Array(e.target.result);
+                        const workbook = XLSX.read(data, {type: 'array'});
+                        const firstSheetName = workbook.SheetNames[0];
+                        const worksheet = workbook.Sheets[firstSheetName];
+                        const json = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+                        
+                        for (let row of json) {
+                            if (row.length > 0 && row[0]) {
+                                const nisnVal = String(row[0]).replace(/[^0-9]/g, '');
+                                let nameVal = "Siswa SMAN 2 Ciamis";
+                                let classVal = "";
+                                if (row.length > 1 && row[1]) {
+                                    nameVal = String(row[1]).replace(/['"]/g, '').trim();
+                                }
+                                if (row.length > 2 && row[2]) {
+                                    classVal = String(row[2]).replace(/['"]/g, '').trim();
+                                }
+                                if (nisnVal && nisnVal.length >= 5) {
+                                    nisnData[nisnVal] = { name: nameVal, kelas: classVal };
+                                }
+                            }
+                        }
+                    } else {
+                        // CSV Fallback
+                        let text = new TextDecoder().decode(e.target.result).replace(/\0/g, '');
+                        const lines = text.split(/\r?\n/);
+                        for (let line of lines) {
+                            const parts = line.split(/[,;\t]/);
+                            if (parts[0]) {
+                                const nisnVal = parts[0].replace(/[^0-9]/g, '');
+                                let nameVal = "Siswa SMAN 2 Ciamis";
+                                let classVal = "";
+                                if (parts.length > 1 && parts[1].trim() !== '') {
+                                    nameVal = parts[1].replace(/['"]/g, '').trim();
+                                }
+                                if (parts.length > 2 && parts[2].trim() !== '') {
+                                    classVal = parts[2].replace(/['"]/g, '').trim();
+                                }
+                                if (nisnVal && nisnVal.length >= 5) {
+                                    nisnData[nisnVal] = { name: nameVal, kelas: classVal };
+                                }
+                            }
+                        }
                     }
-                }
 
-                if (nisns.length > 0) {
-                    set(ref(db, 'nisn_list'), nisns).then(() => {
-                        document.getElementById('csv-upload-status').innerHTML = `<span class="text-green-500">✅ Berhasil mengimpor ${nisns.length} NISN ke Database!</span>`;
-                    }).catch((error) => {
-                        document.getElementById('csv-upload-status').innerHTML = `<span class="text-red-500">❌ Gagal: ${error.message}</span>`;
-                    });
-                } else {
-                    document.getElementById('csv-upload-status').innerHTML = `<span class="text-amber-500">⚠️ File kosong atau format tidak valid.</span>`;
+                    if (Object.keys(nisnData).length > 0) {
+                        set(ref(db, 'nisn_list'), nisnData).then(() => {
+                            document.getElementById('csv-upload-status').innerHTML = `<span class="text-green-500">✅ Berhasil mengimpor ${Object.keys(nisnData).length} data siswa dari ${file.name}!</span>`;
+                        }).catch((error) => {
+                            document.getElementById('csv-upload-status').innerHTML = `<span class="text-red-500">❌ Gagal: ${error.message}</span>`;
+                        });
+                    } else {
+                        document.getElementById('csv-upload-status').innerHTML = `<span class="text-amber-500">⚠️ File kosong atau format tidak valid. Pastikan kolom A adalah NISN dan kolom B adalah Nama.</span>`;
+                    }
+                } catch (err) {
+                    document.getElementById('csv-upload-status').innerHTML = `<span class="text-red-500">❌ Error membaca file: ${err.message}</span>`;
                 }
+                event.target.value = '';
             };
-            reader.readAsText(file);
+            
+            reader.readAsArrayBuffer(file);
+        }
+
+        // --- REKAP ASESMEN LOGIC ---
+        let currentRekapSemester = 1;
+        let mockRekapData = {};
+        
+        function getRealAsesmenData(nisn) {
+            const studentData = allAsesmenData[nisn] || {};
+            
+            const materiSem1 = [
+                { id: "s1_1", nama: "Permainan Invasi", abbr: "Permainan Invasi:<br>Basket" }, 
+                { id: "s1_2", nama: "Permainan Net", abbr: "Permainan Net:<br>Bola Voli" }, 
+                { id: "s1_3", nama: "Permainan Lapangan", abbr: "Permainan Lapangan:<br>Futsal/Sepak Bola" },
+                { id: "s1_4", nama: "Atletik", abbr: "Atletik:<br>Lari Jarak Pendek" }, 
+                { id: "s1_5", nama: "Gerak Berirama", abbr: "Gerak Berirama:<br>Senam Ritmik" }, 
+                { id: "s1_6", nama: "Kebugaran Jasmani", abbr: "Kebugaran Jasmani:<br>Kesehatan Jantung dan Paru" }, 
+                { id: "s1_7", nama: "Kesehatan", abbr: "Kesehatan:<br>Pola Hidup Sehat" }
+            ];
+            
+            const materiSem2 = [
+                { id: "s2_1", nama: "Permainan Lapangan", abbr: "Permainan Lapangan:<br>Softball" }, 
+                { id: "s2_2", nama: "Permainan Net", abbr: "Permainan Net:<br>Bulutangkis" }, 
+                { id: "s2_3", nama: "Permainan Net", abbr: "Permainan Net:<br>Tenis Meja" },
+                { id: "s2_4", nama: "Aktivitas Senam", abbr: "Aktivitas Senam:<br>Senam Ritmik" }, 
+                { id: "s2_5", nama: "Aktivitas Beladiri", abbr: "Aktivitas Beladiri:<br>Silat" }, 
+                { id: "s2_6", nama: "Aktivitas Air", abbr: "Aktivitas Air:<br>Renang dan Keselamatan Air" }
+            ];
+            
+            const mapData = (list, sem) => {
+                return list.map(m => {
+                    const harian = studentData[m.id + '_h'] || 0;
+                    const asas = studentData[m.id + '_a'] || 0;
+                    const akhir = Math.round((harian * 0.7) + (asas * 0.3));
+                    return { id: m.id, abbr: m.abbr, nama: m.nama, harian, asas, akhir };
+                });
+            };
+            
+            return {
+                1: mapData(materiSem1, 1),
+                2: mapData(materiSem2, 2)
+            };
+        }
+
+        window.switchRekapSemester = function(sem) {
+            currentRekapSemester = sem;
+            document.getElementById('btn-rekap-sem1').className = sem === 1 ? "px-4 py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-sm transition-all" : "px-4 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 transition-all";
+            document.getElementById('btn-rekap-sem2').className = sem === 2 ? "px-4 py-2 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-sm transition-all" : "px-4 py-2 rounded-lg text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 transition-all";
+            renderRekapAsesmen();
+        }
+
+        window.renderRekapAsesmen = function() {
+            try {
+                if (!currentUser) return;
+                
+                let targetNisn = "";
+                let isAdmin = currentUser.role === 'admin';
+                
+                if (isAdmin) {
+                    document.getElementById('admin-rekap-selector').classList.remove('hidden');
+                    document.getElementById('admin-rekap-selector').classList.add('flex');
+                    document.getElementById('rekap-summary-card').classList.add('hidden');
+                    targetNisn = document.getElementById('admin-select-siswa').value;
+                    if (!targetNisn) {
+                        document.getElementById('rekap-th-row').innerHTML = `<th class="px-3 py-3 text-left w-32 border-r border-slate-200 dark:border-slate-700">Komponen</th>`;
+                        document.getElementById('rekap-table-body').innerHTML = `<tr><td colspan="10" class="px-4 py-8 text-center text-slate-500">Pilih siswa dari dropdown di atas untuk mengelola nilai.</td></tr>`;
+                        return;
+                    }
+                } else {
+                    document.getElementById('admin-rekap-selector').classList.remove('flex');
+                    document.getElementById('admin-rekap-selector').classList.add('hidden');
+                    document.getElementById('rekap-summary-card').classList.remove('hidden');
+                    targetNisn = currentUser.id;
+                }
+            
+            mockRekapData = getRealAsesmenData(targetNisn);
+            const data = mockRekapData[currentRekapSemester];
+            const tbody = document.getElementById('rekap-table-body');
+            const theadRow = document.getElementById('rekap-th-row');
+            
+            let theadHTML = `<th class="px-3 py-3 text-left w-32 border-r border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80">Komp. Nilai</th>`;
+            data.forEach(d => {
+                theadHTML += `<th class="px-4 py-3 min-w-[160px] text-center align-top border-r border-slate-200 dark:border-slate-700" title="${d.nama}">${d.abbr}</th>`;
+            });
+            theadHTML += `<th class="px-3 py-3 text-center bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400">Rata-Rata</th>`;
+            theadRow.innerHTML = theadHTML;
+            
+            let totalAkhir = 0;
+            let sumHarian = 0;
+            let sumAsas = 0;
+            
+            let rowHarian = `<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50"><td class="px-3 py-3 font-semibold text-slate-900 dark:text-white border-r border-slate-200 dark:border-slate-700 text-left">N. Harian <span class="text-[9px] font-normal text-slate-400 block">(Sumatif Akhir)</span></td>`;
+            let rowAsas = `<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50"><td class="px-3 py-3 font-semibold text-slate-900 dark:text-white border-r border-slate-200 dark:border-slate-700 text-left">N. ASAS <span class="text-[9px] font-normal text-slate-400 block">(Akhir Semester)</span></td>`;
+            let rowAkhir = `<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 bg-slate-50 dark:bg-slate-800/30"><td class="px-3 py-3 font-bold text-emerald-700 dark:text-emerald-400 border-r border-slate-200 dark:border-slate-700 text-left">N. Rapor <span class="text-[9px] font-normal text-slate-400 block">(70% H + 30% ASAS)</span></td>`;
+            
+            data.forEach(d => {
+                totalAkhir += d.akhir;
+                sumHarian += d.harian;
+                sumAsas += d.asas;
+                
+                if (isAdmin) {
+                    rowHarian += `<td class="px-2 py-3 text-center border-r border-slate-200 dark:border-slate-700"><input type="number" id="input_${d.id}_h" class="w-16 p-1 border rounded text-center text-sm" value="${d.harian}"></td>`;
+                    rowAsas += `<td class="px-2 py-3 text-center border-r border-slate-200 dark:border-slate-700"><input type="number" id="input_${d.id}_a" class="w-16 p-1 border rounded text-center text-sm" value="${d.asas}"></td>`;
+                } else {
+                    rowHarian += `<td class="px-2 py-3 text-center border-r border-slate-200 dark:border-slate-700">${d.harian}</td>`;
+                    rowAsas += `<td class="px-2 py-3 text-center border-r border-slate-200 dark:border-slate-700">${d.asas}</td>`;
+                }
+                rowAkhir += `<td class="px-2 py-3 text-center font-bold text-emerald-600 dark:text-emerald-400 border-r border-slate-200 dark:border-slate-700">${d.akhir}</td>`;
+            });
+            
+            const rataRata = Math.round(totalAkhir / data.length);
+            const avgHarian = Math.round(sumHarian / data.length);
+            const avgAsas = Math.round(sumAsas / data.length);
+            
+            rowHarian += `<td class="px-3 py-3 text-center font-bold border-l-2 border-emerald-100 dark:border-emerald-900/50">${avgHarian}</td></tr>`;
+            rowAsas += `<td class="px-3 py-3 text-center font-bold border-l-2 border-emerald-100 dark:border-emerald-900/50">${avgAsas}</td></tr>`;
+            rowAkhir += `<td class="px-3 py-3 text-center font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 border-l-2 border-emerald-200 dark:border-emerald-800">${rataRata}</td></tr>`;
+            
+            tbody.innerHTML = rowHarian + rowAsas + rowAkhir;
+            document.getElementById('rekap-nilai-akhir').innerText = rataRata;
+            
+            let kategori = "";
+            let kktpDesc = "";
+            
+            if (rataRata <= 74) {
+                kategori = "Berkembang";
+                kktpDesc = "Belum memenuhi kriteria, membutuhkan remedial.";
+                document.getElementById('rekap-summary-card').className = "bg-gradient-to-r from-red-500 to-rose-600 rounded-xl p-6 text-white shadow-sm mb-6 flex flex-col md:flex-row justify-between items-center gap-4 cursor-pointer hover:shadow-md transition-shadow";
+            } else if (rataRata < 83) {
+                kategori = "Layak";
+                kktpDesc = "Sudah memenuhi kriteria ketuntasan minimum.";
+                document.getElementById('rekap-summary-card').className = "bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl p-6 text-white shadow-sm mb-6 flex flex-col md:flex-row justify-between items-center gap-4 cursor-pointer hover:shadow-md transition-shadow";
+            } else if (rataRata < 92) {
+                kategori = "Cakap";
+                kktpDesc = "Sudah memenuhi kriteria ketuntasan dengan baik.";
+                document.getElementById('rekap-summary-card').className = "bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl p-6 text-white shadow-sm mb-6 flex flex-col md:flex-row justify-between items-center gap-4 cursor-pointer hover:shadow-md transition-shadow";
+            } else {
+                kategori = "Mahir";
+                kktpDesc = "Sudah memenuhi kriteria serta membutuhkan pengayaan.";
+                document.getElementById('rekap-summary-card').className = "bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl p-6 text-white shadow-sm mb-6 flex flex-col md:flex-row justify-between items-center gap-4 cursor-pointer hover:shadow-md transition-shadow";
+            }
+            
+            document.getElementById('rekap-kategori').innerText = kategori;
+            
+            // Set up modal content
+            document.getElementById('kktp-title').innerText = kategori;
+            document.getElementById('kktp-desc').innerText = kktpDesc;
+            document.getElementById('kktp-score').innerText = rataRata;
+            
+            const headerBg = document.getElementById('kktp-header-bg');
+            headerBg.className = "h-24 absolute top-0 left-0 right-0 " + document.getElementById('rekap-summary-card').className.split(' ').find(c => c.startsWith('from-')) + " " + document.getElementById('rekap-summary-card').className.split(' ').find(c => c.startsWith('to-'));
+            headerBg.classList.add('bg-gradient-to-br');
+            
+            } catch (e) {
+                document.getElementById('rekap-th-row').innerHTML = `<th class="px-3 py-3 text-left w-32 border-r border-slate-200 dark:border-slate-700 text-red-500">ERROR: ${e.message}</th>`;
+                document.getElementById('rekap-table-body').innerHTML = `<tr><td class="px-4 py-8 text-left text-red-500 font-mono text-xs"><pre>${e.stack}</pre></td></tr>`;
+            }
+        }
+
+        window.showKktpPopup = function() {
+            document.getElementById('modal-kktp-popup').classList.remove('hidden');
+        }
+
+        window.simpanNilaiAsesmen = function() {
+            const nisn = document.getElementById('admin-select-siswa').value;
+            if (!nisn) return alert("Pilih siswa terlebih dahulu!");
+            
+            const data = mockRekapData[currentRekapSemester];
+            const updates = {};
+            data.forEach(d => {
+                const elH = document.getElementById(`input_${d.id}_h`);
+                const elA = document.getElementById(`input_${d.id}_a`);
+                if (elH) updates[`${d.id}_h`] = parseInt(elH.value) || 0;
+                if (elA) updates[`${d.id}_a`] = parseInt(elA.value) || 0;
+            });
+            
+            const studentRef = ref(db, 'asesmen_data/' + nisn);
+            update(studentRef, updates).then(() => {
+                alert("Nilai berhasil disimpan ke server!");
+            }).catch(e => {
+                alert("Gagal menyimpan nilai: " + e.message);
+            });
         }
 
         checkLoginState();
