@@ -3915,6 +3915,9 @@
             const rombelSel = document.getElementById('rekap-presensi-rombel');
             if (!rombelSel) { renderRekapPresensiTable(); return; }
 
+            // Simpan rombel yang sedang dipilih
+            const currentRombel = rombelSel.value;
+
             rombelSel.innerHTML = '<option value="">— Semua Rombel —</option>';
 
             const rombelMap = {
@@ -3929,6 +3932,14 @@
                 opt.textContent = r;
                 rombelSel.appendChild(opt);
             });
+
+            // Kembalikan pilihan jika masih valid untuk kelas ini
+            if (currentRombel) {
+                const options = Array.from(rombelSel.options).map(o => o.value);
+                if (options.includes(currentRombel)) {
+                    rombelSel.value = currentRombel;
+                }
+            }
 
             renderRekapPresensiTable();
         };
