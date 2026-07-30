@@ -3756,7 +3756,6 @@
         window.renderStudentPresensiView = function () {
             const container = document.getElementById('presensi-student-view');
             if (!container) return;
-            container.innerHTML = '';
 
             const studentGrade = getStudentGrade() || 'Kelas X';
             const studentKelas = (currentUser && currentUser.kelas) ? currentUser.kelas.trim() : '';
@@ -3800,6 +3799,13 @@
                     else if (studentGrade === 'Kelas XII' && (keyUpper.startsWith('XII F-') || keyUpper.startsWith('KELAS XII'))) sess = s;
                 }
             }
+
+            const renderKey = myLog ? `success_${myLog.status}` : (sess && sess.active ? `active_${sess.pin}` : 'empty');
+            if (container.dataset.renderKey === renderKey) {
+                return; // Prevent losing focus on PIN input if state hasn't changed
+            }
+            container.dataset.renderKey = renderKey;
+            container.innerHTML = '';
 
             if (myLog) {
                 // Already checked in
