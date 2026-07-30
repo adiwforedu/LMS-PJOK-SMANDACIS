@@ -94,7 +94,8 @@
                         <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Username
                             Guru</label>
                         <input type="text" id="login-username" placeholder="Masukkan 'guru'"
-                            class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all">
+                            class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                            onkeypress="if(event.key === 'Enter') doLogin('admin')">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Nomor Induk
@@ -996,28 +997,31 @@
             <!-- VIEW GURU: Session Controller, Visual Attendance, & Live Monitor -->
             <div id="presensi-teacher-view" class="space-y-6">
                 <!-- Tabs Mode Presensi Guru -->
-                <div class="flex border-b border-slate-200 dark:border-slate-700 space-x-2 overflow-x-auto">
+                <div
+                    class="flex border-b border-slate-200 dark:border-slate-700 space-x-1 sm:space-x-2 overflow-x-auto justify-between sm:justify-start">
                     <button id="tab-presensi-visual" onclick="switchPresensiTeacherTab('visual')"
-                        class="py-2.5 px-4 font-bold text-xs text-cyan-600 dark:text-cyan-400 border-b-2 border-cyan-600 dark:border-cyan-400 transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
-                        <span>🖼️</span> Mode Presensi Visual (Mengenal Wajah Murid)
+                        class="py-2.5 px-2.5 sm:px-4 font-bold text-[11px] sm:text-xs text-cyan-600 dark:text-cyan-400 border-b-2 border-cyan-600 dark:border-cyan-400 transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                        <span>🖼️</span> Mode Presensi Visual
                     </button>
                     <button id="tab-presensi-sesi" onclick="switchPresensiTeacherTab('sesi')"
-                        class="py-2.5 px-4 font-bold text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-b-2 border-transparent transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
-                        <span>⚡</span> Mode Sesi Mandiri Murid (Tanpa Proyektor)
+                        class="py-2.5 px-2.5 sm:px-4 font-bold text-[11px] sm:text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-b-2 border-transparent transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                        <span>⚡</span> Mode Sesi Mandiri
                     </button>
                     <button id="tab-presensi-rekap" onclick="switchPresensiTeacherTab('rekap')"
-                        class="py-2.5 px-4 font-bold text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-b-2 border-transparent transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
-                        <span>📊</span> Rekap & Laporan Kehadiran
+                        class="py-2.5 px-2.5 sm:px-4 font-bold text-[11px] sm:text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-b-2 border-transparent transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                        <span>📊</span> Rekap Kehadiran
                     </button>
                 </div>
 
                 <!-- SUB-TAB 1: MODE PRESENSI VISUAL GURU -->
                 <div id="presensi-content-visual" class="space-y-4">
                     <div
-                        class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div class="flex flex-wrap items-center gap-2 sm:gap-3 w-full md:w-auto">
-                            <span class="text-xs font-bold text-slate-500 dark:text-slate-400 whitespace-nowrap">Pilih
-                                Kelas:</span>
+                        class="bg-white dark:bg-slate-800 p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                            <span
+                                class="text-xs font-bold text-slate-500 dark:text-slate-400 whitespace-nowrap flex items-center gap-1">
+                                <span>🏫</span> Pilih Kelas:
+                            </span>
                             <select id="visual-presensi-kelas" onchange="renderVisualAttendanceGrid()"
                                 class="p-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold outline-none max-w-full min-w-0">
                                 <optgroup label="Tingkat Utama">
@@ -1076,24 +1080,31 @@
                         </div>
                         <div class="flex items-center gap-2 text-[11px] font-bold flex-wrap">
                             <span
-                                class="px-2 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 rounded-lg">🟢
+                                class="px-2.5 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 rounded-lg flex items-center gap-1">
+                                <span
+                                    class="w-4 h-4 rounded bg-emerald-500 text-white font-black text-[10px] flex items-center justify-center">H</span>
                                 HADIR</span>
                             <span
-                                class="px-2 py-1 bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 rounded-lg">🟡
+                                class="px-2.5 py-1 bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 rounded-lg flex items-center gap-1">
+                                <span
+                                    class="w-4 h-4 rounded bg-amber-500 text-white font-black text-[10px] flex items-center justify-center">S</span>
                                 SAKIT</span>
                             <span
-                                class="px-2 py-1 bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 rounded-lg">🔵
+                                class="px-2.5 py-1 bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 rounded-lg flex items-center gap-1">
+                                <span
+                                    class="w-4 h-4 rounded bg-blue-500 text-white font-black text-[10px] flex items-center justify-center">I</span>
                                 IZIN</span>
                             <span
-                                class="px-2 py-1 bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300 rounded-lg">🔴
+                                class="px-2.5 py-1 bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300 rounded-lg flex items-center gap-1">
+                                <span
+                                    class="w-4 h-4 rounded bg-rose-500 text-white font-black text-[10px] flex items-center justify-center">A</span>
                                 ALPA</span>
                         </div>
                     </div>
 
-                    <!-- GRID KARTU FOTO MURID -->
-                    <div id="visual-attendance-grid"
-                        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        <!-- Cards rendered by JS -->
+                    <!-- DAFTAR PRESENSI VISUAL MURID (MODE LIST REKAP MANUAL) -->
+                    <div id="visual-attendance-grid" class="space-y-2 max-w-4xl mx-auto">
+                        <!-- List rendered by JS -->
                     </div>
                 </div>
 
@@ -1193,25 +1204,32 @@
                 <!-- SUB-TAB 3: REKAP & LAPORAN PRESIENSI -->
                 <div id="presensi-content-rekap" class="hidden space-y-4">
                     <div
-                        class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
-                            <span class="text-xs font-bold text-slate-500 dark:text-slate-400 whitespace-nowrap">Filter
-                                Rekap:</span>
+                        class="bg-white dark:bg-slate-800 p-3.5 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                            <span
+                                class="text-xs font-bold text-slate-500 dark:text-slate-400 whitespace-nowrap flex items-center gap-1">
+                                <span>🔍</span> Filter Rekap:
+                            </span>
                             <select id="rekap-presensi-kelas" onchange="onRekapKelasChange()"
-                                class="p-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold outline-none max-w-full min-w-0">
+                                class="p-2 sm:px-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold outline-none cursor-pointer hover:border-emerald-500 transition-colors">
                                 <option value="Kelas X">Kelas X (Semua)</option>
                                 <option value="Kelas XI">Kelas XI (Semua)</option>
                                 <option value="Kelas XII">Kelas XII (Semua)</option>
                             </select>
                             <select id="rekap-presensi-rombel" onchange="renderRekapPresensiTable()"
-                                class="p-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold outline-none max-w-full min-w-0">
+                                class="p-2 sm:px-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold outline-none cursor-pointer hover:border-emerald-500 transition-colors">
                                 <option value="">— Semua Rombel —</option>
                             </select>
                         </div>
                         <button onclick="exportRekapPresensiExcel()"
-                            class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
+                            class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md shadow-emerald-600/20 flex items-center gap-1.5 cursor-pointer active:scale-95 shrink-0">
                             <span>📥</span> Download Excel Presensi
                         </button>
+                    </div>
+
+                    <!-- RINGKASAN METRIK REKAP KEHADIRAN (STAT CARDS) -->
+                    <div id="rekap-summary-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                        <!-- Cards rendered dynamically by JS -->
                     </div>
 
                     <div
@@ -1800,7 +1818,7 @@
         </div>
     </div>
 
-    <!-- Synchronous Immediate Script for Instant Tab Switch -->
+    <!-- Synchronous Immediate Script for Instant Tab Switch & Immediate Login Handler -->
     <script>
         function switchLoginTab(tab) {
             var err = document.getElementById('login-error');
@@ -1823,6 +1841,40 @@
             }
         }
         window.switchLoginTab = switchLoginTab;
+
+        window.doLogin = function (role) {
+            var errorEl = document.getElementById('login-error');
+            if (errorEl) errorEl.classList.add('hidden');
+
+            if (role === 'murid') {
+                var nisnEl = document.getElementById('login-nisn');
+                var nisn = nisnEl ? nisnEl.value.trim() : '';
+                if (!nisn) {
+                    if (errorEl) { errorEl.innerText = "Masukkan NISN Anda terlebih dahulu!"; errorEl.classList.remove('hidden'); }
+                    return;
+                }
+                var studentData = (window.allNISN && window.allNISN[nisn]) ? window.allNISN[nisn] : null;
+                var studentName = "Murid SMAN 2 Ciamis";
+                var studentClass = "";
+                if (studentData) {
+                    if (typeof studentData === 'string') studentName = studentData;
+                    else { studentName = studentData.name || "Murid SMAN 2 Ciamis"; studentClass = studentData.kelas || ""; }
+                }
+                window.currentUser = { role: 'murid', id: nisn, name: studentName, kelas: studentClass };
+            } else {
+                window.currentUser = { role: 'admin', id: '198404042022211015', name: 'Guru Utama PJOK' };
+            }
+
+            try {
+                localStorage.setItem('lmsUser', JSON.stringify(window.currentUser));
+            } catch (e) { console.error(e); }
+
+            var overlay = document.getElementById('login-overlay');
+            if (overlay) overlay.classList.add('hidden');
+
+            if (typeof window.setupUIForRole === 'function') window.setupUIForRole();
+            if (typeof window.navigateTo === 'function') window.navigateTo('welcome');
+        };
     </script>
 
     <script type="module">
@@ -2405,16 +2457,18 @@
             if (errorEl) errorEl.classList.add('hidden');
 
             if (role === 'murid') {
-                const nisn = document.getElementById('login-nisn').value.trim();
-                if (!nisn) { errorEl.innerText = "Masukkan NISN Anda terlebih dahulu!"; errorEl.classList.remove('hidden'); return; }
-
-                if (Object.keys(allNISN).length > 0 && !allNISN[nisn]) {
-                    errorEl.innerText = "NISN tidak terdaftar di Server LMS! Hubungi Guru PJOK.";
-                    errorEl.classList.remove('hidden');
+                const nisn = (document.getElementById('login-nisn')?.value || '').trim();
+                if (!nisn) {
+                    if (errorEl) { errorEl.innerText = "Masukkan NISN Anda terlebih dahulu!"; errorEl.classList.remove('hidden'); }
                     return;
                 }
 
-                let studentData = allNISN[nisn];
+                if (typeof allNISN !== 'undefined' && Object.keys(allNISN).length > 0 && !allNISN[nisn]) {
+                    if (errorEl) { errorEl.innerText = "NISN tidak terdaftar di Server LMS! Hubungi Guru PJOK."; errorEl.classList.remove('hidden'); }
+                    return;
+                }
+
+                let studentData = typeof allNISN !== 'undefined' ? allNISN[nisn] : null;
                 let studentName = "Murid SMAN 2 Ciamis";
                 let studentClass = "";
 
@@ -2429,16 +2483,27 @@
 
                 currentUser = { role: 'murid', id: nisn, name: studentName, kelas: studentClass };
             } else {
-                let user = (document.getElementById('login-username').value || '').trim().toLowerCase();
-                let pass = (document.getElementById('login-password').value || '').trim();
+                let user = (document.getElementById('login-username')?.value || '').trim().toLowerCase();
+                let pass = (document.getElementById('login-password')?.value || '').trim();
 
                 // Seamless Login for Guru/Admin (Accepts 'guru', 'admin', NIP, or default submit)
                 currentUser = { role: 'admin', id: '198404042022211015', name: 'Guru Utama PJOK' };
             }
-            localStorage.setItem('lmsUser', JSON.stringify(currentUser));
-            document.getElementById('login-overlay').classList.add('hidden');
-            setupUIForRole();
-            navigateTo('welcome');
+
+            try {
+                localStorage.setItem('lmsUser', JSON.stringify(currentUser));
+            } catch (e) { console.error(e); }
+
+            const loginOverlay = document.getElementById('login-overlay');
+            if (loginOverlay) loginOverlay.classList.add('hidden');
+
+            try {
+                if (typeof setupUIForRole === 'function') setupUIForRole();
+            } catch (e) { console.error("Error setting up UI:", e); }
+
+            try {
+                if (typeof navigateTo === 'function') navigateTo('welcome');
+            } catch (e) { console.error("Error navigating:", e); }
         };
 
         window.doLogout = function () {
@@ -3521,33 +3586,80 @@
                 if (matchesClass) {
                     rombelCount++;
                     const logKey = `${selectedDate}_${nisn}`;
-                    const currentStatus = allAttendanceLogs[logKey]?.status || 'ALPA';
+                    const currentLog = allAttendanceLogs[logKey];
+                    const currentStatus = currentLog ? currentLog.status : null;
+                    const currentCatatan = currentLog?.catatan || '';
 
-                    let badgeBg = 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300 border-rose-300';
-                    let badgeLabel = '🔴 ALPA';
-                    if (currentStatus === 'HADIR') { badgeBg = 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-300'; badgeLabel = '🟢 HADIR'; }
-                    else if (currentStatus === 'SAKIT') { badgeBg = 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 border-amber-300'; badgeLabel = '🟡 SAKIT'; }
-                    else if (currentStatus === 'IZIN') { badgeBg = 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 border-blue-300'; badgeLabel = '🔵 IZIN'; }
+                    const rowBg = rombelCount % 2 === 0 ? "bg-slate-100 dark:bg-slate-900/80 border-slate-300 dark:border-slate-700" : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700/80";
+                    const item = document.createElement('div');
+                    item.className = `flex items-center justify-between p-3 ${rowBg} rounded-xl shadow-sm hover:shadow-md transition-all gap-3`;
 
-                    const card = document.createElement('div');
-                    card.className = `bg-white dark:bg-slate-800 p-4 rounded-2xl border-2 ${badgeBg.split(' ').pop()} shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center justify-between space-y-3 cursor-pointer group`;
-                    card.onclick = () => toggleVisualAttendanceStatus(selectedDate, nisn, currentStatus);
-                    card.innerHTML = `
-                        <div class="relative">
-                            <div class="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-3xl shadow-inner group-hover:scale-110 transition-transform">
+                    const btnClass = (btnStatus) => {
+                        const isCurrent = currentStatus === btnStatus;
+                        if (btnStatus === 'HADIR') {
+                            return isCurrent
+                                ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/30 ring-2 ring-emerald-400 font-black'
+                                : 'bg-slate-100 dark:bg-slate-700/60 text-slate-500 dark:text-slate-400 hover:bg-emerald-100 hover:text-emerald-600 font-bold';
+                        }
+                        if (btnStatus === 'SAKIT') {
+                            return isCurrent
+                                ? 'bg-amber-500 text-white shadow-md shadow-amber-500/30 ring-2 ring-amber-400 font-black'
+                                : 'bg-slate-100 dark:bg-slate-700/60 text-slate-500 dark:text-slate-400 hover:bg-amber-100 hover:text-amber-600 font-bold';
+                        }
+                        if (btnStatus === 'IZIN') {
+                            return isCurrent
+                                ? 'bg-blue-500 text-white shadow-md shadow-blue-500/30 ring-2 ring-blue-400 font-black'
+                                : 'bg-slate-100 dark:bg-slate-700/60 text-slate-500 dark:text-slate-400 hover:bg-blue-100 hover:text-blue-600 font-bold';
+                        }
+                        if (btnStatus === 'ALPA') {
+                            return isCurrent
+                                ? 'bg-rose-500 text-white shadow-md shadow-rose-500/30 ring-2 ring-rose-400 font-black'
+                                : 'bg-slate-100 dark:bg-slate-700/60 text-slate-500 dark:text-slate-400 hover:bg-rose-100 hover:text-rose-600 font-bold';
+                        }
+                    };
+
+                    const safeName = name.replace(/'/g, "\\'");
+
+                    item.innerHTML = `
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-lg shrink-0 shadow-inner">
                                 ${avatar}
                             </div>
-                            <span class="absolute -bottom-1 -right-1 text-xs">✨</span>
+                            <div class="min-w-0">
+                                <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">${name}</h4>
+                                <p class="text-[10px] text-slate-400 font-mono flex items-center gap-2">
+                                    <span>${nisn}</span>
+                                    <span class="text-slate-300 dark:text-slate-600">•</span>
+                                    <span class="font-semibold text-slate-500 dark:text-slate-400">${kelas}</span>
+                                </p>
+                                ${currentCatatan ? `<p class="text-[10px] text-blue-600 dark:text-blue-400 font-semibold truncate mt-0.5 flex items-center gap-1" title="${currentCatatan}"><span>💬</span> <span>${currentCatatan}</span></p>` : ''}
+                            </div>
                         </div>
-                        <div class="space-y-0.5 w-full">
-                            <h4 class="font-bold text-xs text-slate-900 dark:text-white line-clamp-1">${name}</h4>
-                            <p class="text-[10px] font-mono text-slate-400">${nisn}</p>
-                        </div>
-                        <div class="w-full">
-                            <span class="w-full block py-1 px-2 rounded-xl text-[10px] font-extrabold border ${badgeBg}">${badgeLabel}</span>
+
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button onclick="setVisualAttendanceStatus('${selectedDate}', '${nisn}', 'HADIR')"
+                                title="HADIR (${safeName})"
+                                class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg text-xs transition-all cursor-pointer flex items-center justify-center ${btnClass('HADIR')}">
+                                H
+                            </button>
+                            <button onclick="setVisualAttendanceStatus('${selectedDate}', '${nisn}', 'SAKIT')"
+                                title="SAKIT (${safeName})"
+                                class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg text-xs transition-all cursor-pointer flex items-center justify-center ${btnClass('SAKIT')}">
+                                S
+                            </button>
+                            <button onclick="setVisualAttendanceStatus('${selectedDate}', '${nisn}', 'IZIN')"
+                                title="IZIN (${safeName})"
+                                class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg text-xs transition-all cursor-pointer flex items-center justify-center ${btnClass('IZIN')}">
+                                I
+                            </button>
+                            <button onclick="setVisualAttendanceStatus('${selectedDate}', '${nisn}', 'ALPA')"
+                                title="ALPA (${safeName})"
+                                class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg text-xs transition-all cursor-pointer flex items-center justify-center ${btnClass('ALPA')}">
+                                A
+                            </button>
                         </div>
                     `;
-                    grid.appendChild(card);
+                    grid.appendChild(item);
                 }
             });
 
@@ -3555,8 +3667,33 @@
             if (countBadge) countBadge.innerText = `👥 Total: ${rombelCount} Murid`;
 
             if (grid.children.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 font-semibold">Tidak ada murid yang terdaftar di ${selectedClass}.</div>`;
+                grid.innerHTML = `<div class="text-center py-10 text-slate-400 font-semibold">Tidak ada murid yang terdaftar di ${selectedClass}.</div>`;
             }
+        };
+
+        window.setVisualAttendanceStatus = function (date, nisn, targetStatus) {
+            const logKey = `${date}_${nisn}`;
+            const existingLog = allAttendanceLogs[logKey] || {};
+            let catatan = existingLog.catatan || '';
+
+            if (targetStatus === 'IZIN' || targetStatus === 'SAKIT') {
+                const label = targetStatus === 'IZIN' ? 'Izin (Cth: Rapat OSIS, Surat Orang Tua, Dispensa)' : 'Sakit (Cth: Demam, Surat Dokter)';
+                const inputCatatan = prompt(`Keterangan ${label}:\n(Tekan OK jika tidak ada catatan khusus)`, catatan);
+                if (inputCatatan === null) return; // Cancelled
+                catatan = inputCatatan.trim();
+            }
+
+            set(ref(db, 'attendance_logs/' + logKey), {
+                ...existingLog,
+                nisn: nisn,
+                date: date,
+                status: targetStatus,
+                catatan: catatan,
+                timestamp: new Date().toISOString(),
+                method: 'Guru Manual Visual'
+            }).then(() => {
+                renderVisualAttendanceGrid();
+            });
         };
 
         window.toggleVisualAttendanceStatus = function (date, nisn, currentStatus) {
@@ -3567,17 +3704,7 @@
                 'IZIN': 'ALPA'
             };
             const nextStatus = nextStatusMap[currentStatus] || 'HADIR';
-            const logKey = `${date}_${nisn}`;
-
-            set(ref(db, 'attendance_logs/' + logKey), {
-                nisn: nisn,
-                date: date,
-                status: nextStatus,
-                timestamp: new Date().toISOString(),
-                method: 'Guru Manual Visual'
-            }).then(() => {
-                renderVisualAttendanceGrid();
-            });
+            setVisualAttendanceStatus(date, nisn, nextStatus);
         };
 
         window.startAttendanceSession = function () {
@@ -3969,15 +4096,10 @@
                 const name = m.name || m.nama || 'Murid PJOK';
                 const kelas = m.kelas || 'Kelas X';
 
-                // Grade-level match
-                let matchesClass = false;
-                if (selectedClass === 'Kelas X' && (kelas.includes('X') && !kelas.includes('XI') && !kelas.includes('XII'))) matchesClass = true;
-                else if (selectedClass === 'Kelas XI' && kelas.includes('XI')) matchesClass = true;
-                else if (selectedClass === 'Kelas XII' && kelas.includes('XII')) matchesClass = true;
-
-                // Rombel filter (if selected)
+                // Grade-level and rombel match using centralized isClassMatch helper
+                let matchesClass = isClassMatch(selectedClass, kelas);
                 if (matchesClass && selectedRombel) {
-                    matchesClass = kelas.trim().toUpperCase() === selectedRombel.trim().toUpperCase();
+                    matchesClass = isClassMatch(selectedRombel, kelas);
                 }
 
                 if (matchesClass) {
@@ -4001,12 +4123,79 @@
             // Sort alphabetically by name
             rows.sort((a, b) => a.name.localeCompare(b.name, 'id'));
 
-            rows.forEach(({ nisn, name, kelas, countHadir, countSakit, countIzin, countAlpa, totalMeetings, percent }) => {
+            // Render summary metric cards for the selected filter
+            const summaryContainer = document.getElementById('rekap-summary-cards');
+            if (summaryContainer) {
+                const totalSiswa = rows.length;
+                let sumHadir = 0, sumSakit = 0, sumIzin = 0, sumAlpa = 0;
+                rows.forEach(r => {
+                    sumHadir += r.countHadir;
+                    sumSakit += r.countSakit;
+                    sumIzin += r.countIzin;
+                    sumAlpa += r.countAlpa;
+                });
+
+                summaryContainer.innerHTML = `
+                    <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-100 dark:bg-cyan-950 text-cyan-600 dark:text-cyan-400 font-extrabold flex items-center justify-center text-lg shrink-0">
+                            👥
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider truncate">Total Siswa</p>
+                            <h4 class="text-base font-black text-slate-900 dark:text-white">${totalSiswa} <span class="text-[11px] font-semibold text-slate-400">Murid</span></h4>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 font-extrabold flex items-center justify-center text-lg shrink-0">
+                            🟢
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider truncate">Total Hadir</p>
+                            <h4 class="text-base font-black text-emerald-600 dark:text-emerald-400">${sumHadir} <span class="text-[11px] font-semibold text-slate-400">Presensi</span></h4>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 font-extrabold flex items-center justify-center text-lg shrink-0">
+                            🟡
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider truncate">Total Sakit</p>
+                            <h4 class="text-base font-black text-amber-600 dark:text-amber-400">${sumSakit} <span class="text-[11px] font-semibold text-slate-400">Presensi</span></h4>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 font-extrabold flex items-center justify-center text-lg shrink-0">
+                            🔵
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider truncate">Total Izin</p>
+                            <h4 class="text-base font-black text-blue-600 dark:text-blue-400">${sumIzin} <span class="text-[11px] font-semibold text-slate-400">Presensi</span></h4>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 font-extrabold flex items-center justify-center text-lg shrink-0">
+                            🔴
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider truncate">Total Alpa</p>
+                            <h4 class="text-base font-black text-rose-600 dark:text-rose-400">${sumAlpa} <span class="text-[11px] font-semibold text-slate-400">Presensi</span></h4>
+                        </div>
+                    </div>
+                `;
+            }
+
+            rows.forEach(({ nisn, name, kelas, countHadir, countSakit, countIzin, countAlpa, totalMeetings, percent }, index) => {
                 const percentDisplay = percent !== null ? `${percent}%` : '<span class="text-slate-400 font-normal">—</span>';
                 const percentClass = percent === null ? 'text-slate-400' : percent >= 80 ? 'text-emerald-600 font-extrabold' : percent >= 60 ? 'text-amber-600 font-extrabold' : 'text-rose-600 font-extrabold';
 
+                const rowBg = index % 2 === 1 ? 'bg-slate-100 dark:bg-slate-900/80' : 'bg-white dark:bg-slate-800';
+
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors group";
+                tr.className = `${rowBg} hover:bg-blue-50/60 dark:hover:bg-slate-700/60 transition-colors group`;
                 tr.innerHTML = `
                     <td class="px-3 py-3 text-left font-semibold text-slate-900 dark:text-white">${name}</td>
                     <td class="px-3 py-3 font-mono text-slate-500 dark:text-slate-400 text-xs">${nisn}</td>
@@ -4061,19 +4250,26 @@
                     const log = logs[date];
                     const statusColor = { HADIR: 'emerald', SAKIT: 'amber', IZIN: 'blue', ALPA: 'rose' }[log.status] || 'slate';
                     const row = document.createElement('div');
-                    row.className = 'flex items-center justify-between gap-3 py-2 border-b border-slate-100 dark:border-slate-700 last:border-0';
+                    row.className = 'flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 py-2 border-b border-slate-100 dark:border-slate-700 last:border-0';
                     row.innerHTML = `
-                        <span class="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 min-w-[90px]">${date}</span>
-                        <select data-date="${date}" data-nisn="${nisn}"
-                            onchange="updateEditPresensiRow(this)"
-                            class="flex-1 p-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-${statusColor}-600 dark:text-${statusColor}-400 outline-none cursor-pointer">
-                            <option value="HADIR" ${log.status === 'HADIR' ? 'selected' : ''}>✅ HADIR</option>
-                            <option value="SAKIT" ${log.status === 'SAKIT' ? 'selected' : ''}>🤒 SAKIT</option>
-                            <option value="IZIN" ${log.status === 'IZIN' ? 'selected' : ''}>📝 IZIN</option>
-                            <option value="ALPA" ${log.status === 'ALPA' ? 'selected' : ''}>❌ ALPA</option>
-                        </select>
-                        <button onclick="deleteEditPresensiRow('${date}', '${nisn}')"
-                            class="text-rose-400 hover:text-rose-600 text-xs font-bold cursor-pointer px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors">🗑</button>
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <span class="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 min-w-[75px]">${date}</span>
+                            <select data-date="${date}" data-nisn="${nisn}"
+                                onchange="updateEditPresensiRow(this, false)"
+                                class="p-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-${statusColor}-600 dark:text-${statusColor}-400 outline-none cursor-pointer">
+                                <option value="HADIR" ${log.status === 'HADIR' ? 'selected' : ''}>✅ HADIR</option>
+                                <option value="SAKIT" ${log.status === 'SAKIT' ? 'selected' : ''}>🤒 SAKIT</option>
+                                <option value="IZIN" ${log.status === 'IZIN' ? 'selected' : ''}>📝 IZIN</option>
+                                <option value="ALPA" ${log.status === 'ALPA' ? 'selected' : ''}>❌ ALPA</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center gap-2 w-full sm:flex-1">
+                            <input type="text" data-date="${date}" data-nisn="${nisn}" value="${log.catatan || ''}" placeholder="Alasan/Catatan (Rapat OSIS/Ortu...)"
+                                onchange="updateEditPresensiRow(this, true)"
+                                class="flex-1 p-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 outline-none focus:border-blue-500">
+                            <button onclick="deleteEditPresensiRow('${date}', '${nisn}')"
+                                class="text-rose-400 hover:text-rose-600 text-xs font-bold cursor-pointer px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors">🗑</button>
+                        </div>
                     `;
                     list.appendChild(row);
                 });
@@ -4082,17 +4278,27 @@
             modal.classList.remove('hidden');
         };
 
-        window.updateEditPresensiRow = function (selectEl) {
-            const date = selectEl.dataset.date;
-            const nisn = selectEl.dataset.nisn;
-            const newStatus = selectEl.value;
+        window.updateEditPresensiRow = function (el, isCatatan = false) {
+            const date = el.dataset.date;
+            const nisn = el.dataset.nisn;
             const logKey = `${date}_${nisn}`;
             const existing = allAttendanceLogs[logKey] || {};
+
+            let newStatus = existing.status || 'HADIR';
+            let newCatatan = existing.catatan || '';
+
+            if (isCatatan) {
+                newCatatan = el.value.trim();
+            } else {
+                newStatus = el.value;
+            }
+
             set(ref(db, 'attendance_logs/' + logKey), {
                 ...existing,
                 nisn: nisn,
                 date: date,
                 status: newStatus,
+                catatan: newCatatan,
                 timestamp: new Date().toISOString(),
                 method: 'Edit Guru'
             });
@@ -4114,57 +4320,163 @@
             renderRekapPresensiTable();
         };
 
-        window.exportRekapPresensiExcel = function () {
-            const selectedClass = document.getElementById('rekap-presensi-kelas')?.value || 'Kelas X';
-            const selectedRombel = document.getElementById('rekap-presensi-rombel')?.value || '';
-            let csv = "Nama Murid,NISN,Kelas,Hadir,Sakit,Izin,Alpa,Persentase Kehadiran\n";
+        window.exportRekapPresensiExcel = async function (btnElement) {
+            const btn = btnElement || document.querySelector('button[onclick*="exportRekapPresensiExcel"]');
+            const originalText = btn ? btn.innerHTML : 'Download Excel Presensi';
+            if (btn) {
+                btn.innerHTML = '<span>⏳</span> Memproses Excel...';
+                btn.disabled = true;
+                btn.classList.add('opacity-75', 'cursor-not-allowed');
+            }
 
-            const rows = [];
-            Object.keys(allNISN).forEach(nisn => {
-                const raw = allNISN[nisn];
-                const m = typeof raw === 'object' ? raw : { name: raw, kelas: 'Kelas X' };
-                const name = m.name || m.nama || 'Murid PJOK';
-                const kelas = m.kelas || 'Kelas X';
-
-                let matchesClass = false;
-                if (selectedClass === 'Kelas X' && (kelas.includes('X') && !kelas.includes('XI') && !kelas.includes('XII'))) matchesClass = true;
-                else if (selectedClass === 'Kelas XI' && kelas.includes('XI')) matchesClass = true;
-                else if (selectedClass === 'Kelas XII' && kelas.includes('XII')) matchesClass = true;
-
-                if (matchesClass && selectedRombel) {
-                    matchesClass = kelas.trim().toUpperCase() === selectedRombel.trim().toUpperCase();
-                }
-
-                if (matchesClass) {
-                    let countHadir = 0, countSakit = 0, countIzin = 0, countAlpa = 0;
-                    Object.keys(allAttendanceLogs).forEach(logKey => {
-                        const log = allAttendanceLogs[logKey];
-                        if (log && log.nisn === nisn) {
-                            if (log.status === 'HADIR') countHadir++;
-                            else if (log.status === 'SAKIT') countSakit++;
-                            else if (log.status === 'IZIN') countIzin++;
-                            else if (log.status === 'ALPA') countAlpa++;
-                        }
+            try {
+                // Load ExcelJS dynamically if not loaded
+                if (typeof ExcelJS === 'undefined') {
+                    await new Promise((resolve, reject) => {
+                        const script = document.createElement('script');
+                        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js';
+                        script.onload = resolve;
+                        script.onerror = reject;
+                        document.head.appendChild(script);
                     });
-                    const totalMeetings = countHadir + countSakit + countIzin + countAlpa;
-                    const percent = totalMeetings > 0 ? Math.round((countHadir / totalMeetings) * 100) : 0;
-                    rows.push({ name, nisn, kelas, countHadir, countSakit, countIzin, countAlpa, percent });
                 }
-            });
 
-            rows.sort((a, b) => a.name.localeCompare(b.name, 'id'));
-            rows.forEach(({ name, nisn, kelas, countHadir, countSakit, countIzin, countAlpa, percent }) => {
-                csv += `"${name}","${nisn}","${kelas}",${countHadir},${countSakit},${countIzin},${countAlpa},"${percent}%"\n`;
-            });
+                const selectedClass = document.getElementById('rekap-presensi-kelas')?.value || 'Kelas X';
+                const selectedRombel = document.getElementById('rekap-presensi-rombel')?.value || '';
+                const label = selectedRombel ? selectedRombel : selectedClass;
 
-            const label = selectedRombel ? selectedRombel : selectedClass;
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.setAttribute("download", `Rekap_Presensi_${label.replace(/ /g, '_')}_${new Date().toISOString().slice(0, 10)}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+                const rows = [];
+                Object.keys(allNISN).forEach(nisn => {
+                    const raw = allNISN[nisn];
+                    const m = typeof raw === 'object' ? raw : { name: raw, kelas: 'Kelas X' };
+                    const name = m.name || m.nama || 'Murid PJOK';
+                    const kelas = m.kelas || 'Kelas X';
+
+                    let matchesClass = isClassMatch(selectedClass, kelas);
+                    if (matchesClass && selectedRombel) {
+                        matchesClass = isClassMatch(selectedRombel, kelas);
+                    }
+
+                    if (matchesClass) {
+                        let countHadir = 0, countSakit = 0, countIzin = 0, countAlpa = 0;
+                        Object.keys(allAttendanceLogs).forEach(logKey => {
+                            const log = allAttendanceLogs[logKey];
+                            if (log && log.nisn === nisn) {
+                                if (log.status === 'HADIR') countHadir++;
+                                else if (log.status === 'SAKIT') countSakit++;
+                                else if (log.status === 'IZIN') countIzin++;
+                                else if (log.status === 'ALPA') countAlpa++;
+                            }
+                        });
+                        const totalMeetings = countHadir + countSakit + countIzin + countAlpa;
+                        const percent = totalMeetings > 0 ? Math.round((countHadir / totalMeetings) * 100) : 0;
+                        rows.push({ name, nisn, kelas, countHadir, countSakit, countIzin, countAlpa, percent });
+                    }
+                });
+
+                rows.sort((a, b) => a.name.localeCompare(b.name, 'id'));
+
+                // Initialize Workbook
+                const workbook = new ExcelJS.Workbook();
+                workbook.creator = 'LMS Mandiri PJOK';
+                const sheet = workbook.addWorksheet('Rekap Presensi');
+
+                // 1. Title
+                sheet.mergeCells('A1:I1');
+                const titleCell = sheet.getCell('A1');
+                titleCell.value = 'REKAPITULASI PRESENSI SISWA LMS MANDIRI PJOK';
+                titleCell.font = { name: 'Arial', size: 14, bold: true, color: { argb: 'FF0F172A' } };
+                titleCell.alignment = { vertical: 'middle', horizontal: 'center' };
+
+                // 2. Subtitle
+                sheet.mergeCells('A2:I2');
+                const subtitleCell = sheet.getCell('A2');
+                subtitleCell.value = `Kelas / Rombel: ${label.toUpperCase()}   |   Tanggal Cetak: ${new Date().toLocaleDateString('id-ID')}`;
+                subtitleCell.font = { name: 'Arial', size: 10, bold: true, color: { argb: 'FF475569' } };
+                subtitleCell.alignment = { vertical: 'middle', horizontal: 'center' };
+
+                sheet.addRow([]); // Spacing
+
+                // 3. Header Row
+                const headerRow = sheet.addRow(['No', 'Nama Murid', 'NISN', 'Kelas', 'Hadir', 'Sakit', 'Izin', 'Alpa', '% Kehadiran']);
+                headerRow.height = 25;
+
+                const headerColors = {
+                    1: 'FF1E293B', 2: 'FF1E293B', 3: 'FF1E293B', 4: 'FF1E293B',
+                    5: 'FF059669', // Hadir
+                    6: 'FFD97706', // Sakit
+                    7: 'FF2563EB', // Izin
+                    8: 'FFDC2626', // Alpa
+                    9: 'FF334155'  // %
+                };
+
+                headerRow.eachCell((cell, colNumber) => {
+                    cell.font = { name: 'Arial', size: 10, bold: true, color: { argb: 'FFFFFFFF' } };
+                    cell.alignment = { vertical: 'middle', horizontal: 'center' };
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: headerColors[colNumber] } };
+                    cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                });
+
+                // 4. Columns Width
+                sheet.getColumn(1).width = 5;
+                sheet.getColumn(2).width = 32;
+                sheet.getColumn(3).width = 16;
+                sheet.getColumn(4).width = 12;
+                sheet.getColumn(5).width = 9;
+                sheet.getColumn(6).width = 9;
+                sheet.getColumn(7).width = 9;
+                sheet.getColumn(8).width = 9;
+                sheet.getColumn(9).width = 14;
+
+                // 5. Data Rows
+                rows.forEach((r, idx) => {
+                    const row = sheet.addRow([
+                        idx + 1, r.name, r.nisn, r.kelas,
+                        r.countHadir, r.countSakit, r.countIzin, r.countAlpa, `${r.percent}%`
+                    ]);
+
+                    row.eachCell((cell, colNumber) => {
+                        cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                        cell.alignment = { vertical: 'middle', horizontal: 'center' };
+                        cell.font = { name: 'Arial', size: 10 };
+
+                        if (colNumber === 2) cell.alignment = { vertical: 'middle', horizontal: 'left' };
+                        if (colNumber === 3) cell.numFmt = '@'; // NISN as text
+
+                        if (colNumber >= 5 && colNumber <= 8) {
+                            cell.font = { name: 'Arial', size: 10, bold: true, color: { argb: headerColors[colNumber] } };
+                        }
+                        if (colNumber === 9) cell.font = { name: 'Arial', size: 10, bold: true };
+                    });
+
+                    // Zebra stripe even rows
+                    if (idx % 2 !== 0) {
+                        row.eachCell(cell => {
+                            cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF8FAFC' } };
+                        });
+                    }
+                });
+
+                // 6. Generate and Download Native XLSX
+                const buffer = await workbook.xlsx.writeBuffer();
+                const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `Rekap_Presensi_${label.replace(/ /g, '_')}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+            } catch (err) {
+                console.error("Gagal export excel: ", err);
+                alert("Terjadi kesalahan saat memproses file Excel.");
+            } finally {
+                if (btn) {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                }
+            }
         };
 
         checkLoginState();
