@@ -1197,11 +1197,15 @@
                         <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
                             <span class="text-xs font-bold text-slate-500 dark:text-slate-400 whitespace-nowrap">Filter
                                 Rekap:</span>
-                            <select id="rekap-presensi-kelas" onchange="renderRekapPresensiTable()"
+                            <select id="rekap-presensi-kelas" onchange="onRekapKelasChange()"
                                 class="p-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold outline-none max-w-full min-w-0">
-                                <option value="Kelas X">Kelas X</option>
-                                <option value="Kelas XI">Kelas XI</option>
-                                <option value="Kelas XII">Kelas XII</option>
+                                <option value="Kelas X">Kelas X (Semua)</option>
+                                <option value="Kelas XI">Kelas XI (Semua)</option>
+                                <option value="Kelas XII">Kelas XII (Semua)</option>
+                            </select>
+                            <select id="rekap-presensi-rombel" onchange="renderRekapPresensiTable()"
+                                class="p-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs font-bold outline-none max-w-full min-w-0">
+                                <option value="">— Semua Rombel —</option>
                             </select>
                         </div>
                         <button onclick="exportRekapPresensiExcel()"
@@ -1225,6 +1229,7 @@
                                         <th class="px-3 py-3 text-blue-600">Izin</th>
                                         <th class="px-3 py-3 text-rose-600">Alpa</th>
                                         <th class="px-3 py-3">% Kehadiran</th>
+                                        <th class="px-3 py-3">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="rekap-presensi-table-body"
@@ -1262,6 +1267,113 @@
                     </div>
                     <button onclick="document.getElementById('modal-kktp-popup').classList.add('hidden')"
                         class="w-full py-2.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-md">Tutup</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Edit Rekap Presensi (Teacher Only) -->
+        <div id="modal-edit-presensi"
+            class="hidden fixed inset-0 z-[90] bg-slate-900/70 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl w-full max-w-md shadow-2xl flex flex-col max-h-[90vh]">
+                <!-- Header -->
+                <div
+                    class="bg-gradient-to-r from-indigo-600 to-purple-600 p-5 flex justify-between items-center rounded-t-3xl shrink-0">
+                    <div>
+                        <h3 class="font-black text-white text-sm" id="edit-presensi-title">Edit Kehadiran Murid</h3>
+                        <p class="text-indigo-100 text-[11px] mt-0.5">Klik dropdown untuk mengubah status per tanggal
+                        </p>
+                    </div>
+                    <button onclick="closeEditPresensiModal()"
+                        class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white font-bold text-lg flex items-center justify-center cursor-pointer">&times;</button>
+                </div>
+                <input type="hidden" id="edit-presensi-nisn" value="">
+                <!-- Scrollable log list -->
+                <div class="flex-1 overflow-y-auto p-5 min-h-0">
+                    <div id="edit-presensi-list" class="space-y-0.5"></div>
+                </div>
+                <!-- Footer -->
+                <div class="p-4 border-t border-slate-100 dark:border-slate-700 shrink-0">
+                    <button onclick="closeEditPresensiModal()"
+                        class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md cursor-pointer transition-all active:scale-95">
+                        ✅ Selesai & Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Bantu Presensikan Guru (Smart Input) -->
+        <div id="modal-bantu-presensi"
+            class="hidden fixed inset-0 z-[85] bg-slate-900/70 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div
+                class="bg-white dark:bg-slate-800 rounded-3xl w-full max-w-md shadow-2xl overflow-hidden flex flex-col">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-5 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-black text-white text-base flex items-center gap-2">📋 Input Kehadiran Murid
+                        </h3>
+                        <p class="text-blue-100 text-[11px] mt-0.5" id="bantu-modal-subtitle">Sesi: —</p>
+                    </div>
+                    <button onclick="closeBantuPresensiModal()"
+                        class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white font-bold text-lg flex items-center justify-center cursor-pointer transition-colors">&times;</button>
+                </div>
+                <!-- Body -->
+                <div class="p-5 space-y-4">
+                    <!-- Student Dropdown -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Pilih
+                            Murid</label>
+                        <select id="bantu-murid-select"
+                            class="w-full p-3 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm font-semibold outline-none focus:border-blue-500 transition-colors">
+                            <option value="">— Pilih nama murid —</option>
+                        </select>
+                        <p class="text-[10px] text-slate-400 mt-1">Hanya menampilkan murid yang <strong>belum
+                                dicatat</strong> hari ini</p>
+                    </div>
+
+                    <!-- Status Selection -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">Status
+                            Kehadiran</label>
+                        <div class="grid grid-cols-4 gap-2" id="bantu-status-grid">
+                            <button onclick="selectBantuStatus('HADIR')" id="bantu-btn-HADIR"
+                                class="bantu-status-btn py-3 rounded-xl border-2 border-emerald-200 bg-emerald-50 dark:bg-emerald-950/40 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300 font-bold text-xs flex flex-col items-center gap-1 cursor-pointer transition-all hover:scale-105">
+                                <span class="text-lg">✅</span>Hadir
+                            </button>
+                            <button onclick="selectBantuStatus('SAKIT')" id="bantu-btn-SAKIT"
+                                class="bantu-status-btn py-3 rounded-xl border-2 border-amber-200 bg-amber-50 dark:bg-amber-950/40 dark:border-amber-700 text-amber-700 dark:text-amber-300 font-bold text-xs flex flex-col items-center gap-1 cursor-pointer transition-all hover:scale-105">
+                                <span class="text-lg">🤒</span>Sakit
+                            </button>
+                            <button onclick="selectBantuStatus('IZIN')" id="bantu-btn-IZIN"
+                                class="bantu-status-btn py-3 rounded-xl border-2 border-blue-200 bg-blue-50 dark:bg-blue-950/40 dark:border-blue-700 text-blue-700 dark:text-blue-300 font-bold text-xs flex flex-col items-center gap-1 cursor-pointer transition-all hover:scale-105">
+                                <span class="text-lg">📝</span>Izin
+                            </button>
+                            <button onclick="selectBantuStatus('ALPA')" id="bantu-btn-ALPA"
+                                class="bantu-status-btn py-3 rounded-xl border-2 border-rose-200 bg-rose-50 dark:bg-rose-950/40 dark:border-rose-700 text-rose-700 dark:text-rose-300 font-bold text-xs flex flex-col items-center gap-1 cursor-pointer transition-all hover:scale-105">
+                                <span class="text-lg">❌</span>Alpa
+                            </button>
+                        </div>
+                        <input type="hidden" id="bantu-selected-status" value="">
+                    </div>
+
+                    <!-- Catatan opsional -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Keterangan
+                            (Opsional)</label>
+                        <input type="text" id="bantu-catatan" placeholder="Cth: Sakit demam, surat terlampir..."
+                            class="w-full p-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-xs outline-none focus:border-blue-500">
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="px-5 pb-5 flex gap-3">
+                    <button onclick="closeBantuPresensiModal()"
+                        class="flex-1 py-3 rounded-xl border border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-300 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
+                        Batal
+                    </button>
+                    <button onclick="saveBantuPresensiModal()"
+                        class="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs shadow-md shadow-blue-500/25 cursor-pointer transition-all active:scale-95">
+                        💾 Simpan Kehadiran
+                    </button>
                 </div>
             </div>
         </div>
@@ -2040,6 +2152,12 @@
             document.getElementById('page-murid').classList.add('hidden');
             document.getElementById('page-presensi').classList.add('hidden');
 
+            // Block murid from accessing admin-only pages — redirect to Beranda
+            const adminOnlyPages = ['murid'];
+            if (adminOnlyPages.includes(pageName) && currentUser && currentUser.role !== 'admin') {
+                pageName = 'welcome'; // fallback to welcome
+            }
+
             const targetPage = document.getElementById(`page-${pageName}`);
             if (targetPage) targetPage.classList.remove('hidden');
 
@@ -2088,9 +2206,21 @@
 
         function updateSidebarStyles(activePage) {
             const pages = ['welcome', 'akun', 'dashboard', 'modul', 'presensi', 'murid', 'kalender', 'referensi', 'bantuan', 'rekap'];
+            // Nav items that are ONLY visible for admin/guru
+            const adminOnlyNavItems = ['murid'];
+            const isGuru = currentUser && currentUser.role === 'admin';
+
             pages.forEach(p => {
                 const btn = document.getElementById(`nav-desk-${p}`);
                 if (!btn) return;
+
+                // Always hide admin-only items for murid
+                if (adminOnlyNavItems.includes(p) && !isGuru) {
+                    btn.className = "hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-colors";
+                    return;
+                }
+
+                // Apply active/inactive style
                 if (p === activePage) {
                     btn.className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow-md transition-all";
                 } else {
@@ -3333,7 +3463,7 @@
             });
 
             if (tab === 'visual') renderVisualAttendanceGrid();
-            else if (tab === 'rekap') renderRekapPresensiTable();
+            else if (tab === 'rekap') onRekapKelasChange();
         };
 
         window.renderPresensiPage = function () {
@@ -3356,6 +3486,7 @@
                 }
 
                 if (currentPresensiTeacherTab === 'visual') renderVisualAttendanceGrid();
+                else if (currentPresensiTeacherTab === 'rekap') onRekapKelasChange();
                 renderTeacherActiveSessionBox();
             } else {
                 if (teacherView) teacherView.classList.add('hidden');
@@ -3522,57 +3653,103 @@
             });
         };
 
+        // ─── Teacher Bantu Presensi Smart Modal ────────────────────────────────
+        let bantuPresensiTargetClass = '';
+
         window.bantuPresensikanMuridTanpaHp = function (targetClass) {
+            openBantuPresensiModal(targetClass, false);
+        };
+
+        // Open modal: if absentMode=true → show all unrecorded students (SAKIT/IZIN/ALPA)
+        // if absentMode=false → show unrecorded students for HADIR assist
+        window.openBantuPresensiModal = function (targetClass, absentMode) {
+            bantuPresensiTargetClass = targetClass;
+            const modal = document.getElementById('modal-bantu-presensi');
+            const subtitle = document.getElementById('bantu-modal-subtitle');
+            const muridSelect = document.getElementById('bantu-murid-select');
+            const statusInput = document.getElementById('bantu-selected-status');
+            const catatan = document.getElementById('bantu-catatan');
+
+            if (subtitle) subtitle.textContent = `Kelas: ${targetClass}`;
+            if (statusInput) statusInput.value = '';
+            if (catatan) catatan.value = '';
+
+            // Reset status button highlight
+            ['HADIR', 'SAKIT', 'IZIN', 'ALPA'].forEach(s => {
+                const btn = document.getElementById(`bantu-btn-${s}`);
+                if (btn) btn.style.outline = '';
+            });
+
+            // Build student list: only those not yet recorded today
             const todayStr = new Date().toISOString().slice(0, 10);
             const sortedList = getSortedStudentList();
+            muridSelect.innerHTML = '<option value="">— Pilih nama murid —</option>';
 
-            const unpresent = [];
+            let count = 0;
             sortedList.forEach(m => {
-                const n = m.nisn;
-                const k = m.kelas;
-
-                let matchesClass = isClassMatch(targetClass, k);
-
-                if (matchesClass) {
-                    const logKey = `${todayStr}_${n}`;
-                    const currentStatus = allAttendanceLogs[logKey]?.status;
-                    if (!currentStatus || currentStatus === 'ALPA') {
-                        unpresent.push({ nisn: n, name: m.name });
-                    }
+                if (!isClassMatch(targetClass, m.kelas)) return;
+                const logKey = `${todayStr}_${m.nisn}`;
+                const currentStatus = allAttendanceLogs[logKey]?.status;
+                // Show only unrecorded (or ALPA = default)
+                if (!currentStatus || currentStatus === 'ALPA') {
+                    const opt = document.createElement('option');
+                    opt.value = m.nisn;
+                    opt.textContent = `${m.name} — ${m.nisn}`;
+                    muridSelect.appendChild(opt);
+                    count++;
                 }
             });
 
-            if (unpresent.length === 0) {
-                alert(`Seluruh murid ${targetClass} sudah presensi atau tercatat hari ini!`);
-                return;
+            if (count === 0) {
+                muridSelect.innerHTML = '<option value="">✅ Semua murid sudah tercatat hari ini</option>';
             }
 
-            let promptMsg = `Bantu Presensikan Murid ${targetClass} (Yang Tidak Membawa HP):\nPilih nomor urut murid berikut:\n\n`;
-            unpresent.forEach((u, i) => {
-                promptMsg += `${i + 1}. ${u.name} (NISN: ${u.nisn})\n`;
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        window.closeBantuPresensiModal = function () {
+            const modal = document.getElementById('modal-bantu-presensi');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.selectBantuStatus = function (status) {
+            document.getElementById('bantu-selected-status').value = status;
+            // Highlight selected button
+            ['HADIR', 'SAKIT', 'IZIN', 'ALPA'].forEach(s => {
+                const btn = document.getElementById(`bantu-btn-${s}`);
+                if (btn) btn.style.outline = s === status ? '3px solid #3b82f6' : '';
+                if (btn) btn.style.outlineOffset = s === status ? '2px' : '';
             });
+        };
 
-            const choice = prompt(promptMsg + "\nMasukkan Nomor Urut Murid (Contoh: 1):");
-            if (!choice) return;
+        window.saveBantuPresensiModal = function () {
+            const nisn = document.getElementById('bantu-murid-select')?.value;
+            const status = document.getElementById('bantu-selected-status')?.value;
+            const catatan = document.getElementById('bantu-catatan')?.value.trim();
 
-            const selectedIdx = parseInt(choice) - 1;
-            if (isNaN(selectedIdx) || selectedIdx < 0 || selectedIdx >= unpresent.length) {
-                alert("Pilihan tidak valid!");
-                return;
-            }
+            if (!nisn) { alert('Pilih nama murid terlebih dahulu!'); return; }
+            if (!status) { alert('Pilih status kehadiran terlebih dahulu!'); return; }
 
-            const targetMurid = unpresent[selectedIdx];
-            const logKey = `${todayStr}_${targetMurid.nisn}`;
+            // Find student name from select option text
+            const selectEl = document.getElementById('bantu-murid-select');
+            const studentName = selectEl.options[selectEl.selectedIndex]?.text?.split(' — ')[0] || nisn;
+
+            const todayStr = new Date().toISOString().slice(0, 10);
+            const logKey = `${todayStr}_${nisn}`;
 
             set(ref(db, 'attendance_logs/' + logKey), {
-                nisn: targetMurid.nisn,
+                nisn: nisn,
                 date: todayStr,
-                status: 'HADIR',
+                status: status,
+                catatan: catatan || '',
                 timestamp: new Date().toISOString(),
-                method: 'Guru Assist (Murid Tanpa HP)'
+                method: `Guru Input (${status})`
             }).then(() => {
-                alert(`Berhasil mencatat presensi HADIR untuk ${targetMurid.name}!`);
+                const statusLabel = { HADIR: '✅ HADIR', SAKIT: '🤒 SAKIT', IZIN: '📝 IZIN', ALPA: '❌ ALPA' }[status] || status;
+                alert(`Kehadiran ${studentName} berhasil dicatat: ${statusLabel}`);
+                closeBantuPresensiModal();
                 renderPresensiPage();
+                renderTeacherActiveSessionBox();
             });
         };
 
@@ -3582,10 +3759,47 @@
             container.innerHTML = '';
 
             const studentGrade = getStudentGrade() || 'Kelas X';
-            const sess = activeAttendanceSessions[studentGrade];
+            const studentKelas = (currentUser && currentUser.kelas) ? currentUser.kelas.trim() : '';
             const todayStr = new Date().toISOString().slice(0, 10);
             const myLogKey = `${todayStr}_${currentUser.id}`;
             const myLog = allAttendanceLogs[myLogKey];
+
+            // Find matching active session:
+            // Priority 1: exact rombel match (e.g. "X E-11")
+            // Priority 2: generic grade match (e.g. "Kelas X")
+            // Priority 3: any active session for the same grade level
+            let sess = null;
+
+            // Normalize student kelas to uppercase for comparison
+            const kelasUpper = studentKelas.toUpperCase();
+
+            // Try to find a session that matches this student
+            const allSessionKeys = Object.keys(activeAttendanceSessions || {});
+            for (const key of allSessionKeys) {
+                const s = activeAttendanceSessions[key];
+                if (!s || !s.active) continue;
+
+                const keyUpper = key.toUpperCase();
+
+                // Exact rombel match: e.g. student kelas = "X E-11" and session key = "X E-11"
+                if (studentKelas && keyUpper === kelasUpper) {
+                    sess = s;
+                    break;
+                }
+
+                // Generic grade match: session key = "Kelas X" and student is in Kelas X
+                if (key === studentGrade) {
+                    sess = s;
+                    // Don't break — keep looking for more specific rombel match
+                }
+
+                // Grade-level fallback: session opened for "X E-11" but student is in Kelas X
+                if (!sess) {
+                    if (studentGrade === 'Kelas X' && (keyUpper.startsWith('X E-') || keyUpper.startsWith('KELAS X'))) sess = s;
+                    else if (studentGrade === 'Kelas XI' && (keyUpper.startsWith('XI F-') || keyUpper.startsWith('KELAS XI'))) sess = s;
+                    else if (studentGrade === 'Kelas XII' && (keyUpper.startsWith('XII F-') || keyUpper.startsWith('KELAS XII'))) sess = s;
+                }
+            }
 
             if (myLog) {
                 // Already checked in
@@ -3608,7 +3822,7 @@
                     </div>
                 `;
             } else if (sess && sess.active) {
-                // Active session available
+                // Active session available — student can check in HADIR, or self-report IZIN/SAKIT
                 container.innerHTML = `
                     <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white rounded-3xl p-8 border border-cyan-500/30 shadow-2xl space-y-6 max-w-lg mx-auto text-center">
                         <div class="inline-block px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 text-xs font-bold animate-pulse">
@@ -3616,16 +3830,35 @@
                         </div>
                         <div>
                             <h3 class="text-xl font-black text-white">${sess.materi}</h3>
-                            <p class="text-xs text-slate-400 mt-1">Masukkan 6-Digit PIN Token yang diberikan oleh Guru untuk konfirmasi presensi Anda.</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5">Sesi untuk: <span class="font-bold text-cyan-400">${sess.targetClass || studentGrade}</span></p>
                         </div>
 
-                        <div class="space-y-3">
+                        <!-- HADIR via PIN -->
+                        <div class="space-y-3 bg-slate-800/60 p-4 rounded-2xl border border-cyan-500/20">
+                            <p class="text-xs text-slate-300 font-bold">✅ Hadir — Masukkan PIN dari Guru</p>
                             <input type="text" id="student-pin-input" maxlength="6" placeholder="Masukkan 6-Digit PIN..."
                                 class="w-full text-center tracking-widest text-2xl font-black font-mono py-3 px-4 rounded-2xl border-2 border-cyan-500/50 bg-slate-900 text-cyan-300 focus:outline-none focus:border-cyan-400 shadow-inner">
-                            <button onclick="submitStudentAttendance('${sess.pin}')"
+                            <button onclick="submitStudentAttendance('${sess.pin}', 'HADIR')"
                                 class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-extrabold text-sm rounded-2xl shadow-lg shadow-emerald-500/25 transition-all transform active:scale-95 cursor-pointer">
-                                🎯 Kirim Presensi Kehadiran
+                                🎯 Konfirmasi Hadir
                             </button>
+                        </div>
+
+                        <!-- IZIN / SAKIT self-report (no PIN needed) -->
+                        <div class="space-y-2">
+                            <p class="text-[10px] text-slate-500 font-semibold uppercase tracking-wide">— Atau Laporkan Ketidakhadiran —</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="submitStudentAttendance(null, 'SAKIT')"
+                                    class="py-3 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-300 font-bold text-xs rounded-2xl transition-all active:scale-95 cursor-pointer flex flex-col items-center gap-1">
+                                    <span class="text-xl">🤒</span>
+                                    Sakit
+                                </button>
+                                <button onclick="submitStudentAttendance(null, 'IZIN')"
+                                    class="py-3 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-400/40 text-blue-300 font-bold text-xs rounded-2xl transition-all active:scale-95 cursor-pointer flex flex-col items-center gap-1">
+                                    <span class="text-xl">📝</span>
+                                    Izin
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -3638,17 +3871,25 @@
                         </div>
                         <h3 class="text-lg font-black text-slate-900 dark:text-white">Belum Ada Sesi Presensi Aktif</h3>
                         <p class="text-xs text-slate-500 leading-relaxed">
-                            Guru belum membuka sesi presensi mandiri untuk ${studentGrade}. Jika presensi dilakukan secara langsung oleh Guru, status kehadiran Anda akan diperbarui secara otomatis.
+                            Guru belum membuka sesi presensi mandiri untuk ${studentKelas || studentGrade}. Jika presensi dilakukan secara langsung oleh Guru, status kehadiran Anda akan diperbarui secara otomatis.
                         </p>
                     </div>
                 `;
             }
         };
 
-        window.submitStudentAttendance = function (correctPin) {
-            const inputPin = (document.getElementById('student-pin-input')?.value || '').trim();
-            if (!inputPin) { alert("Masukkan 6-Digit PIN terlebih dahulu!"); return; }
-            if (inputPin !== correctPin) { alert("PIN Token Salah! Silakan tanyakan PIN resmi kepada Guru."); return; }
+        window.submitStudentAttendance = function (correctPin, status) {
+            status = status || 'HADIR';
+
+            // Only HADIR requires PIN verification
+            if (status === 'HADIR') {
+                const inputPin = (document.getElementById('student-pin-input')?.value || '').trim();
+                if (!inputPin) { alert("Masukkan 6-Digit PIN terlebih dahulu!"); return; }
+                if (inputPin !== correctPin) { alert("PIN Token Salah! Silakan tanyakan PIN resmi kepada Guru."); return; }
+            } else {
+                const label = status === 'SAKIT' ? 'Sakit 🤒' : 'Izin 📝';
+                if (!confirm(`Anda akan melaporkan kehadiran sebagai "${label}" hari ini. Lanjutkan?`)) return;
+            }
 
             const todayStr = new Date().toISOString().slice(0, 10);
             const myLogKey = `${todayStr}_${currentUser.id}`;
@@ -3656,13 +3897,40 @@
             set(ref(db, 'attendance_logs/' + myLogKey), {
                 nisn: currentUser.id,
                 date: todayStr,
-                status: 'HADIR',
+                status: status,
                 timestamp: new Date().toISOString(),
-                method: 'Presensi Mandiri Murid'
+                method: status === 'HADIR' ? 'Presensi Mandiri Murid' : `Laporan Mandiri (${status})`
             }).then(() => {
-                alert("Presensi Anda berhasil dicatat!");
+                const msg = status === 'HADIR' ? 'Presensi HADIR Anda berhasil dicatat!' :
+                    status === 'SAKIT' ? 'Laporan Sakit Anda berhasil dicatat. Semoga lekas sembuh! 🙏' :
+                        'Laporan Izin Anda berhasil dicatat.';
+                alert(msg);
                 renderStudentPresensiView();
             });
+        };
+
+        // Helper: populate rombel dropdown based on selected grade, then re-render table
+        window.onRekapKelasChange = function () {
+            const kelasVal = document.getElementById('rekap-presensi-kelas')?.value || 'Kelas X';
+            const rombelSel = document.getElementById('rekap-presensi-rombel');
+            if (!rombelSel) { renderRekapPresensiTable(); return; }
+
+            rombelSel.innerHTML = '<option value="">— Semua Rombel —</option>';
+
+            const rombelMap = {
+                'Kelas X': ['X E-1', 'X E-2', 'X E-3', 'X E-4', 'X E-5', 'X E-6', 'X E-7', 'X E-8', 'X E-9', 'X E-10', 'X E-11', 'X E-12'],
+                'Kelas XI': ['XI F-1', 'XI F-2', 'XI F-3', 'XI F-4', 'XI F-5', 'XI F-6', 'XI F-7', 'XI F-8', 'XI F-9', 'XI F-10', 'XI F-11', 'XI F-12'],
+                'Kelas XII': ['XII F-1', 'XII F-2', 'XII F-3', 'XII F-4', 'XII F-5', 'XII F-6', 'XII F-7', 'XII F-8', 'XII F-9', 'XII F-10', 'XII F-11', 'XII F-12']
+            };
+
+            (rombelMap[kelasVal] || []).forEach(r => {
+                const opt = document.createElement('option');
+                opt.value = r;
+                opt.textContent = r;
+                rombelSel.appendChild(opt);
+            });
+
+            renderRekapPresensiTable();
         };
 
         window.renderRekapPresensiTable = function () {
@@ -3671,6 +3939,11 @@
             tbody.innerHTML = '';
 
             const selectedClass = document.getElementById('rekap-presensi-kelas')?.value || 'Kelas X';
+            const selectedRombel = document.getElementById('rekap-presensi-rombel')?.value || '';
+            const isGuru = currentUser && currentUser.role === 'admin';
+
+            // Build filtered list with counts, then sort alphabetically
+            const rows = [];
             const nisnKeys = Object.keys(allNISN || {});
 
             nisnKeys.forEach(nisn => {
@@ -3679,15 +3952,19 @@
                 const name = m.name || m.nama || 'Murid PJOK';
                 const kelas = m.kelas || 'Kelas X';
 
+                // Grade-level match
                 let matchesClass = false;
                 if (selectedClass === 'Kelas X' && (kelas.includes('X') && !kelas.includes('XI') && !kelas.includes('XII'))) matchesClass = true;
                 else if (selectedClass === 'Kelas XI' && kelas.includes('XI')) matchesClass = true;
                 else if (selectedClass === 'Kelas XII' && kelas.includes('XII')) matchesClass = true;
 
-                if (matchesClass) {
-                    // Count Attendance Statuses from allAttendanceLogs
-                    let countHadir = 0, countSakit = 0, countIzin = 0, countAlpa = 0;
+                // Rombel filter (if selected)
+                if (matchesClass && selectedRombel) {
+                    matchesClass = kelas.trim().toUpperCase() === selectedRombel.trim().toUpperCase();
+                }
 
+                if (matchesClass) {
+                    let countHadir = 0, countSakit = 0, countIzin = 0, countAlpa = 0;
                     Object.keys(allAttendanceLogs).forEach(logKey => {
                         const log = allAttendanceLogs[logKey];
                         if (log && log.nisn === nisn) {
@@ -3697,35 +3974,135 @@
                             else if (log.status === 'ALPA') countAlpa++;
                         }
                     });
-
                     const totalMeetings = countHadir + countSakit + countIzin + countAlpa;
-                    const percent = totalMeetings > 0 ? Math.round((countHadir / totalMeetings) * 100) : 100;
-
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors";
-                    tr.innerHTML = `
-                        <td class="px-3 py-3 text-left font-semibold text-slate-900 dark:text-white">${name}</td>
-                        <td class="px-3 py-3 font-mono text-slate-500 dark:text-slate-400 font-bold">${nisn}</td>
-                        <td class="px-3 py-3 font-medium text-slate-600 dark:text-slate-300">${kelas}</td>
-                        <td class="px-3 py-3 font-bold text-emerald-600">${countHadir}</td>
-                        <td class="px-3 py-3 font-bold text-amber-600">${countSakit}</td>
-                        <td class="px-3 py-3 font-bold text-blue-600">${countIzin}</td>
-                        <td class="px-3 py-3 font-bold text-rose-600">${countAlpa}</td>
-                        <td class="px-3 py-3 font-extrabold text-slate-800 dark:text-slate-200">${percent}%</td>
-                    `;
-                    tbody.appendChild(tr);
+                    // Fix: show 0% (or "—") when no attendance recorded yet
+                    const percent = totalMeetings > 0 ? Math.round((countHadir / totalMeetings) * 100) : null;
+                    rows.push({ nisn, name, kelas, countHadir, countSakit, countIzin, countAlpa, totalMeetings, percent });
                 }
             });
 
+            // Sort alphabetically by name
+            rows.sort((a, b) => a.name.localeCompare(b.name, 'id'));
+
+            rows.forEach(({ nisn, name, kelas, countHadir, countSakit, countIzin, countAlpa, totalMeetings, percent }) => {
+                const percentDisplay = percent !== null ? `${percent}%` : '<span class="text-slate-400 font-normal">—</span>';
+                const percentClass = percent === null ? 'text-slate-400' : percent >= 80 ? 'text-emerald-600 font-extrabold' : percent >= 60 ? 'text-amber-600 font-extrabold' : 'text-rose-600 font-extrabold';
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors group";
+                tr.innerHTML = `
+                    <td class="px-3 py-3 text-left font-semibold text-slate-900 dark:text-white">${name}</td>
+                    <td class="px-3 py-3 font-mono text-slate-500 dark:text-slate-400 text-xs">${nisn}</td>
+                    <td class="px-3 py-3 font-medium text-slate-600 dark:text-slate-300">${kelas}</td>
+                    <td class="px-3 py-3 font-bold text-emerald-600">${countHadir}</td>
+                    <td class="px-3 py-3 font-bold text-amber-600">${countSakit}</td>
+                    <td class="px-3 py-3 font-bold text-blue-600">${countIzin}</td>
+                    <td class="px-3 py-3 font-bold text-rose-600">${countAlpa}</td>
+                    <td class="px-3 py-3 ${percentClass}">${percentDisplay}</td>
+                    ${isGuru ? `<td class="px-3 py-2 text-center">
+                        <button onclick="openEditPresensiModal('${nisn}', '${name.replace(/'/g, "\\'")}')"
+                            class="opacity-0 group-hover:opacity-100 px-2.5 py-1 text-[10px] font-bold rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 transition-all cursor-pointer">
+                            ✏️ Edit
+                        </button>
+                    </td>` : ''}
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const label = selectedRombel ? selectedRombel : selectedClass;
             if (tbody.children.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-slate-400">Belum ada data rekap presensi untuk ${selectedClass}.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="${isGuru ? 9 : 8}" class="text-center py-6 text-slate-400">Belum ada data murid untuk ${label}.</td></tr>`;
             }
+        };
+
+        // ─── Edit Presensi Modal (Teacher Only) ────────────────────────────────
+        window.openEditPresensiModal = function (nisn, name) {
+            // Collect all log dates for this student
+            const logs = {};
+            Object.keys(allAttendanceLogs).forEach(logKey => {
+                const log = allAttendanceLogs[logKey];
+                if (log && log.nisn === nisn) {
+                    logs[log.date] = log;
+                }
+            });
+
+            const modal = document.getElementById('modal-edit-presensi');
+            if (!modal) return;
+
+            document.getElementById('edit-presensi-title').textContent = `Edit Kehadiran: ${name}`;
+            document.getElementById('edit-presensi-nisn').value = nisn;
+
+            const list = document.getElementById('edit-presensi-list');
+            list.innerHTML = '';
+
+            const sortedDates = Object.keys(logs).sort((a, b) => b.localeCompare(a));
+
+            if (sortedDates.length === 0) {
+                list.innerHTML = `<p class="text-center text-xs text-slate-400 py-4">Belum ada catatan kehadiran untuk murid ini.</p>`;
+            } else {
+                sortedDates.forEach(date => {
+                    const log = logs[date];
+                    const statusColor = { HADIR: 'emerald', SAKIT: 'amber', IZIN: 'blue', ALPA: 'rose' }[log.status] || 'slate';
+                    const row = document.createElement('div');
+                    row.className = 'flex items-center justify-between gap-3 py-2 border-b border-slate-100 dark:border-slate-700 last:border-0';
+                    row.innerHTML = `
+                        <span class="text-xs font-mono font-bold text-slate-600 dark:text-slate-300 min-w-[90px]">${date}</span>
+                        <select data-date="${date}" data-nisn="${nisn}"
+                            onchange="updateEditPresensiRow(this)"
+                            class="flex-1 p-1.5 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-${statusColor}-600 dark:text-${statusColor}-400 outline-none cursor-pointer">
+                            <option value="HADIR" ${log.status === 'HADIR' ? 'selected' : ''}>✅ HADIR</option>
+                            <option value="SAKIT" ${log.status === 'SAKIT' ? 'selected' : ''}>🤒 SAKIT</option>
+                            <option value="IZIN" ${log.status === 'IZIN' ? 'selected' : ''}>📝 IZIN</option>
+                            <option value="ALPA" ${log.status === 'ALPA' ? 'selected' : ''}>❌ ALPA</option>
+                        </select>
+                        <button onclick="deleteEditPresensiRow('${date}', '${nisn}')"
+                            class="text-rose-400 hover:text-rose-600 text-xs font-bold cursor-pointer px-2 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors">🗑</button>
+                    `;
+                    list.appendChild(row);
+                });
+            }
+
+            modal.classList.remove('hidden');
+        };
+
+        window.updateEditPresensiRow = function (selectEl) {
+            const date = selectEl.dataset.date;
+            const nisn = selectEl.dataset.nisn;
+            const newStatus = selectEl.value;
+            const logKey = `${date}_${nisn}`;
+            const existing = allAttendanceLogs[logKey] || {};
+            set(ref(db, 'attendance_logs/' + logKey), {
+                ...existing,
+                nisn: nisn,
+                date: date,
+                status: newStatus,
+                timestamp: new Date().toISOString(),
+                method: 'Edit Guru'
+            });
+        };
+
+        window.deleteEditPresensiRow = function (date, nisn) {
+            if (!confirm(`Hapus catatan ${date} untuk murid ini?`)) return;
+            const logKey = `${date}_${nisn}`;
+            remove(ref(db, 'attendance_logs/' + logKey)).then(() => {
+                renderRekapPresensiTable();
+                // Refresh the modal
+                const nameEl = document.getElementById('edit-presensi-title').textContent.replace('Edit Kehadiran: ', '');
+                openEditPresensiModal(nisn, nameEl);
+            });
+        };
+
+        window.closeEditPresensiModal = function () {
+            document.getElementById('modal-edit-presensi')?.classList.add('hidden');
+            renderRekapPresensiTable();
         };
 
         window.exportRekapPresensiExcel = function () {
             const selectedClass = document.getElementById('rekap-presensi-kelas')?.value || 'Kelas X';
+            const selectedRombel = document.getElementById('rekap-presensi-rombel')?.value || '';
             let csv = "Nama Murid,NISN,Kelas,Hadir,Sakit,Izin,Alpa,Persentase Kehadiran\n";
 
+            const rows = [];
             Object.keys(allNISN).forEach(nisn => {
                 const raw = allNISN[nisn];
                 const m = typeof raw === 'object' ? raw : { name: raw, kelas: 'Kelas X' };
@@ -3737,6 +4114,10 @@
                 else if (selectedClass === 'Kelas XI' && kelas.includes('XI')) matchesClass = true;
                 else if (selectedClass === 'Kelas XII' && kelas.includes('XII')) matchesClass = true;
 
+                if (matchesClass && selectedRombel) {
+                    matchesClass = kelas.trim().toUpperCase() === selectedRombel.trim().toUpperCase();
+                }
+
                 if (matchesClass) {
                     let countHadir = 0, countSakit = 0, countIzin = 0, countAlpa = 0;
                     Object.keys(allAttendanceLogs).forEach(logKey => {
@@ -3749,15 +4130,21 @@
                         }
                     });
                     const totalMeetings = countHadir + countSakit + countIzin + countAlpa;
-                    const percent = totalMeetings > 0 ? Math.round((countHadir / totalMeetings) * 100) : 100;
-                    csv += `"${name}","${nisn}","${kelas}",${countHadir},${countSakit},${countIzin},${countAlpa},"${percent}%"\n`;
+                    const percent = totalMeetings > 0 ? Math.round((countHadir / totalMeetings) * 100) : 0;
+                    rows.push({ name, nisn, kelas, countHadir, countSakit, countIzin, countAlpa, percent });
                 }
             });
 
+            rows.sort((a, b) => a.name.localeCompare(b.name, 'id'));
+            rows.forEach(({ name, nisn, kelas, countHadir, countSakit, countIzin, countAlpa, percent }) => {
+                csv += `"${name}","${nisn}","${kelas}",${countHadir},${countSakit},${countIzin},${countAlpa},"${percent}%"\n`;
+            });
+
+            const label = selectedRombel ? selectedRombel : selectedClass;
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.setAttribute("download", `Rekap_Presensi_${selectedClass.replace(' ', '_')}_${new Date().toISOString().slice(0, 10)}.csv`);
+            link.setAttribute("download", `Rekap_Presensi_${label.replace(/ /g, '_')}_${new Date().toISOString().slice(0, 10)}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
